@@ -1,0 +1,3 @@
+{% for uni in all_unis %}
+<h1><a href="{% url 'comment:faculty' uni.id %}">{{ uni.uni_name }}</a></h1>
+{% endfor %}
