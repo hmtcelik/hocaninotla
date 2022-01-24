@@ -1,0 +1,3 @@
+{% for item in all_faculties %}
+    <h1><a href="{% url 'comment:departmant' item.pk%}">{{ item.faculty_name }}</a></h1>
+{% endfor %}

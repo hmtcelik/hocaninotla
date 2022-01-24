@@ -2,14 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class City(models.Model):
-    city_name = models.CharField(max_length=50)
-    
-    def __str__(self):
-        return self.city_name
-    
 class University(models.Model):
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
     uni_name = models.CharField(max_length=50)
     
     def __str__(self):
@@ -20,7 +13,7 @@ class Faculty(models.Model):
     faculty_name = models.CharField(max_length=50)
     
     def __str__(self):
-        return self.faculty_name
+        return self.faculty_name 
     
 class Departmant(models.Model):
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)

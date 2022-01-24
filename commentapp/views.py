@@ -2,23 +2,19 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import City, University, Faculty, Departmant, Doctor, Comment
+from .models import University, Faculty, Departmant, Doctor, Comment
 
 # Create your views here.
 
 class IndexView(TemplateView):
     template_name = "index.html"
-    
-class CityView(ListView):
-    model = City
-    template_name = 'city.html'
-    context_object_name = 'all_cities'
-    
+     
 class UniView(ListView):
     model = University
     template_name = 'universty.html'
     context_object_name = 'all_universities'
-
+    uni_name = University.uni_name
+    
 class FacultyView(ListView):
     model = Faculty
     template_name = 'faculty.html'

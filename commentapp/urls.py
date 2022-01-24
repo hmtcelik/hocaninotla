@@ -1,23 +1,11 @@
-"""sitefolder URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.urls import path
-from .views import IndexView, CityView, UniView, FacultyView, DepartmantView, DoctorView, CommentView 
+from . import views
 
-urlpatterns = [
-    path('', CityView.as_view(), name='city'),
-    path('<int:pk>/', UniView.as_view(), name='university'),
-    path('city/university/<int:pk>', FacultyView.as_view(), name='faculty'),        
+app_name = 'comment'
+
+urlpatterns = [ 
+    path('', views.UniView.as_view(), name='university'),
+    path('<int:pk>/', views.FacultyView.as_view(), name='faculty'),
+    path('<int:pk>/', views.DepartmantView.as_view(), name='departmant'),      
+       
 ]
