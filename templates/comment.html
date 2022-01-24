@@ -1,0 +1,6 @@
+{% for comment in doctor.comment_set.all  %}
+        <h1>{{ comment.comment_title }}</h1>
+        <p>{{ comment.comment_body }}</p>
+        <p>{{comment.comment_author}}</p>
+        <p>===========================</p>
+{% endfor %}

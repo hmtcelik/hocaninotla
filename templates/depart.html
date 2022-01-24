@@ -1,0 +1,5 @@
+<ul>
+    {% for depart in faculty.depart_set.all  %}
+        <li><h1><a href="{% url 'comment:doctor' depart.id %}">{{ depart.depart_name }}</h1></a></li>
+    {% endfor %}
+</ul>

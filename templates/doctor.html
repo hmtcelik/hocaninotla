@@ -1,0 +1,5 @@
+<ul>
+    {% for doctor in depart.doctor_set.all  %}
+        <li><h1><a href="{% url 'comment:comment' doctor.id %}">{{ doctor.doctor_name }}</h1></a></li>
+    {% endfor %}
+</ul>
