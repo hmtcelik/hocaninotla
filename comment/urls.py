@@ -5,7 +5,8 @@ from . import models
 app_name = 'comment'
 
 urlpatterns = [
-    path('', views.UniView.as_view(), name='uni'),
+    path('', views.HomeView.as_view(), name = 'home'),
+    path('university/', views.UniView.as_view(), name='uni'),
     path('university/<int:pk>/', views.FacultyView.as_view(), name='faculty'),
     path('faculty/<int:pk>/', views.DepartView.as_view(), name='depart'),
     path('depart/<int:pk>/', views.DoctorView.as_view(), name='doctor'),

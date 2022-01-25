@@ -1,5 +1,9 @@
-<ul>
-    {% for depart in faculty.depart_set.all  %}
-        <li><h1><a href="{% url 'comment:doctor' depart.id %}">{{ depart.depart_name }}</h1></a></li>
-    {% endfor %}
-</ul>
+{% extends 'includes/base.html' %}
+{% block title %}{{ faculty.faculty_name }}{% endblock %}
+{% block body %}
+    <ul>
+        {% for depart in faculty.depart_set.all  %}
+            <li><h1><a href="{% url 'comment:doctor' depart.id %}">{{ depart.depart_name }}</h1></a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

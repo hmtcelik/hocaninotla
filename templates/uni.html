@@ -1,3 +1,7 @@
-{% for uni in all_unis %}
-<h1><a href="{% url 'comment:faculty' uni.id %}">{{ uni.uni_name }}</a></h1>
-{% endfor %}
+{% extends 'includes/base.html' %}
+{% block title %}Universite sec{% endblock %}
+{% block body %}
+    {% for uni in all_unis %}
+        <h1><a href="{% url 'comment:faculty' uni.id %}">{{ uni.uni_name }}</a></h1>
+    {% endfor %}
+{% endblock %}
