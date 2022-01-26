@@ -1,45 +1,269 @@
 <!DOCTYPE html>
 {% load static %}
+<html>
+	<head>
+		<title>Hocani Notla</title>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">		
+		<link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700" rel="stylesheet">
+		<link rel="stylesheet" href="{% static '/css/magnific-popup.css' %}">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"style="padding: 6px 10px;">
-        <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'comment:home'%}">HocaniNotla</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'comment:uni'%}">Hoca-Ara</a>
-                    </li>
-                </ul>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	</head>
+
+	<body>
+		<!-- Wrapper -->
+		<section class="head" id="header">
+			<div class="wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<header class="header">
+								<div class="inner">
+									<!-- Logo -->
+									<a href="#menu"class="nav-bars">
+										<img src="{% static 'images/nav_icon.svg' %}" class="img-responsive" alt="Collapsable Navbar">
+									</a>
+									<a href="{% url 'comment:home'%}" class="logo">
+										<span class="symbol"><img src="{% static 'images/logo.png' %}" alt="Title" /></span><span class="title">Hocani Notla</span>
+									</a>
+								</div>
+							</header>
+							<!-- Menu -->
+							<nav id="menu">
+								<h2>Menu</h2>
+								<ul>
+									<li><a href="{% url 'comment:home'%}">Anasayfa</a></li>
+									<li><a href="{% url 'comment:uni'%}">Hocani Ara</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main -->
+
+		<section class="main-body">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
+						<p class="drescription">Hosgeldin! Asagidan universitene tiklayarak, hocana <span class="orange">not verip, yorum yapabilirsin</span> :) . Yorum yapabilmek icin uye olmalisin ve tum univeriteler icin sag ustteki menuyu kullanabilirsin.</p>
+					</div>
+				</div>
+				<div class="tiles">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+                                    <!-- img dimensions = 953 x 668 px-->
+									<img src="{% static 'images/odtu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover glass">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">ODTU</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+									<img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover shoes-glass">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">ITU</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div><br>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+									<img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover hand-parts">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">Hacettepe Üni</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+									<img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover hand-parts">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">Ankara Üni</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+									<img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover hand-parts">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">Bogazici Üni</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+                    </div>
+                    <div class="row">
+						<div class="col-md-4">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+									<img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover hand-parts">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">Karabuk Üni</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+									<img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover hand-parts">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">Marmara Üni</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="a">
+								<a href="#" class="open-popup-link">
+									<img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+									<div class="img-hover hand-parts">
+										<div class="c-table">
+											<div class="ct-cell">
+												<h3 class="img-title">İstanbul Üni</h3>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+                    </div>
+                    <a href="#">TUM UNILER</a>
+                </div>
             </div>
-            <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-                <ul class="navbar-nav text-right">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="https://github.com/hmtcelik" target="_blank">Created by hmtcelik</a>
-                    </li>
-            </div>
-        </div>           
-    </nav>  
+		</section>
 
-    <div class="container-fluid" style="padding: 5px 40px;"> 
-            <div class="mt-3">
-                {% block body %}
-                {% endblock %}
-            </div>   
-    </div>
+		
+		<section class="social-contact-icon">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-xs-12">
+						<ul class="text-center social-contact">
+							<li class="social-icons">
+							<a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-google-plus"><span class="label">GooglePlus</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-pinterest"><span class="label">pinterest</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-stumbleupon"><span class="label">Stumbleupon</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-tumblr"><span class="label">tumblr</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-reddit-alien"><span class="label">reddit-alien</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-dribbble"><span class="label">Dribbble</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-behance"><span class="label">Behance</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-linkedin"><span class="label">Linkedin</span></a>
+							</li>
+							<li class="social-icons">
+								<a href="#" class="icon style2 fa-vk"><span class="label">vk</span></a>
+							</li>
+						</ul>							
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
+		<section class="footer">		
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8 col-xs-9">
+							<p class="right-color">&copy; Copyright 2022. All rights reserved by <a href="#" target="_blank">HocaniNotla</a></p>
+						</div>
+						<div class="col-sm-4 col-xs-3" align="right">
+							<a href="#" id="back-to-top" class="top text-right" >Yukari Cik <i class="fa fa-angle-up" aria-hidden="true"></i> </a>
+						</div>
+					</div>
+				</div>											
+			</footer>
+		</section>
+
+	<!-- Scripts -->
+
+		<script src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+
+		<script src="{% static 'js/script.js' %}"></script>
+
+		<!--  ===== Scroll to Top ====  -->
+	    <script>
+			if ($('#back-to-top').length) {
+			    $('#back-to-top').on('click', function (e) {
+			        e.preventDefault();
+			        $('html,body').animate({
+			            scrollTop: 0
+			        }, 700);
+			    });
+			}
+		</script>
+		
+	</body>
 </html>
