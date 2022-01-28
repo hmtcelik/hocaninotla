@@ -1,5 +1,132 @@
 {% extends 'includes/base.html' %}
+{% load static %}
 {% block title %}Anasayfa{% endblock %}
 {% block body %}
-<p>burasi, hocalar hakkinda yorum yapma ve notlama uygulamasidir</p>
+<div class="row">
+    <div class="col-md-9">
+        <p class="drescription">Hosgeldin! Asagidan universitene tiklayarak, hocana <span class="orange">not verip, yorum yapabilirsin</span> :) . Yorum yapabilmek icin uye olmalisin ve tum univeriteler icin sag ustteki menuyu kullanabilirsin.</p>
+    </div>
+</div>
+<div class="tiles">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <!-- img dimensions = 953 x 668 px-->
+                    <img src="{% static 'images/odtu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover glass">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">ODTU</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover shoes-glass">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">ITU</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover hand-parts">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">Hacettepe Üni</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover hand-parts">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">Ankara Üni</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover hand-parts">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">Bogazici Üni</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover hand-parts">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">Karabuk Üni</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover hand-parts">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">Marmara Üni</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="a">
+                <a href="#" class="open-popup-link">
+                    <img src="{% static 'images/itu.jpg' %}" class="img-responsive" alt="Responsive image">
+                    <div class="img-hover hand-parts">
+                        <div class="c-table">
+                            <div class="ct-cell">
+                                <h3 class="img-title">İstanbul Üni</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <a href="#">TUM UNILER</a>
+</div>
 {% endblock %}
