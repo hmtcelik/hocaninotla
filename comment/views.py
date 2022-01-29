@@ -1,5 +1,17 @@
 from django.views import generic
 from .models import Uni , Faculty, Depart, Doctor
+from django.shortcuts import render
+
+
+# Searchbar func.
+def searchbar(request):
+    if request.method == "GET":
+        search = request.GET.get('search')
+        post = Uni.objects.all().filter(uni_name__contains=search)
+        post2 = Doctor.objects.all().filter(doctor_name__contains=search)
+        context = {'post': post, 'post2' : post2,}
+        return render(request, 'searchbar.html', context)
+
 
 class HomeView(generic.TemplateView):
     template_name = 'index.html'
@@ -30,3 +42,4 @@ class DoctorView(generic.DetailView):
 class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
+    

@@ -1,0 +1,21 @@
+{{ error }}
+
+{% if post %} <!-- University search -->
+    <h1>Universities:</h1>
+    <br>
+    {% for i in post %}
+        <h2><a href="{% url 'comment:faculty' i.id %}">{{ i.uni_name }}</a></h2>
+    {% endfor %}
+{% endif %}
+
+{% if post2 %} <!-- Doctor search -->
+    <h1>Doctors:</h1>
+    <br>
+    {% for i in post2 %}
+        <h2><a href="{% url 'comment:comment' i.id %}">{{ i.doctor_name }}</a></h2>
+    {% endfor %} 
+{% endif %}
+
+{% if not post and not post2 %} <!-- if doesnt any matched -->
+<h2>No matched</h2>
+{% endif %}
