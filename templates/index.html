@@ -4,15 +4,17 @@
 {% block body %}
 <div class="row">
     <div class="col-md-9">
-        <p class="drescription">Hosgeldin! Asagidan universitene tiklayarak, hocana <span class="orange">not verip, yorum yapabilirsin</span> :) . Yorum yapabilmek icin uye olmalisin ve tum univeriteler icin sag ustteki menuyu kullanabilirsin.</p>
+        <p class="drescription">Hosgeldin! Asagidan universitene tiklayarak, hocana <span class="orange">not verip, yorum yapabilirsin</span> :) . Yorum yapabilmek icin uye olmalisin. Universiteni ve hocani alttaki arama motorundan aratabilirsin. </p>
     </div>
 </div>
 <div class="tiles">
     <div class="row">
-        <form action="{% url 'comment:searchbar' %}" method="get">
-            <input type="text" name="search"/>
-            <button type="submit">Search</button>
-        </form>
+        <div style="text-align: center;">
+            <form action="{% url 'comment:searchbar' %}" method="get" class="form-inline">
+                <input type="text" name="search" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+            </form>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -133,6 +135,8 @@
             </div>
         </div>
     </div>
-    <a href="#">TUM UNILER</a>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'comment:uni' %}"><button type="button" class="btn btn-light">Tum Universiteler</button></a>
+    </div>
 </div>
 {% endblock %}
