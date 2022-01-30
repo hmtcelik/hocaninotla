@@ -1,7 +1,19 @@
 {% extends 'includes/base.html' %}
 {% block title %}Universite sec{% endblock %}
 {% block body %}
+    <div class="row">
+        <div style="text-align: center; margin-top:30px;">
+            <form action="{% url 'comment:searchbar' %}" method="get" class="form-inline">
+                <input type="text" name="search" class="form-control mr-sm-2" placeholder="Ara" aria-label="Search">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Ara</button>
+            </form>
+        </div>
+    </div>
     {% for uni in all_unis %}
-        <h1><a href="{% url 'comment:faculty' uni.id %}">{{ uni.uni_name }}</a></h1>
+        <div class="col-md-6">
+            <div class="a">
+                <h1><a href="{% url 'comment:faculty' uni.id %}">{{ uni.uni_name }}</a></h1>
+            </div>    
+        </div>
     {% endfor %}
 {% endblock %}

@@ -3,6 +3,7 @@ from django.db import models
 
 class Uni(models.Model):
     uni_name = models.CharField(max_length=50)
+    uni_img = models.ImageField(upload_to ='uploads/', blank=True, null=True)
 
     def __str__(self):
         return self.uni_name
