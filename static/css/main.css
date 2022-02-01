@@ -850,6 +850,11 @@ li.popup-socials-icons {
 	margin-top: 250px;
 }
 
+.doc-pp{
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
 @media screen and (max-width: 1024px) {
 	.pop-up-color section {
 	margin-top: 25px;

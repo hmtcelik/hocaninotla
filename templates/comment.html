@@ -1,8 +1,18 @@
 {% extends 'includes/base.html' %}
 {% block title %}{{ doctor.doctor_name }}{% endblock %}
 {% block body %}
+        <div style="
+	text-align: center;
+	margin-bottom: 30px;
+        ">
+                <h1>{{doctor.doctor_name}}</h1>
+                <img src="/media/{{ doctor.doctor_pp }}" alt="doc" width="320px" height="380px" class = "doc-pp">
+                <p>{{doctor.doctor_bio}}</p>
+        </div>        
+        <br>
+        <h1 style="margin-bottom: 30px;">Yorumlar</h1>
         {% for comment in doctor.comment_set.all  %}
-        <h1>{{comment.comment_author}}</h1>      
+        <h4>{{comment.comment_author}}</h4>      
         <p>{{ comment.comment_title }}</p>
         <p>{{ comment.comment_body }}</p>
         <p>===========================</p>
