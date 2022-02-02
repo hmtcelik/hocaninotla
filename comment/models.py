@@ -34,7 +34,6 @@ class Doctor(models.Model):
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     comment_author = models.CharField(max_length=50)
-    comment_title = models.CharField(max_length=100)
     comment_body = models.TextField(max_length=1000)
     
     def __str__(self):

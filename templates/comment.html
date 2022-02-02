@@ -9,12 +9,12 @@
                 <img src="/media/{{ doctor.doctor_pp }}" alt="doc" width="320px" height="380px" class = "doc-pp">
                 <p>{{doctor.doctor_bio}}</p>
         </div>        
-        <br>
-        <h1 style="margin-bottom: 30px;">Yorumlar</h1>
-        {% for comment in doctor.comment_set.all  %}
-        <h4>{{comment.comment_author}}</h4>      
-        <p>{{ comment.comment_title }}</p>
-        <p>{{ comment.comment_body }}</p>
-        <p>===========================</p>
-        {% endfor %}
+        <div style="margin-top: 50px;">
+                <h1 style="margin-bottom: 30px;">Yorumlar</h1>
+                {% for comment in doctor.comment_set.all  %}
+                        <h4 style="margin-top: 50px;">{{comment.comment_author}}</h4>      
+                        <p>{{ comment.comment_body }}</p>
+                        <a href="#">yanitla</a>
+                {% endfor %}
+        </div>
 {% endblock %}
