@@ -1,0 +1,21 @@
+{% extends 'includes/base.html' %}
+
+{% block title %}Kayit{% endblock %}
+
+
+{% block body %} 
+
+{% load crispy_forms_tags %}         
+
+<!--Register--> 
+<div class="container py-5">
+	<h1>Kayit Ol</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ register_form|crispy }}                    
+		<button class="btn btn-primary" type="submit">Kayit Ol</button>
+	</form><br>
+	<p>Zaten hesabiniz varsa, <a href="/login">Giris</a> yapiniz.</p>
+</div>
+
+{% endblock %}

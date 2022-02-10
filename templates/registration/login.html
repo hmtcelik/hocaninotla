@@ -1,0 +1,22 @@
+{% extends 'includes/base.html' %}
+
+{% block title %}Giris{% endblock %}
+
+{% block body %}      
+
+{% load crispy_forms_tags %}
+
+<!--Login-->
+<div class="text-center">
+  <div class="container py-5">
+    <h1>Login</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ login_form|crispy }}<br>
+      <button class="btn btn-primary" type="submit">Giris</button>
+    </form><br>
+    <p class="text-center">Hesabiniz yoksa<a href="/register">Kayit olunuz</a>.</p>
+  </div>
+</div>
+
+{% endblock %}

@@ -12,6 +12,9 @@ urlpatterns = [
     path('university/faculty/depart/<int:pk>/', views.DoctorView.as_view(), name='doctor'),
     path('university/faculty/depart/doctor/<int:pk>/', views.CommentView.as_view(), name='comment'),
     path("search/", views.searchbar, name="searchbar"),
+    path("register/", views.register_request, name="register"),
+    path("login/", views.login_request, name="login"),
+    
 ]
 
 

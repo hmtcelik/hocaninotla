@@ -10,10 +10,8 @@
         </div>
     </div>
     {% for uni in all_unis %}
-        <div class="col-md-6">
             <div class="a">
                 <h1><a href="{% url 'comment:faculty' uni.id %}">{{ uni.uni_name }}</a></h1>
             </div>    
-        </div>
     {% endfor %}
 {% endblock %}
