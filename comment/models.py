@@ -38,13 +38,3 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment_author+'__'+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name
-    
-
-# user model for login and register
-class User(models.Model):
-    username = models.CharField(max_length=50)
-    mail = models.CharField(max_length=100)
-    password = models.CharField(max_length=50)
-    
-    def __str__(self):
-        return self.username

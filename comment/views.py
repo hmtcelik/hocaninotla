@@ -55,10 +55,10 @@ def register_request(request):
 		form = NewUserForm(request.POST)
 		if form.is_valid():
 			user = form.save()
-			login(request, user)
 			messages.success(request, "Basariyla Kayit Olundu." )
-			return redirect("home")
-		messages.error(request, "Bir Seyler Ters Gitti, Lutfen Tekrar Deneyiniz.")
+			return redirect("comment:login")
+		else:
+				messages.error(request,"Bir Seyler Ters Gitti, Lutfen Tekrar Deneyiniz.")
 	form = NewUserForm()
 	return render (request=request, template_name="registration/register.html", context={"register_form":form})
 
@@ -74,7 +74,7 @@ def login_request(request):
 			if user is not None:
 				login(request, user)
 				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("homepage")
+				return redirect("comment:home")
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
@@ -87,4 +87,4 @@ def login_request(request):
 def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
-	return redirect("homepage")
+	return redirect("comment:home")
