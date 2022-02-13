@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 
-from .forms import NewUserForm
-from .models import Uni , Faculty, Depart, Doctor
+from .forms import NewUserForm, RateForm
+from .models import Uni , Faculty, Depart, Doctor, Comment
 
 
 # Searchbar func.
@@ -48,6 +48,9 @@ class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
 
+
+def RateView(request, doctor_id):
+    doctor = Doctor.objects.get() #burda kaldin
 
 #Register----->
 def register_request(request):

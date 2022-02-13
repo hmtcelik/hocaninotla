@@ -12,7 +12,8 @@
         <div style="margin-top: 50px;">
                 <h1 style="margin-bottom: 30px;">Yorumlar</h1>
                 {% if user.is_authenticated %}
-                        <a href="#">Yorum Ekle</a>
+                        <button type="button"><a href="{% url 'comment:createcomment' %}">Yorum Ekle</a></button>
+
                 {% else %}
                         <p>Yorum yapmak icin <a href="/login">Giris</a> yapiniz</p>
                 {% endif %}
