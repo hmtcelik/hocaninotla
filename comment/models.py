@@ -31,10 +31,21 @@ class Doctor(models.Model):
     def __str__(self):
         return self.depart.faculty.uni.uni_name + '-' + self.doctor_name
     
+    
+RATE_CHOICES = [
+    (1, '1 - cok kotu'),
+    (2, '2 - kotu'),
+    (3, '3 - orta'),
+    (4, '4 - iyi'),
+    (5, '5 - cok iyi'),    
+]
+    
+    
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     comment_author = models.CharField(max_length=50)
     comment_body = models.TextField(max_length=1000)
+    rate = models.PositiveSmallIntegerField(blank=True, null=True, choices=RATE_CHOICES)
     
     def __str__(self):
         return self.comment_author+'__'+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name

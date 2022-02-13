@@ -11,8 +11,14 @@
         </div>        
         <div style="margin-top: 50px;">
                 <h1 style="margin-bottom: 30px;">Yorumlar</h1>
+                {% if user.is_authenticated %}
+                        <a href="#">Yorum Ekle</a>
+                {% else %}
+                        <p>Yorum yapmak icin <a href="/login">Giris</a> yapiniz</p>
+                {% endif %}
+
                 {% for comment in doctor.comment_set.all  %}
-                        <h4 style="margin-top: 50px;">{{comment.comment_author}}</h4>      
+                        <h4 style="margin-top: 50px;">{{comment.comment_author}} - {{comment.rate}}</h4>      
                         <p>{{ comment.comment_body }}</p>
                         <a href="#">yanitla</a>
                 {% endfor %}
