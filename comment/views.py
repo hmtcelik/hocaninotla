@@ -3,6 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+
+
 
 from .forms import NewUserForm, RateForm
 from .models import Uni , Faculty, Depart, Doctor, Comment
@@ -48,9 +53,21 @@ class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
 
+class CommentCreate(generic.FormView):
+    template_name = 'comment_add.html'
+    form_class = RateForm
+    success_url = reverse_lazy('comment:comment')
 
-def RateView(request, doctor_id):
-    doctor = Doctor.objects.get() #burda kaldin
+
+'''def createcomment(request):
+    if request.method == "POST":
+        form = RateForm(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            return redirect("comment:comment")
+    form = RateForm()
+    return render (request=request, template_name="comment_add.html", context={"rate_form":form})
+'''
 
 #Register----->
 def register_request(request):
