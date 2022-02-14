@@ -12,7 +12,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700" rel="stylesheet">
 		<link rel="stylesheet" href="{% static '/css/magnific-popup.css' %}">
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet" />
 
 		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 	</head>
@@ -36,22 +37,45 @@
 										<span class="symbol"><img src="{% static 'images/logo.png' %}" alt="Title" /></span><span class="title">Hocani Notla</span>
 									</a>
 								</div>
-								<div class="navbar-nav ms-auto">
+								
+								<!-- LOGIN REGISTER BUTTONS-->
 									{% if user.is_authenticated %}
-									  <a class="nav-link" href="#">Welcome, {{user.username}}</a>
-									  <a class="nav-link" href="/logout">Logout</a>
+									<a class="nav-link" href="#">Welcome, {{user.username}}</a>
+									<div class="buttonn">
+										<button onclick="location.href='/logout'" type="button" class="slide">
+											<div>
+												<a href="{% url 'comment:logout'%}">Cikis Yap</a>	
+											</div>
+											<i class="icon-arrow-right"></i>
+										</button>
+									</div>
 									{% else %}
-									  <a href="/login" class="nav-item nav-link">Login</a>
-									  <a href="/register" class="nav-item nav-link">Sign up</a>
+									<div style="display:flex;">
+										<div class="buttonn">
+											<button onclick="location.href='/login'" type="button" class="slide">
+												<div>
+													<a href="{% url 'comment:login'%}">Giris</a>	
+												</div>
+												<i class="icon-arrow-right"></i>
+											</button>
+										</div> 
+										<div class="buttonn">
+											<button onclick="location.href='/register'" type="button" class="slide">
+												<div>
+													<a href="{% url 'comment:register'%}">Kayit Ol</a>	
+												</div>
+												<i class="icon-arrow-right"></i>
+											</button>
+										</div>
+									</div>
 									{% endif %}
-								</div>
 							</header>
 							<!-- Menu -->
 							<nav id="menu">
 								<h2>Menu</h2>
 								<ul>
 									<li><a href="{% url 'comment:home'%}">Anasayfa</a></li>
-									<li><a href="{% url 'comment:uni'%}">Hocani Ara</a></li>
+									<li><a href="{% url 'comment:uni'%}">Hocani Ara</a></li>									
 								</ul>
 							</nav>
 						</div>

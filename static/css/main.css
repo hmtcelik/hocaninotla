@@ -4,7 +4,7 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #000;
+
 }
 
 a:hover {
@@ -24,7 +24,7 @@ textarea {
 }
 h1 {
 	font-size: 36px;
-	margin-top: 45px;
+	margin-top: 20px;
 }
 h2 {
 	font-size: 31px;
@@ -33,6 +33,61 @@ pre {
 	background-color: e4e4e4;
 	border-radius: 10px;
 }
+
+
+.buttonn {
+	margin: 13px;
+	font-family: inherit;
+}
+
+/* Slide button styling */
+.slide {
+  font-size: 18px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 30px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.slide i {
+  opacity: 0;
+  font-size: 13px;
+  transition: 0.2s;
+  position: absolute;
+  right: 10px;
+  top: 21px;
+  transition: transform 1;
+}
+
+.slide div {
+  transition: transform 0.8s;
+}
+
+.slide:hover div {
+  transform: translateX(-6px);
+}
+
+.slide::after {
+  content: "";
+  background-color: #66f2d5;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+}
+
+.slide:hover i {
+  opacity: 1;
+  transform: translateX(-6px);
+}
+/* End of Slide Button  */
+
 
 .inner {
     border-bottom: 1px solid #f2f2f2;
