@@ -23,14 +23,13 @@ class NewUserForm(UserCreationForm):
 
 
 class RateForm(forms.ModelForm):
-	
+
     class Meta:
         model = Comment
         fields = ('comment_author', 'comment_body', 'rate')
         
     def save(self, commit=True):
-        obj = super(RateForm, self).save(commit=False)
-        obj.doctor = self.cleaned_data['doctor']
+        obj = super(RateForm, self)
         if commit:
             obj.save()
         return obj

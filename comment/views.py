@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 
 
@@ -56,7 +56,23 @@ class CommentView(generic.DetailView):
 class CommentCreate(generic.FormView):
     template_name = 'comment_add.html'
     form_class = RateForm
-    success_url = reverse_lazy('comment:comment')
+
+    def get_success_url(self):
+        return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
+
+    def form_valid(self, form):
+        form.instance.doctor_id = self.kwargs.get('doctor_id')
+        form.save()
+        
+        return super().form_valid(form)
+
+
+    '''def form_valid(self, form):
+        doctor_id = self.kwargs['doctor_id']
+        doctor = Doctor.objects.get(pk=doctor_id)
+       ''' 
+        
+        
 
 
 '''def createcomment(request):

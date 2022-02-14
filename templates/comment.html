@@ -8,11 +8,11 @@
                 <h1>{{doctor.doctor_name}}</h1>
                 <img src="/media/{{ doctor.doctor_pp }}" alt="doc" width="320px" height="380px" class = "doc-pp">
                 <p>{{doctor.doctor_bio}}</p>
-        </div>        
+        </div>
         <div style="margin-top: 50px;">
                 <h1 style="margin-bottom: 30px;">Yorumlar</h1>
                 {% if user.is_authenticated %}
-                        <button type="button"><a href="{% url 'comment:createcomment' %}">Yorum Ekle</a></button>
+                        <button type="button"><a href="{% url 'comment:createcomment' doctor.id%}">Yorum Ekle</a></button>
 
                 {% else %}
                         <p>Yorum yapmak icin <a href="/login">Giris</a> yapiniz</p>

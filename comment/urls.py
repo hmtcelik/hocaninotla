@@ -15,7 +15,7 @@ urlpatterns = [
     path("register/", views.register_request, name="register"),
     path("login/", views.login_request, name="login"),
     path("logout", views.logout_request, name= "logout"),
-    path("createcomment/", views.CommentCreate.as_view(), name = 'createcomment'),
+    path("createcomment/<int:doctor_id>/", views.CommentCreate.as_view(), name = 'createcomment'),
     #path("createcomment/", views.createcomment, name = 'createcomment'),
     
 ]
