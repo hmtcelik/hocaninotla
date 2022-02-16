@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import  Comment , RATE_CHOICES
+from .models import  Comment , RATE_CHOICES, CommentAnswer
 
 
 # Create your forms here.
@@ -34,3 +34,16 @@ class RateForm(forms.ModelForm):
         if commit:
             obj.save()
         return obj
+
+class CommentAnswerForm(forms.ModelForm):
+    
+    class Meta:
+        model = CommentAnswer
+        exclude = ['answer_author']
+        fields = ('answer_body',)
+        
+    def save(self, commit=True):
+        answer = super(CommentAnswerForm, self)
+        if commit:
+            answer.save()
+        return answer

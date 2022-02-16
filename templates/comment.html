@@ -21,7 +21,14 @@
                 {% for comment in doctor.comment_set.all  %}
                         <h4 style="margin-top: 50px;">{{comment.comment_author}} - {{comment.rate}}</h4>      
                         <p>{{ comment.comment_body }}</p>
-                        <a href="#">yanitla</a>
+                        <a href="{% url 'comment:commentanswer' doctor.id comment.id%}">yanitla</a>
+                        <!-- start answers -->
+                        <div style="margin-top:15px;">
+                                {% for re_comment in comment.commentanswer_set.all %}
+                                        <p class='commentanswer'><strong>{{re_comment.answer_author}}</strong> - {{ re_comment.answer_body }}</p>
+                                {% endfor %}                  
+                        </div>      
+                        <!-- end answers --> 
                 {% endfor %}
         </div>
 {% endblock %}

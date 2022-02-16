@@ -9,7 +9,7 @@ from django.urls import reverse_lazy, reverse
 
 
 
-from .forms import NewUserForm, RateForm
+from .forms import NewUserForm, RateForm, CommentAnswerForm
 from .models import Uni , Faculty, Depart, Doctor, Comment
 from django.contrib.auth.models import User
 
@@ -69,6 +69,22 @@ class CommentCreate(generic.FormView):
         form.save()
         
         return super().form_valid(form)
+
+class CommentAnswerView(generic.FormView):
+    template_name = 'comment_answering.html'
+    form_class = CommentAnswerForm
+
+    def get_success_url(self):
+        return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
+    
+    def form_valid(self, form):
+        form.save(commit=False)
+        form.instance.comment_id = self.kwargs.get('comment_id')
+        form.instance.answer_author = self.request.user
+        form.save()
+        
+        return super().form_valid(form)
+
 
 
     '''def form_valid(self, form):

@@ -30,8 +30,8 @@ class Doctor(models.Model):
 
     def __str__(self):
         return self.depart.faculty.uni.uni_name + '-' + self.doctor_name
-    
-    
+
+
 RATE_CHOICES = [
     (1, '1 - cok kotu'),
     (2, '2 - kotu'),
@@ -49,3 +49,11 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment_author+'__'+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name
+
+class CommentAnswer(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    answer_author = models.CharField(max_length=50)
+    answer_body = models.TextField(max_length=1000)
+    
+    def __str__(self):
+        return 'Yanit: ' + self.answer_author+' ---> '+ self.comment.comment_author + ' // ' + self.comment.doctor.doctor_name + '-' + self.comment.doctor.depart.faculty.uni.uni_name
