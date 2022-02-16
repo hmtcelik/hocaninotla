@@ -26,7 +26,8 @@ class RateForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('comment_author', 'comment_body', 'rate')
+        exclude = ['comment_author']        
+        fields = ('comment_body', 'rate')
         
     def save(self, commit=True):
         obj = super(RateForm, self)

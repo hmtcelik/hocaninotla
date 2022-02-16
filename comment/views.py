@@ -11,6 +11,8 @@ from django.urls import reverse_lazy, reverse
 
 from .forms import NewUserForm, RateForm
 from .models import Uni , Faculty, Depart, Doctor, Comment
+from django.contrib.auth.models import User
+
 
 
 # Searchbar func.
@@ -61,7 +63,9 @@ class CommentCreate(generic.FormView):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
 
     def form_valid(self, form):
+        form.save(commit=False)        
         form.instance.doctor_id = self.kwargs.get('doctor_id')
+        form.instance.comment_author = self.request.user
         form.save()
         
         return super().form_valid(form)
