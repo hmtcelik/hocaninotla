@@ -6,6 +6,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.db.models import Avg #for avarage of rates
+from django.template import RequestContext
+
 
 
 
@@ -54,6 +57,15 @@ class DoctorView(generic.DetailView):
 class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
+    av_rates = Comment.objects.all().aggregate(Avg('rate')) #avarage rate for teacher
+    av_rates = av_rates['rate__avg']
+    av_rates = round(av_rates,2)
+    
+    def get_context_data(self, **kwargs): #burda degiskeni context dataya atip gidip templatesde direk ismiyle kullanabiliyoz
+        context = super(CommentView, self).get_context_data(**kwargs)
+        context.update({'av_rates': self.av_rates })
+        return context
+
 
 class CommentCreate(generic.FormView):
     template_name = 'comment_add.html'

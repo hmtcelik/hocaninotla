@@ -27,17 +27,18 @@ class Doctor(models.Model):
     doctor_name = models.CharField(max_length=50)
     doctor_bio = models.TextField(max_length=1000)
     doctor_pp = models.ImageField(upload_to ='uploads/', blank=True, null=True)
+    doctor_rate = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.depart.faculty.uni.uni_name + '-' + self.doctor_name
 
 
 RATE_CHOICES = [
-    (1, '1 - cok kotu'),
-    (2, '2 - kotu'),
-    (3, '3 - orta'),
-    (4, '4 - iyi'),
-    (5, '5 - cok iyi'),    
+    (1.0, '1 - cok kotu'),
+    (2.0, '2 - kotu'),
+    (3.0, '3 - orta'),
+    (4.0, '4 - iyi'),
+    (5.0, '5 - cok iyi'),    
 ]
     
     
@@ -45,10 +46,10 @@ class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     comment_author = models.CharField(max_length=50)
     comment_body = models.TextField(max_length=1000)
-    rate = models.PositiveSmallIntegerField(blank=True, null=True, choices=RATE_CHOICES)
+    rate = models.FloatField(choices=RATE_CHOICES, null=True)
     
     def __str__(self):
-        return self.comment_author+'__'+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name
+        return 'Yorum: '+ self.comment_author+' // '+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name
 
 class CommentAnswer(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
