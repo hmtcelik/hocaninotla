@@ -104,3 +104,24 @@ $('.open-popup-link').magnificPopup({
   }
 });
 
+$(function() {
+  $(".comment-box").each(function(index) {
+    $(this).children(".user-comment-box").slice(-3).show();
+  });
+
+  $(".see-more").click(function(e) {
+    e.preventDefault();
+    var $link = $(this);
+    var $div = $link.closest('.comment-box');
+
+    if ($link.hasClass('visible')) {
+      $link.text('Show all comments');
+      $div.children(".user-comment-box").slice(0, -3).slideUp()
+    } else {
+      $link.text('Show less comments');
+      $div.children(".user-comment-box").slideDown();
+    }
+
+    $link.toggleClass('visible');
+  });
+});

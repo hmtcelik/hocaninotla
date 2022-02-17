@@ -57,15 +57,31 @@ class DoctorView(generic.DetailView):
 class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
-    av_rates = Comment.objects.all().aggregate(Avg('rate')) #avarage rate for teacher
+    
+    #avarage rate for teacher
+    av_rates = Comment.objects.all().aggregate(Avg('rate'))
     av_rates = av_rates['rate__avg']
     av_rates = round(av_rates,2)
     
+    #counting how many rates for each rate
+    rates1 = Comment.objects.filter(rate=1.0).count()
+    rates2 = Comment.objects.filter(rate=2.0).count()
+    rates3 = Comment.objects.filter(rate=3.0).count()
+    rates4 = Comment.objects.filter(rate=4.0).count()
+    rates5 = Comment.objects.filter(rate=5.0).count()
+    
+    
     def get_context_data(self, **kwargs): #burda degiskeni context dataya atip gidip templatesde direk ismiyle kullanabiliyoz
         context = super(CommentView, self).get_context_data(**kwargs)
-        context.update({'av_rates': self.av_rates })
+        arg = {'av_rates': self.av_rates,
+               'rates1': self.rates1,
+               'rates2': self.rates2,
+               'rates3': self.rates3,
+               'rates4': self.rates4,
+               'rates5': self.rates5,}
+        context.update(arg)
         return context
-
+    
 
 class CommentCreate(generic.FormView):
     template_name = 'comment_add.html'

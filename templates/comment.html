@@ -17,6 +17,74 @@
                 {% else %}
                         <p>Yorum yapmak icin <a href="/login">Giris</a> yapiniz</p>
                 {% endif %}
+                
+                <!-- deneme-->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                
+                <!-- TUM YANITLARI GORME SCRIPTI-->
+                <script>
+                        $(function() {
+                                $(".comment-box").each(function(index) {
+                                  $(this).children(".user-comment-box").slice(-3).show();
+                                });
+                              
+                                $(".see-more").click(function(e) {
+                                  e.preventDefault();
+                                  var $link = $(this);
+                                  var $div = $link.closest('.comment-box');
+                              
+                                  if ($link.hasClass('visible')) {
+                                    $link.text('Show all comments');
+                                    $div.children(".user-comment-box").slice(0, -3).slideUp()
+                                  } else {
+                                    $link.text('Show less comments');
+                                    $div.children(".user-comment-box").slideDown();
+                                  }
+                              
+                                  $link.toggleClass('visible');
+                                });
+                              });
+                </script>
+                <style>
+                        .user-comment-box {
+                                display: none;
+                          }
+                </style>
+
+                <div class="comment-box-container">
+                  <div class="comment-box">
+                    <a href="#" class="see-more">Show all comments</a>
+                    <div class="user-comment-box">0</div>
+                    <div class="user-comment-box">1</div>
+                    <div class="user-comment-box">2</div>
+                    <div class="user-comment-box">3</div>
+                    <div class="user-comment-box">4</div>
+                    <div class="user-comment-box">5</div>
+                    <div class="user-comment-box">6</div>
+                  </div>
+                </div><br />
+                
+                <div class="comment-box-container">
+                  <div class="comment-box">
+                    <a href="#" class="see-more">Show all comments</a>
+                    <div class="user-comment-box">0</div>
+                    <div class="user-comment-box">1</div>
+                    <div class="user-comment-box">2</div>
+                    <div class="user-comment-box">3</div>
+                    <div class="user-comment-box">4</div>
+                    <div class="user-comment-box">5</div>
+                    <div class="user-comment-box">6</div>
+                  </div>
+                </div>
+                <!-- end deneme-->
+
+                <Br>
+                <Br>
+                1.0 --> {{ rates1 }} <br>
+                2.0 --> {{ rates2 }} <Br>
+                3.0 --> {{ rates3 }} <Br>
+                4.0 --> {{ rates4 }} <br>
+                5.0 --> {{ rates5 }} <br>
 
                 {% for comment in doctor.comment_set.all  %}
                         <h4 style="margin-top: 50px;">{{comment.comment_author}} - {{comment.rate}}</h4>      
