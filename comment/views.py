@@ -13,7 +13,7 @@ from django.template import RequestContext
 
 
 from .forms import NewUserForm, RateForm, CommentAnswerForm
-from .models import Uni , Faculty, Depart, Doctor, Comment
+from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer
 from django.contrib.auth.models import User
 
 
@@ -70,9 +70,11 @@ class CommentView(generic.DetailView):
     rates4 = Comment.objects.filter(rate=4.0).count()
     rates5 = Comment.objects.filter(rate=5.0).count()
     
+    #re-comment counter for javascript slider (bunu yapiyom cunki tum yanitlari goster mallik yapmasin eger yorum varsa yapsin diye)
+    comments = Comment.objects.all().count()        
     
     def get_context_data(self, **kwargs): #burda degiskeni context dataya atip gidip templatesde direk ismiyle kullanabiliyoz
-        context = super(CommentView, self).get_context_data(**kwargs)
+        context = super(CommentView, self).get_context_data(**kwargs) 
         arg = {'av_rates': self.av_rates,
                'rates1': self.rates1,
                'rates2': self.rates2,

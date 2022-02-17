@@ -25,7 +25,7 @@
                 <script>
                         $(function() {
                                 $(".comment-box").each(function(index) {
-                                  $(this).children(".user-comment-box").slice(-3).show();
+                                  $(this).children(".user-comment-box").slice(-2).show();
                                 });
                               
                                 $(".see-more").click(function(e) {
@@ -34,10 +34,10 @@
                                   var $div = $link.closest('.comment-box');
                               
                                   if ($link.hasClass('visible')) {
-                                    $link.text('Show all comments');
-                                    $div.children(".user-comment-box").slice(0, -3).slideUp()
+                                    $link.text('+ Tum yanitlari goster');
+                                    $div.children(".user-comment-box").slice(0, -2).slideUp()
                                   } else {
-                                    $link.text('Show less comments');
+                                    $link.text('- Yorumlari gizle');
                                     $div.children(".user-comment-box").slideDown();
                                   }
                               
@@ -50,33 +50,7 @@
                                 display: none;
                           }
                 </style>
-
-                <div class="comment-box-container">
-                  <div class="comment-box">
-                    <a href="#" class="see-more">Show all comments</a>
-                    <div class="user-comment-box">0</div>
-                    <div class="user-comment-box">1</div>
-                    <div class="user-comment-box">2</div>
-                    <div class="user-comment-box">3</div>
-                    <div class="user-comment-box">4</div>
-                    <div class="user-comment-box">5</div>
-                    <div class="user-comment-box">6</div>
-                  </div>
-                </div><br />
-                
-                <div class="comment-box-container">
-                  <div class="comment-box">
-                    <a href="#" class="see-more">Show all comments</a>
-                    <div class="user-comment-box">0</div>
-                    <div class="user-comment-box">1</div>
-                    <div class="user-comment-box">2</div>
-                    <div class="user-comment-box">3</div>
-                    <div class="user-comment-box">4</div>
-                    <div class="user-comment-box">5</div>
-                    <div class="user-comment-box">6</div>
-                  </div>
-                </div>
-                <!-- end deneme-->
+                <!-- end script and style BU ARADA BUNU ALABILIYORSAN GIT ADAM GIBI STATICE AL-->
 
                 <Br>
                 <Br>
@@ -92,9 +66,20 @@
                         <a href="{% url 'comment:commentanswer' doctor.id comment.id%}">yanitla</a>
                         <!-- start answers -->
                         <div style="margin-top:15px;">
-                                {% for re_comment in comment.commentanswer_set.all %}
-                                        <p class='commentanswer'><strong>{{re_comment.answer_author}}</strong> - {{ re_comment.answer_body }}</p>
-                                {% endfor %}                  
+                                <div class="comment-box-container">
+                                        <div class="comment-box">
+                                                {% if ct_recomments > 2 %}
+                                                <a href="#" class="see-more" style="margin-left:10px;"> + Tum yanitlari goster</a>
+                                                {% else %}
+                                                {% endif %}
+                                                {% for re_comment in comment.commentanswer_set.all %}
+                                                        <div class="user-comment-box">
+                                                                <p class='commentanswer'><strong>{{re_comment.answer_author}}</strong> - {{ re_comment.answer_body }}</p>
+                                                        </div>
+                                                {% endfor %}      
+                                        </div>
+                                </div>
+            
                         </div>      
                         <!-- end answers --> 
                 {% endfor %}
