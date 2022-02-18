@@ -61,25 +61,32 @@
                 5.0 --> {{ rates5 }} <br>
 
                 {% for comment in doctor.comment_set.all  %}
-                        <h4 style="margin-top: 50px;">{{comment.comment_author}} - {{comment.rate}}</h4>      
-                        <p>{{ comment.comment_body }}</p>
-                        <a href="{% url 'comment:commentanswer' doctor.id comment.id%}">yanitla</a>
-                        <!-- start answers -->
-                        <div style="margin-top:15px;">
-                                <div class="comment-box-container">
-                                        <div class="comment-box">
-                                                {% if ct_recomments > 2 %}
-                                                <a href="#" class="see-more" style="margin-left:10px;"> + Tum yanitlari goster</a>
-                                                {% else %}
-                                                {% endif %}
-                                                {% for re_comment in comment.commentanswer_set.all %}
-                                                        <div class="user-comment-box">
-                                                                <p class='commentanswer'><strong>{{re_comment.answer_author}}</strong> - {{ re_comment.answer_body }}</p>
-                                                        </div>
-                                                {% endfor %}      
+                        <div  style="margin-top: 50px;">
+                                <h4>{{comment.comment_author}} - {{comment.rate}}</h4>      
+                                <p>{{ comment.comment_body }}</p>
+                                <a href="{% url 'comment:commentanswer' doctor.id comment.id%}">yanitla</a>
+                                        
+                                <!-- like a comment -->
+                                <form action="{% url 'comment:likecomment' comment.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} 
+                                </form>
+
+
+
+                                <!-- start answers -->
+                                <div style="margin-top:15px;">
+                                        <div class="comment-box-container">
+                                                <div class="comment-box">
+                                                        <a href="#" class="see-more" style="margin-left:10px;"> + Tum yanitlari goster</a>
+                                                        {% for re_comment in comment.commentanswer_set.all %}
+                                                                <div class="user-comment-box">
+                                                                        <p class='commentanswer'><strong>{{re_comment.answer_author}}</strong> - {{ re_comment.answer_body }}</p>
+                                                                </div>
+                                                        {% endfor %}      
+                                                </div>
                                         </div>
                                 </div>
-            
                         </div>      
                         <!-- end answers --> 
                 {% endfor %}

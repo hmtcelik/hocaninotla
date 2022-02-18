@@ -71,16 +71,25 @@ class CommentView(generic.DetailView):
     rates5 = Comment.objects.filter(rate=5.0).count()
     
     #re-comment counter for javascript slider (bunu yapiyom cunki tum yanitlari goster mallik yapmasin eger yorum varsa yapsin diye)
-    comments = Comment.objects.all().count()        
-    
+    comments = Comment.objects.all().count()
+    i = 1
+    for i in range(comments):
+        ct = CommentAnswer.objects.filter(comment=i).count()
+
     def get_context_data(self, **kwargs): #burda degiskeni context dataya atip gidip templatesde direk ismiyle kullanabiliyoz
-        context = super(CommentView, self).get_context_data(**kwargs) 
+        context = super(CommentView, self).get_context_data(**kwargs)
+        
+        stuff = get_object_or_404(Comment, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
         arg = {'av_rates': self.av_rates,
                'rates1': self.rates1,
                'rates2': self.rates2,
                'rates3': self.rates3,
                'rates4': self.rates4,
-               'rates5': self.rates5,}
+               'rates5': self.rates5,
+               'ct_recomments': self.ct,
+               'total_likes': total_likes,
+               }
         context.update(arg)
         return context
     
@@ -115,26 +124,13 @@ class CommentAnswerView(generic.FormView):
         
         return super().form_valid(form)
 
-
-
-    '''def form_valid(self, form):
-        doctor_id = self.kwargs['doctor_id']
-        doctor = Doctor.objects.get(pk=doctor_id)
-       ''' 
-        
-        
-
-
-'''def createcomment(request):
-    if request.method == "POST":
-        form = RateForm(request.POST)
-        if form.is_valid():
-            obj = form.save()
-            return redirect("comment:comment")
-    form = RateForm()
-    return render (request=request, template_name="comment_add.html", context={"rate_form":form})
-'''
-
+def likeview(request, comment_id):
+    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
+    comment.likes.add(request.user)
+    return HttpResponseRedirect(reverse('comment:comment', args=[str(comment_id)]))
+    
+    
+    
 #Register----->
 def register_request(request):
 	if request.method == "POST":

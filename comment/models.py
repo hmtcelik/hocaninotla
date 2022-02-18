@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Uni(models.Model):
@@ -44,16 +45,20 @@ RATE_CHOICES = [
     
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    comment_author = models.CharField(max_length=50)
+    comment_author = models.CharField(max_length=150)
     comment_body = models.TextField(max_length=1000)
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
+    likes = models.ManyToManyField(User, related_name='doc_comments')
+    
+    def total_likes(self):
+        return self.likes.count()
     
     def __str__(self):
         return 'Yorum: '+ self.comment_author+' // '+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name
 
 class CommentAnswer(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    answer_author = models.CharField(max_length=50)
+    answer_author = models.CharField(max_length=150)
     answer_body = models.TextField(max_length=1000)
     
     def __str__(self):

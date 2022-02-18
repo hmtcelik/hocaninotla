@@ -22,11 +22,11 @@ class NewUserForm(UserCreationForm):
 		return user
 
 
-class RateForm(forms.ModelForm):
+class RateForm(forms.ModelForm): #comment create
 
     class Meta:
         model = Comment
-        exclude = ['comment_author']        
+        exclude = ['comment_author', 'likes']        
         fields = ('comment_body', 'rate')
         
     def save(self, commit=True):

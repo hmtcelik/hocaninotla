@@ -8,3 +8,4 @@ admin.site.register(Depart)
 admin.site.register(Doctor)
 admin.site.register(Comment)
 admin.site.register(CommentAnswer)
+
