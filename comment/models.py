@@ -48,7 +48,7 @@ class Comment(models.Model):
     comment_author = models.CharField(max_length=150)
     comment_body = models.TextField(max_length=1000)
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
-    likes = models.ManyToManyField(User, related_name='doc_comments')
+    likes = models.ManyToManyField(User, related_name='comments')
     
     def total_likes(self):
         return self.likes.count()

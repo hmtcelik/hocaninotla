@@ -17,7 +17,16 @@ from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer
 from django.contrib.auth.models import User
 
 
-
+#like button
+def likeview(request, doctor_id, comment_id):
+    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
+    user = request.user
+    comment.likes.add(user)
+    comment.save()
+    print(doctor_id)
+    print(comment_id)
+    return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
+    
 # Searchbar func.
 def searchbar(request):
     if request.method == "GET":
@@ -76,11 +85,10 @@ class CommentView(generic.DetailView):
     for i in range(comments):
         ct = CommentAnswer.objects.filter(comment=i).count()
 
+
     def get_context_data(self, **kwargs): #burda degiskeni context dataya atip gidip templatesde direk ismiyle kullanabiliyoz
         context = super(CommentView, self).get_context_data(**kwargs)
-        
-        stuff = get_object_or_404(Comment, id=self.kwargs['pk'])
-        total_likes = stuff.total_likes()
+
         arg = {'av_rates': self.av_rates,
                'rates1': self.rates1,
                'rates2': self.rates2,
@@ -88,8 +96,8 @@ class CommentView(generic.DetailView):
                'rates4': self.rates4,
                'rates5': self.rates5,
                'ct_recomments': self.ct,
-               'total_likes': total_likes,
                }
+        
         context.update(arg)
         return context
     
@@ -124,11 +132,6 @@ class CommentAnswerView(generic.FormView):
         
         return super().form_valid(form)
 
-def likeview(request, comment_id):
-    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
-    comment.likes.add(request.user)
-    return HttpResponseRedirect(reverse('comment:comment', args=[str(comment_id)]))
-    
     
     
 #Register----->
