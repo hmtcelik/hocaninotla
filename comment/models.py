@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg #for avarage of rates
+
 
 
 class Uni(models.Model):
@@ -28,8 +30,7 @@ class Doctor(models.Model):
     doctor_name = models.CharField(max_length=50)
     doctor_bio = models.TextField(max_length=1000)
     doctor_pp = models.ImageField(upload_to ='uploads/', blank=True, null=True)
-    doctor_rate = models.FloatField(null=True, blank=True)
-
+    
     def __str__(self):
         return self.depart.faculty.uni.uni_name + '-' + self.doctor_name
 
@@ -39,7 +40,7 @@ RATE_CHOICES = [
     (2.0, '2 - kotu'),
     (3.0, '3 - orta'),
     (4.0, '4 - iyi'),
-    (5.0, '5 - cok iyi'),    
+    (5.0, '5 - cok iyi'),
 ]
     
     

@@ -66,12 +66,7 @@ class DoctorView(generic.DetailView):
 class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
-    
-    #avarage rate for teacher
-    av_rates = Comment.objects.all().aggregate(Avg('rate'))
-    av_rates = av_rates['rate__avg']
-    av_rates = round(av_rates,2)
-    
+
     #counting how many rates for each rate
     rates1 = Comment.objects.filter(rate=1.0).count()
     rates2 = Comment.objects.filter(rate=2.0).count()
@@ -79,23 +74,43 @@ class CommentView(generic.DetailView):
     rates4 = Comment.objects.filter(rate=4.0).count()
     rates5 = Comment.objects.filter(rate=5.0).count()
     
-    #re-comment counter for javascript slider (bunu yapiyom cunki tum yanitlari goster mallik yapmasin eger yorum varsa yapsin diye)
+    #(CALISMIYOR)re-comment counter for javascript slider (bunu yapiyom cunki tum yanitlari goster mallik yapmasin eger yorum varsa yapsin diye)
     comments = Comment.objects.all().count()
     i = 1
     for i in range(comments):
         ct = CommentAnswer.objects.filter(comment=i).count()
 
-
+    
     def get_context_data(self, **kwargs): #burda degiskeni context dataya atip gidip templatesde direk ismiyle kullanabiliyoz
         context = super(CommentView, self).get_context_data(**kwargs)
 
-        arg = {'av_rates': self.av_rates,
+        #------ avarage rates of doctors -----------------
+        doctor = get_object_or_404(Doctor, id=self.kwargs['pk'])
+        #no = numberof
+        noAllRates = Comment.objects.filter(doctor = doctor).count()
+        noRate1 = Comment.objects.filter(doctor = doctor, rate=1.0).count()
+        noRate2 = Comment.objects.filter(doctor = doctor, rate=2.0).count()
+        noRate3 = Comment.objects.filter(doctor = doctor, rate=3.0).count()
+        noRate4 = Comment.objects.filter(doctor = doctor, rate=4.0).count()
+        noRate5 = Comment.objects.filter(doctor = doctor, rate=5.0).count()
+        
+        if noAllRates != 0:
+            av_rates = ((noRate1 * 1) + (noRate2 * 2) + (noRate3 * 3) + (noRate4 * 4) + (noRate5 * 5)) / noAllRates
+            av_rates = round(av_rates, 2)
+        else:
+            av_rates = 'No Rate'
+        #-----------------------------------------------
+        
+        stuff = get_object_or_404(Comment, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
+        arg = {'av_rates': av_rates,
                'rates1': self.rates1,
                'rates2': self.rates2,
                'rates3': self.rates3,
                'rates4': self.rates4,
                'rates5': self.rates5,
                'ct_recomments': self.ct,
+               'total_likes': total_likes,
                }
         
         context.update(arg)
