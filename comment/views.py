@@ -67,13 +67,6 @@ class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
 
-    #counting how many rates for each rate
-    rates1 = Comment.objects.filter(rate=1.0).count()
-    rates2 = Comment.objects.filter(rate=2.0).count()
-    rates3 = Comment.objects.filter(rate=3.0).count()
-    rates4 = Comment.objects.filter(rate=4.0).count()
-    rates5 = Comment.objects.filter(rate=5.0).count()
-    
     #(CALISMIYOR)re-comment counter for javascript slider (bunu yapiyom cunki tum yanitlari goster mallik yapmasin eger yorum varsa yapsin diye)
     comments = Comment.objects.all().count()
     i = 1
@@ -104,11 +97,11 @@ class CommentView(generic.DetailView):
         stuff = get_object_or_404(Comment, id=self.kwargs['pk'])
         total_likes = stuff.total_likes()
         arg = {'av_rates': av_rates,
-               'rates1': self.rates1,
-               'rates2': self.rates2,
-               'rates3': self.rates3,
-               'rates4': self.rates4,
-               'rates5': self.rates5,
+               'rates1': noRate1,
+               'rates2': noRate2,
+               'rates3': noRate3,
+               'rates4': noRate4,
+               'rates5': noRate5,
                'ct_recomments': self.ct,
                'total_likes': total_likes,
                }
