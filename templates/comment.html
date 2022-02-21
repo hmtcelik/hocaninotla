@@ -1,16 +1,23 @@
 {% extends 'includes/base.html' %}
+{% load static %}
 {% block title %}{{ doctor.doctor_name }}{% endblock %}
 {% block body %}
+        <style>
+                .total-rates{
+                        width: 250px;
+                        height: 50px;
+                }
+        </style>
         <div style="
 	text-align: center;
 	margin-bottom: 30px;
         ">
-                <h1>{{doctor.doctor_name}} - {{ av_rates }}</h1>
+                <h1>{{doctor.doctor_name}} - {{ av_rates }} <img src="{% static '/images/just-star.jpg/'%}" width="30px" height="35px" alt=""></h1>
                 <img src="/media/{{ doctor.doctor_pp }}" alt="doc" width="320px" height="380px" class = "doc-pp">
                 <p>{{doctor.doctor_bio}}</p>
         </div>
         <div style="margin-top: 50px;">
-                <h1 style="margin-bottom: 30px;">Yorumlar</h1>
+                <h1 style="margin-bottom: 30px;">Yorumlar ({{ all_comments }}) </h1>
                 {% if user.is_authenticated %}
                         <button type="button"><a href="{% url 'comment:createcomment' doctor.id%}">Yorum Ekle</a></button>
 
@@ -54,15 +61,15 @@
                 
                 <Br>
                 <Br>
-                1.0 --> {{ rates1 }} <br>
-                2.0 --> {{ rates2 }} <Br>
-                3.0 --> {{ rates3 }} <Br>
-                4.0 --> {{ rates4 }} <br>
-                5.0 --> {{ rates5 }} <br>
+                <img src="{% static '/images/total-rates-stars/5-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates5 }} <br>
+                <img src="{% static '/images/total-rates-stars/4-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates4 }} <br>
+                <img src="{% static '/images/total-rates-stars/3-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates3 }} <br>
+                <img src="{% static '/images/total-rates-stars/2-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates2 }} <br>
+                <img src="{% static '/images/total-rates-stars/1-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates1 }} <br>
 
                 {% for comment in doctor.comment_set.all  %}
                         <div  style="margin-top: 50px;">
-                                <h4>{{comment.comment_author}} - {{comment.rate}}</h4>      
+                                <h4>{{comment.comment_author}} - {{comment.rate}} <img src="{% static '/images/just-star.jpg/'%}" width="16px" height="20px" alt=""></h4>      
                                 <p>{{ comment.comment_body }}</p>
                                 <a href="{% url 'comment:commentanswer' doctor.id comment.id%}">yanitla</a>
                                         
@@ -89,6 +96,6 @@
                                 </div>
                         </div>      
                         <!-- end answers --> 
-                {% endfor %}
-        </div>
+                        {% endfor %}
+                </div>
 {% endblock %}

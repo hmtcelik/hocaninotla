@@ -93,9 +93,17 @@ class CommentView(generic.DetailView):
         else:
             av_rates = 'No Rate'
         #-----------------------------------------------
+
+        all_comments = Comment.objects.filter(doctor=doctor).count #number of all comments
+        
+        #------ like-counter --------
+        doc = get_object_or_404(Doctor, id=self.kwargs['pk'])
+        coments = Comment.objects.filter(doctor=doc)
+        
         
         stuff = get_object_or_404(Comment, id=self.kwargs['pk'])
         total_likes = stuff.total_likes()
+        
         arg = {'av_rates': av_rates,
                'rates1': noRate1,
                'rates2': noRate2,
@@ -104,6 +112,8 @@ class CommentView(generic.DetailView):
                'rates5': noRate5,
                'ct_recomments': self.ct,
                'total_likes': total_likes,
+               'all_comments': all_comments,
+               
                }
         
         context.update(arg)
