@@ -51,10 +51,12 @@ class Comment(models.Model):
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
     anonymous = models.BooleanField(default=False, blank=True)
     #hide areas -->
+    date_time = models.DateTimeField(auto_now_add=True, blank=True)
     likes = models.ManyToManyField(User, related_name='comments_likes', blank=True)
     dislikes = models.ManyToManyField(User, related_name='comments_dislikes', blank=True)
     total_likes = models.IntegerField(default=0, blank=True)
     total_dislikes = models.IntegerField(default=0, blank=True)
+    total_answers = models.IntegerField(default=0, blank=True) # this is number of commentanswers (re-comments)
     
     def __str__(self):
         return 'Yorum: '+ self.comment_author+' // '+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name

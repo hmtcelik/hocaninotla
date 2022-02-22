@@ -27,7 +27,7 @@ class RateForm(forms.ModelForm): #comment create
 
     class Meta:
         model = Comment
-        exclude = ['comment_author', 'likes', 'total_likes']        
+        exclude = ['comment_author', 'likes', 'total_likes', 'total_answers', 'date_time']        
         fields = ('comment_body', 'rate', 'anonymous')
         
     def save(self, commit=True):
