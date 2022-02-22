@@ -24,10 +24,11 @@ class NewUserForm(UserCreationForm):
 
 class RateForm(forms.ModelForm): #comment create
 
+
     class Meta:
         model = Comment
-        exclude = ['comment_author', 'likes']        
-        fields = ('comment_body', 'rate')
+        exclude = ['comment_author', 'likes', 'total_likes']        
+        fields = ('comment_body', 'rate', 'anonymous')
         
     def save(self, commit=True):
         obj = super(RateForm, self)

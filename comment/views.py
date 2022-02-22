@@ -22,9 +22,8 @@ def likeview(request, doctor_id, comment_id):
     comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
     user = request.user
     comment.likes.add(user)
+    comment.total_likes = comment.likes.count()
     comment.save()
-    print(doctor_id)
-    print(comment_id)
     return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
     
 # Searchbar func.
@@ -99,10 +98,7 @@ class CommentView(generic.DetailView):
         #------ like-counter --------
         doc = get_object_or_404(Doctor, id=self.kwargs['pk'])
         coments = Comment.objects.filter(doctor=doc)
-        
-        
-        stuff = get_object_or_404(Comment, id=self.kwargs['pk'])
-        total_likes = stuff.total_likes()
+
         
         arg = {'av_rates': av_rates,
                'rates1': noRate1,
@@ -111,9 +107,7 @@ class CommentView(generic.DetailView):
                'rates4': noRate4,
                'rates5': noRate5,
                'ct_recomments': self.ct,
-               'total_likes': total_likes,
                'all_comments': all_comments,
-               
                }
         
         context.update(arg)

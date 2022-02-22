@@ -61,22 +61,26 @@
                 
                 <Br>
                 <Br>
-                <img src="{% static '/images/total-rates-stars/5-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates5 }} <br>
-                <img src="{% static '/images/total-rates-stars/4-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates4 }} <br>
-                <img src="{% static '/images/total-rates-stars/3-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates3 }} <br>
-                <img src="{% static '/images/total-rates-stars/2-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates2 }} <br>
-                <img src="{% static '/images/total-rates-stars/1-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; {{ rates1 }} <br>
+                <img src="{% static '/images/total-rates-stars/5-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp; <strong>{{ rates5 }}</strong> <br>
+                <img src="{% static '/images/total-rates-stars/4-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp;  <strong>{{ rates4 }}</strong> <br>
+                <img src="{% static '/images/total-rates-stars/3-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp;  <strong>{{ rates3 }}</strong> <br>
+                <img src="{% static '/images/total-rates-stars/2-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp;  <strong>{{ rates2 }}</strong> <br>
+                <img src="{% static '/images/total-rates-stars/1-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp;  <strong>{{ rates1 }}</strong> <br>
 
                 {% for comment in doctor.comment_set.all  %}
                         <div  style="margin-top: 50px;">
-                                <h4>{{comment.comment_author}} - {{comment.rate}} <img src="{% static '/images/just-star.jpg/'%}" width="16px" height="20px" alt=""></h4>      
+                                <h4>{% if comment.anonymous == True %} 
+                                        Anonim
+                                    {% else %}
+                                        {{comment.comment_author}}
+                                    {% endif %} - {{comment.rate}} <img src="{% static '/images/just-star.jpg/'%}" width="16px" height="20px" alt=""></h4>      
                                 <p>{{ comment.comment_body }}</p>
                                 <a href="{% url 'comment:commentanswer' doctor.id comment.id%}">yanitla</a>
                                         
                                 <!-- like a comment -->
                                 <form action="{% url 'comment:likecomment' doctor.id comment.id%}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} 
+                                        <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Like</button> - {{ comment.total_likes }} 
                                 </form>
 
 

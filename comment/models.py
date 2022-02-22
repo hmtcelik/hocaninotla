@@ -50,9 +50,8 @@ class Comment(models.Model):
     comment_body = models.TextField(max_length=1000)
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
     likes = models.ManyToManyField(User, related_name='comments', blank=True)
-    
-    def total_likes(self):
-        return self.likes.count()
+    anonymous = models.BooleanField(default=False, blank=True)
+    total_likes = models.IntegerField(default=0, blank=True)
     
     def __str__(self):
         return 'Yorum: '+ self.comment_author+' // '+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name
