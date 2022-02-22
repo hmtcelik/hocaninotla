@@ -17,15 +17,6 @@ from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer
 from django.contrib.auth.models import User
 
 
-#like button
-def likeview(request, doctor_id, comment_id):
-    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
-    user = request.user
-    comment.likes.add(user)
-    comment.total_likes = comment.likes.count()
-    comment.save()
-    return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
-    
 # Searchbar func.
 def searchbar(request):
     if request.method == "GET":
@@ -112,7 +103,24 @@ class CommentView(generic.DetailView):
         
         context.update(arg)
         return context
+
+#comment like button
+def likeview(request, doctor_id, comment_id):
+    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
+    user = request.user
+    comment.likes.add(user)
+    comment.total_likes = comment.likes.count()
+    comment.save()
+    return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
     
+#comment dislike button
+def dislikeview(request, doctor_id, comment_id):
+    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
+    user = request.user
+    comment.dislikes.add(user)
+    comment.total_dislikes = comment.dislikes.count()
+    comment.save()
+    return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
 
 class CommentCreate(generic.FormView):
     template_name = 'comment_add.html'
