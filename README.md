@@ -9,3 +9,4 @@ like www.ratemyprofessors.com but include just Turkish universities
 - comment adding and comment answering
 - comment liking-disliking system
 - admin panel (controling all staff)
+- ...
