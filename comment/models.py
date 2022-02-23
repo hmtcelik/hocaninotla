@@ -59,12 +59,13 @@ class Comment(models.Model):
     total_answers = models.IntegerField(default=0, blank=True) # this is number of commentanswers (re-comments)
     
     def __str__(self):
-        return 'Yorum: '+ self.comment_author+' // '+ self.doctor.doctor_name  + '-' + self.doctor.depart.faculty.uni.uni_name
+        return self.comment_author+' ---> '+ self.doctor.doctor_name  + '//' + self.doctor.depart.faculty.uni.uni_name
 
 class CommentAnswer(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     answer_author = models.CharField(max_length=150)
     answer_body = models.TextField(max_length=1000)
-    
+    date_time = models.DateTimeField(auto_now_add=True, blank=True)
+
     def __str__(self):
         return 'Yanit: ' + self.answer_author+' ---> '+ self.comment.comment_author + ' // ' + self.comment.doctor.doctor_name + '-' + self.comment.doctor.depart.faculty.uni.uni_name
