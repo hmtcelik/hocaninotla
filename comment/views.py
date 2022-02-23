@@ -86,10 +86,7 @@ class CommentView(generic.DetailView):
 
         all_comments = Comment.objects.filter(doctor=doctor).count #number of all comments
         
-        #------ like-counter --------
-        doc = get_object_or_404(Doctor, id=self.kwargs['pk'])
-        coments = Comment.objects.filter(doctor=doc)
-
+        #------ is like/dislike is liked/disliked? for canceling like/dislike  --------
         
         arg = {'av_rates': av_rates,
                'rates1': noRate1,
@@ -108,8 +105,27 @@ class CommentView(generic.DetailView):
 def likeview(request, doctor_id, comment_id):
     comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
     user = request.user
-    comment.likes.add(user)
+    okay = 0
+    disliked = 0
+    
+    for i in comment.likes.all():  #check if user like this post ? (if is , like will delete at line 117)
+        if i == user:
+            okay = 1
+            break
+
+    if okay == 1:   
+        comment.likes.remove(user)
+    else:
+        comment.likes.add(user)
+        for a in comment.dislikes.all(): #check all dislikes for if the user liked the comment, will delete his dislike
+            if a == user:
+                disliked = 1
+                break
+        if disliked == 1:
+            comment.dislikes.remove(user)
+
     comment.total_likes = comment.likes.count()
+    comment.total_dislikes = comment.dislikes.count()
     comment.save()
     return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
     
@@ -117,7 +133,25 @@ def likeview(request, doctor_id, comment_id):
 def dislikeview(request, doctor_id, comment_id):
     comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
     user = request.user
-    comment.dislikes.add(user)
+    okay = 0
+    liked = 0
+    
+    for i in comment.dislikes.all(): #check if user dislike this post ? (if is , dislike will delete at line 135)
+        if i == user:
+            okay = 1
+            break
+    if okay == 1:
+        comment.dislikes.remove(user)
+    else:
+        comment.dislikes.add(user)
+        for a in comment.likes.all(): #check all likes for when the user press dislike button , the site will delete the like if he is liked
+            if a == user:
+                liked = 1
+                break
+        if liked == 1:
+            comment.likes.remove(user)
+
+    comment.total_likes = comment.likes.count()
     comment.total_dislikes = comment.dislikes.count()
     comment.save()
     return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))

@@ -80,13 +80,21 @@
                                 <!-- like a comment -->
                                 <form action="{% url 'comment:likecomment' doctor.id comment.id%}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Like</button> - {{ comment.total_likes }} 
+                                        {% if user in comment.likes.all %}
+                                                <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Unlike</button> - {{ comment.total_likes }} 
+                                        {% else %}
+                                                <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Like</button> - {{ comment.total_likes }} 
+                                        {% endif %}
                                 </form>
                                 
                                 <!-- dislike a comment -->
                                 <form style="margin-top:5px;" action="{% url 'comment:dislikecomment' doctor.id comment.id%}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Dislike</button> - {{ comment.total_dislikes }} 
+                                        {% if user in comment.dislikes.all %}
+                                                <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">UnDislike</button> - {{ comment.total_dislikes }} 
+                                        {% else %}
+                                                <button type="submit", name="comment_id", value="{{ comment.id }}", class="btn btn-primary btn-sm">Dislike</button> - {{ comment.total_dislikes }} 
+                                        {% endif %}
                                 </form>
 
                                 <!-- start answers -->
