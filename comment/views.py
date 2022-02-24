@@ -183,8 +183,11 @@ class CommentAnswerView(generic.FormView):
     def form_valid(self, form):
         form.save(commit=False)
         form.instance.comment_id = self.kwargs.get('comment_id')
-        form.instance.answer_author = self.request.user
+        form.instance.answer_author = self.request.user        
         form.save()
+        
+        comment = get_object_or_404(Comment, id= self.request.POST.get('comment_id'))
+        comment.total_answers += 1        
         
         return super().form_valid(form)
 

@@ -4,7 +4,7 @@ from .models import Uni, Faculty, Depart, Doctor, Comment, CommentAnswer
 
 class CommentAdmin(admin.ModelAdmin):
     list_filter = ('date_time',) #bu yana filter ekliyor
-    list_display = ('comment_author','doctor','date_time',) # bu da kolon ve satir olarak orda cok guzel gosteriyor
+    list_display = ('comment_author','doctor','net_like','date_time',) # bu da kolon ve satir olarak orda cok guzel gosteriyor
     
 class CommentAnswerAdmin(admin.ModelAdmin):
     list_filter = ('date_time',)
