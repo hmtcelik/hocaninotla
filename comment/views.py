@@ -6,7 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.db.models import Avg #for avarage of rates
+from django.db.models import Avg, Count
 from django.template import RequestContext
 
 
@@ -124,8 +124,9 @@ def likeview(request, doctor_id, comment_id):
         if disliked == 1:
             comment.dislikes.remove(user)
 
+    comment.net_like = (comment.likes.count()) - (comment.dislikes.count())
     comment.total_likes = comment.likes.count()
-    comment.total_dislikes = comment.dislikes.count()
+    comment.total_dislikes = comment.dislikes.count()    
     comment.save()
     return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
     
@@ -150,7 +151,8 @@ def dislikeview(request, doctor_id, comment_id):
                 break
         if liked == 1:
             comment.likes.remove(user)
-
+    
+    comment.net_like = (comment.likes.count()) - (comment.dislikes.count())
     comment.total_likes = comment.likes.count()
     comment.total_dislikes = comment.dislikes.count()
     comment.save()

@@ -65,7 +65,7 @@
                 <img src="{% static '/images/total-rates-stars/2-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp;  <strong>{{ rates2 }}</strong> <br>
                 <img src="{% static '/images/total-rates-stars/1-star.jpg'%}" class="total-rates" alt="">&nbsp; &nbsp;  <strong>{{ rates1 }}</strong> <br>
 
-                {% for comment in doctor.comment_set.all  %}
+                {% for comment in doctor.comment_set.all|dictsortreversed:"net_like"%}
                         <div  style="margin-top: 50px;">
                                 <h4>{% if comment.anonymous == True %} 
                                         Anonim

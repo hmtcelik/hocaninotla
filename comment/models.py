@@ -56,6 +56,7 @@ class Comment(models.Model):
     dislikes = models.ManyToManyField(User, related_name='comments_dislikes', blank=True)
     total_likes = models.IntegerField(default=0, blank=True)
     total_dislikes = models.IntegerField(default=0, blank=True)
+    net_like = models.IntegerField(default=0, blank=True)
     total_answers = models.IntegerField(default=0, blank=True) # this is number of commentanswers (re-comments)
     
     def __str__(self):
