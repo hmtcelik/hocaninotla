@@ -170,8 +170,9 @@ class CommentCreate(generic.FormView):
         form.instance.doctor_id = self.kwargs.get('doctor_id')
         form.instance.comment_author = self.request.user
         form.save()
-        
+
         return super().form_valid(form)
+    
 
 class CommentAnswerView(generic.FormView):
     template_name = 'comment_answering.html'
@@ -186,8 +187,11 @@ class CommentAnswerView(generic.FormView):
         form.instance.answer_author = self.request.user        
         form.save()
         
-        comment = get_object_or_404(Comment, id= self.request.POST.get('comment_id'))
-        comment.total_answers += 1        
+        comment = get_object_or_404(Comment, id=self.kwargs.get('comment_id'))
+        print(comment)
+        comment.total_answers += 1 # number of total answers
+        print(comment.total_answers)
+        comment.save()
         
         return super().form_valid(form)
 
