@@ -41,32 +41,15 @@
 								<!-- LOGIN REGISTER BUTTONS-->
 									{% if user.is_authenticated %}
 									<a class="nav-link" href="#">Welcome, {{user.username}}</a>
-									<div class="buttonn">
-										<button onclick="location.href='/logout'" type="button" class="slide">
-											<div>
 												<a href="{% url 'comment:logout'%}">Cikis Yap</a>	
-											</div>
-											<i class="icon-arrow-right"></i>
-										</button>
-									</div>
 									{% else %}
 									<div style="display:flex;">
-										<div class="buttonn">
-											<button onclick="location.href='/login'" type="button" class="slide">
-												<div>
-													<a href="{% url 'comment:login'%}">Giris</a>	
-												</div>
-												<i class="icon-arrow-right"></i>
-											</button>
-										</div> 
-										<div class="buttonn">
-											<button onclick="location.href='/register'" type="button" class="slide">
-												<div>
+										
+													<a href="{% url 'comment:login'%}">Giris</a>&nbsp;	
+												
+										
 													<a href="{% url 'comment:register'%}">Kayit Ol</a>	
-												</div>
-												<i class="icon-arrow-right"></i>
-											</button>
-										</div>
+
 									</div>
 									{% endif %}
 							</header>

@@ -110,18 +110,18 @@ def likeview(request, doctor_id, comment_id):
     
     for i in comment.likes.all():  #check if user like this post ? (if is , like will delete at line 117)
         if i == user:
-            okay = 1
+            okay = True
             break
 
-    if okay == 1:   
+    if okay:   
         comment.likes.remove(user)
     else:
         comment.likes.add(user)
         for a in comment.dislikes.all(): #check all dislikes for if the user liked the comment, will delete his dislike
             if a == user:
-                disliked = 1
+                disliked = True
                 break
-        if disliked == 1:
+        if disliked:
             comment.dislikes.remove(user)
 
     comment.net_like = (comment.likes.count()) - (comment.dislikes.count())
@@ -188,9 +188,7 @@ class CommentAnswerView(generic.FormView):
         form.save()
         
         comment = get_object_or_404(Comment, id=self.kwargs.get('comment_id'))
-        print(comment)
         comment.total_answers += 1 # number of total answers
-        print(comment.total_answers)
         comment.save()
         
         return super().form_valid(form)
