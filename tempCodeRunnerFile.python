@@ -1,2 +1,0 @@
-deger1 = input("")
-print(deger1)

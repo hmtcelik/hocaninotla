@@ -10,6 +10,7 @@ from django.db.models import Avg, Count
 from django.template import RequestContext
 
 
+from sinkaf import Sinkaf #kufur engelleyici
 
 
 from .forms import NewUserForm, RateForm, CommentAnswerForm
@@ -161,7 +162,8 @@ def dislikeview(request, doctor_id, comment_id):
 class CommentCreate(generic.FormView):
     template_name = 'comment_add.html'
     form_class = RateForm
-
+    snf = Sinkaf() #kufur engelliyici
+    
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
 
@@ -169,22 +171,33 @@ class CommentCreate(generic.FormView):
         form.save(commit=False)        
         form.instance.doctor_id = self.kwargs.get('doctor_id')
         form.instance.comment_author = self.request.user
-        form.save()
+        doctor_id = self.kwargs.get('doctor_id')
+        if self.snf.tahmin([form.cleaned_data['comment_body']]):
+            messages.error(self.request,"Yorumunuzda uygunsuz ifadeler bulunuyor.")
+            return HttpResponseRedirect(reverse('comment:createcomment', args=[str(doctor_id)]))
 
+        form.save()
         return super().form_valid(form)
     
 
 class CommentAnswerView(generic.FormView):
     template_name = 'comment_answering.html'
     form_class = CommentAnswerForm
-
+    snf = Sinkaf() #kufur hakaret engelliyor
+    
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
     
     def form_valid(self, form):
         form.save(commit=False)
         form.instance.comment_id = self.kwargs.get('comment_id')
-        form.instance.answer_author = self.request.user        
+        form.instance.answer_author = self.request.user       
+        doctor_id = self.kwargs.get('doctor_id')
+        comment_id = self.kwargs.get('comment_id')         
+        if self.snf.tahmin([form.cleaned_data['answer_body']]):
+            messages.error(self.request,"Yorumunuzda uygunsuz ifadeler bulunuyor.")
+            return HttpResponseRedirect(reverse('comment:commentanswer', args=[str(doctor_id),str(comment_id)]))
+        
         form.save()
         
         comment = get_object_or_404(Comment, id=self.kwargs.get('comment_id'))
