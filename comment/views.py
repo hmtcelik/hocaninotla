@@ -13,8 +13,8 @@ from django.template import RequestContext
 from sinkaf import Sinkaf #kufur engelleyici
 
 
-from .forms import NewUserForm, RateForm, CommentAnswerForm
-from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer
+from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm
+from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment
 from django.contrib.auth.models import User
 
 
@@ -177,6 +177,8 @@ class CommentCreate(generic.FormView):
             return HttpResponseRedirect(reverse('comment:createcomment', args=[str(doctor_id)]))
 
         form.save()
+        messages.success(self.request, "Yorumunuz Basariyla Kaydedildi." )
+        
         return super().form_valid(form)
     
 
@@ -195,11 +197,12 @@ class CommentAnswerView(generic.FormView):
         doctor_id = self.kwargs.get('doctor_id')
         comment_id = self.kwargs.get('comment_id')         
         if self.snf.tahmin([form.cleaned_data['answer_body']]):
-            messages.error(self.request,"Yorumunuzda uygunsuz ifadeler bulunuyor.")
+            messages.error(self.request,"Yanitinizda uygunsuz ifadeler bulunuyor.")
             return HttpResponseRedirect(reverse('comment:commentanswer', args=[str(doctor_id),str(comment_id)]))
-        
+
         form.save()
-        
+        messages.success(self.request, "Yanitiniz Basariyla Kaydedildi." )
+
         comment = get_object_or_404(Comment, id=self.kwargs.get('comment_id'))
         comment_answers = CommentAnswer.objects.filter(comment=comment_id)
         comment.total_answers = comment_answers.count() #number of total answers
@@ -207,6 +210,27 @@ class CommentAnswerView(generic.FormView):
         
         return super().form_valid(form)
 
+class ReportCommentView(generic.FormView):    
+    template_name = 'comment_reporting.html'
+    form_class = ReportForm
+    snf = Sinkaf()
+    
+    def get_success_url(self):
+        return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
+        
+    def form_valid(self, form):
+        form.save(commit=False)
+        form.instance.comment_id = self.kwargs.get('comment_id')
+        form.instance.report_author = self.request.user
+        doctor_id = self.kwargs.get('doctor_id')
+        comment_id = self.kwargs.get('comment_id')   
+        if self.snf.tahmin([form.cleaned_data['report_body']]):
+            messages.error(self.request,"Sikayetinizde uygunsuz ifadeler bulunuyor.")
+            return HttpResponseRedirect(reverse('comment:reportcomment', args=[str(doctor_id),str(comment_id)]))
+        
+        form.save()
+        messages.success(self.request, "Sikayetiniz Bize Ulasmistir." )
+        return super().form_valid(form)
     
     
 #Register----->

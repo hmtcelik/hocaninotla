@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import  Comment , RATE_CHOICES, CommentAnswer
+from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment
 
 
 # Create your forms here.
@@ -48,3 +48,15 @@ class CommentAnswerForm(forms.ModelForm):
         if commit:
             answer.save()
         return answer
+    
+class ReportForm(forms.ModelForm):
+    class Meta:
+        model = ReportComment
+        exclude = ['report_author',]
+        fields = ('report_body',)
+    
+    def save(self, commit=True):
+        report = super(ReportForm, self)
+        if commit:
+            report.save()
+        return report
