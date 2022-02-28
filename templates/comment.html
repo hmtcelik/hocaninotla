@@ -140,7 +140,7 @@
                                         <div class="comment-box-container">
                                                 <div class="comment-box">
                                                         {% if comment.total_answers >= 2 %}                                                        
-                                                                <a href="#" class="see-more" style="margin-left:10px;"> + Tum yanitlari goster</a>
+                                                                <a href="#" class="see-more" style="margin-left:10px;"> ({{comment.total_answers}}) yaniti goster</a>
                                                         {% else %}
                                                         {% endif %}
                                                         {% for re_comment in comment.commentanswer_set.all %}

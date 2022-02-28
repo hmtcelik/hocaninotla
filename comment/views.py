@@ -187,7 +187,7 @@ class CommentAnswerView(generic.FormView):
     
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
-    
+
     def form_valid(self, form):
         form.save(commit=False)
         form.instance.comment_id = self.kwargs.get('comment_id')
@@ -201,7 +201,8 @@ class CommentAnswerView(generic.FormView):
         form.save()
         
         comment = get_object_or_404(Comment, id=self.kwargs.get('comment_id'))
-        comment.total_answers += 1 # number of total answers
+        comment_answers = CommentAnswer.objects.filter(comment=comment_id)
+        comment.total_answers = comment_answers.count() #number of total answers
         comment.save()
         
         return super().form_valid(form)
