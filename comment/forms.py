@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment
+from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE_CHOICES, ONLINE_CLASS_CHOICES, ATTANDANCE_CHOICES, TAKE_AGAIN_CHOICES
 
 
 # Create your forms here.
@@ -28,7 +28,7 @@ class RateForm(forms.ModelForm): #comment create
     class Meta:
         model = Comment
         exclude = ['comment_author', 'likes', 'total_likes', 'total_answers', 'date_time', 'net_like']        
-        fields = ('comment_body', 'rate', 'anonymous')
+        fields = ('comment_body', 'rate','take_again','attandance','online_class','grade','anonymous')
         
     def save(self, commit=True):
         obj = super(RateForm, self)

@@ -13,6 +13,10 @@
         ">
                 <h1>{{doctor.doctor_name}} - {{ av_rates }} <img src="{% static '/images/just-star.jpg/'%}" width="30px" height="35px" alt=""></h1>
                 <img src="/media/{{ doctor.doctor_pp }}" alt="doc" width="320px" height="380px" class = "doc-pp">
+                <div class="social-icons">
+                        <a href="{{doctor.doctor_link}}" class="button"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+                        <a href="{{doctor.scholar_link}}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                </div>
                 <p>{{doctor.doctor_bio}}</p>
         </div>
         <div style="margin-top: 50px;">
@@ -43,6 +47,21 @@
                                     {% else %}
                                         {{comment.comment_author}}
                                     {% endif %} - {{comment.rate}} <img src="{% static '/images/just-star.jpg/'%}" width="16px" height="20px" alt=""></h4>      
+                                        
+                                <p>
+                                {% if comment.take_again != None %}
+                                   Tekrar Alir miydim: <strong>{{comment.take_again}}</strong>&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                                {% if comment.attandance != None %}
+                                   Devamlilik: <strong>{{comment.attandance}}</strong>&nbsp;&nbsp;&nbsp;
+                                   {% endif %}
+                                {% if comment.online_class != None %}
+                                   Egitim Sekli: <strong>{{comment.online_class}}</strong>&nbsp;&nbsp;&nbsp;
+                                   {% endif %}
+                                {% if comment.grade != None %}
+                                   Notum: <strong>{{comment.grade}}</strong>
+                                   {% endif %}
+                                </p>
                                 <p>{{ comment.comment_body }}</p>
 
                                         
@@ -102,7 +121,7 @@
                                                 {% endif %}
                                         </form>
                                         &nbsp;&nbsp;<a href="{% url 'comment:commentanswer' doctor.id comment.id%}"><button class="btn btn-light">Yanitla</button></a>
-                                        <a style="margin-left:30px;"href="{% url 'comment:reportcomment' doctor.id comment.id%}"><button class="btn btn-danger">!</button></a>
+                                        <a style="margin-left:30px;"href="{% url 'comment:reportcomment' doctor.id comment.id%}"><button class="btn btn-danger btn-sm">Sikayet Et</button></a>
                                 </div> <!-- end inline div -->
 
                                 <!-- start answers -->

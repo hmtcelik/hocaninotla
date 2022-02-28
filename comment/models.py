@@ -30,6 +30,9 @@ class Doctor(models.Model):
     doctor_name = models.CharField(max_length=150)
     doctor_bio = models.TextField(max_length=1000)
     doctor_pp = models.ImageField(upload_to ='uploads/', blank=True, null=True)
+    doctor_link = models.URLField(max_length=200, blank=True, default="#")
+    scholar_link = models.URLField(max_length=200, blank=True, default="#")
+    
     
     def __str__(self):
         return self.depart.faculty.uni.uni_name + '-' + self.doctor_name
@@ -42,13 +45,45 @@ RATE_CHOICES = [
     (4.0, '4 - iyi'),
     (5.0, '5 - cok iyi'),
 ]
-    
+
+GRADE_CHOICES = (
+    ('Henuz Bilmiyorum','Henuz Bilmiyorum'),
+    ('AA','AA'),
+    ('BA','BA'),
+    ('BB','BB'),
+    ('CB','CB'),
+    ('CC','CC'),
+    ('DC','DC'),
+    ('DD','DD'),
+    ('FF','FF'),        
+)
+
+TAKE_AGAIN_CHOICES = (
+    ('Evet','Evet'),
+    ('Hayir','Hayir'),
+    ('Emin Degilim','Emin Degilim'),
+)
+
+ATTANDANCE_CHOICES = (
+    ('Zorunlu','Zorunlu'),
+    ('Zorunlu Degil','Zorunlu Degil'),
+)
+
+ONLINE_CLASS_CHOICES = (
+    ('Yuzyuze Egitim','Yuzyuze Egitim'),
+    ('Online Egitim','Online Egitim'),
+    ('Hibrit Egitim','Hibrit Egitim'),
+)
     
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     comment_author = models.CharField(max_length=150)
     comment_body = models.TextField(max_length=1000)
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
+    take_again = models.CharField(max_length=20, choices=TAKE_AGAIN_CHOICES, null=True, blank=True)
+    attandance = models.CharField(max_length=20, choices=ATTANDANCE_CHOICES, null=True, blank=True)
+    online_class = models.CharField(max_length=20, choices=ONLINE_CLASS_CHOICES, null=True, blank=True)
+    grade = models.CharField(max_length=20, choices=GRADE_CHOICES, null=True, blank=True)
     anonymous = models.BooleanField(default=False, blank=True)
     #hide areas -->
     date_time = models.DateTimeField(auto_now_add=True, blank=True)

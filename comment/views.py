@@ -58,13 +58,6 @@ class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
 
-    #(CALISMIYOR)re-comment counter for javascript slider (bunu yapiyom cunki tum yanitlari goster mallik yapmasin eger yorum varsa yapsin diye)
-    comments = Comment.objects.all().count()
-    i = 1
-    for i in range(comments):
-        ct = CommentAnswer.objects.filter(comment=i).count()
-
-    
     def get_context_data(self, **kwargs): #burda degiskeni context dataya atip gidip templatesde direk ismiyle kullanabiliyoz
         context = super(CommentView, self).get_context_data(**kwargs)
 
@@ -95,7 +88,6 @@ class CommentView(generic.DetailView):
                'rates3': noRate3,
                'rates4': noRate4,
                'rates5': noRate5,
-               'ct_recomments': self.ct,
                'all_comments': all_comments,
                }
         
