@@ -78,8 +78,8 @@ ONLINE_CLASS_CHOICES = (
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     comment_author = models.CharField(max_length=150)
-    comment_body = models.TextField(max_length=1000)
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
+    comment_body = models.TextField(max_length=1000, blank=True)
     take_again = models.CharField(max_length=20, choices=TAKE_AGAIN_CHOICES, null=True, blank=True)
     attandance = models.CharField(max_length=20, choices=ATTANDANCE_CHOICES, null=True, blank=True)
     online_class = models.CharField(max_length=20, choices=ONLINE_CLASS_CHOICES, null=True, blank=True)
@@ -109,7 +109,7 @@ class CommentAnswer(models.Model):
 class ReportComment(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     report_author = models.CharField(max_length=150)
-    report_body = models.TextField(max_length=1000)
+    report_body = models.TextField(max_length=1000, blank=True)
     date_time = models.DateTimeField(auto_now_add=True, blank=True)
     
     def __str__(self):

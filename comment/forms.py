@@ -8,27 +8,39 @@ from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE
 # Create your forms here.
 
 class NewUserForm(UserCreationForm):
-	email = forms.EmailField(required=True)
-
-	class Meta:
-		model = User
-		fields = ("username", "email", "password1", "password2")
-
-	def save(self, commit=True):
-		user = super(NewUserForm, self).save(commit=False)
-		user.email = self.cleaned_data['email']
-		if commit:
-			user.save()
-		return user
+    email = forms.EmailField(required=True)
+    class Meta:
+        model = User
+        fields = ("username", "email", "password1", "password2")
+        labels = {
+            "username": "Kullanici Adi",
+            "email": "Mail",
+            "password1": "Parola",
+            "password2": "Tekrar Parola",
+        }
+    def save(self, commit=True):
+            user = super(NewUserForm, self).save(commit=False)
+            user.email = self.cleaned_data['email']
+            if commit:
+                user.save()
+            return user    
 
 
 class RateForm(forms.ModelForm): #comment create
 
-
     class Meta:
         model = Comment
         exclude = ['comment_author', 'likes', 'total_likes', 'total_answers', 'date_time', 'net_like']        
-        fields = ('comment_body', 'rate','take_again','attandance','online_class','grade','anonymous')
+        fields = ('rate','comment_body', 'take_again','attandance','online_class','grade','anonymous')
+        labels = {
+            "comment_body": "Yorum",
+            "rate": "Verdigim Not * ",
+            "take_again": "Tekrar Alir miyim",
+            "attandance": "Devamlilik",
+            "online_class": "Egitim Sekli",
+            "grade": "Harf Notum",
+            "anonymous":"Ismim Gozukmesin"
+        }
         
     def save(self, commit=True):
         obj = super(RateForm, self)
@@ -42,6 +54,9 @@ class CommentAnswerForm(forms.ModelForm):
         model = CommentAnswer
         exclude = ['answer_author']
         fields = ('answer_body',)
+        labels = {
+            "answer_body": "Yanit",
+        }
         
     def save(self, commit=True):
         answer = super(CommentAnswerForm, self)
@@ -54,7 +69,10 @@ class ReportForm(forms.ModelForm):
         model = ReportComment
         exclude = ['report_author',]
         fields = ('report_body',)
-    
+        labels = {
+            "report_body":"Aciklama",
+        }
+        
     def save(self, commit=True):
         report = super(ReportForm, self)
         if commit:

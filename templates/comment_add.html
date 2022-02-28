@@ -5,7 +5,11 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <br>
+    <p>* ile gosterilen alanlar zorunludur</p> 
+
     <input type="submit" value="Yorum Ekle">
 </form>
+
 
 {% endblock %}
