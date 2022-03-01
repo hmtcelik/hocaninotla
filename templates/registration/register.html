@@ -15,7 +15,7 @@
 		{{ register_form|crispy }}                    
 		<button class="btn btn-primary" type="submit">Kayit Ol</button>
 	</form><br>
-	<p>Zaten hesabiniz varsa, <a href="/login">Giris</a> yapiniz.</p>
+	<p>Zaten hesabiniz varsa, <a href="{% url 'comment:login' %}">Giris</a> yapiniz.</p>
 </div>
 
 {% endblock %}

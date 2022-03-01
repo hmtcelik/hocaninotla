@@ -9,6 +9,8 @@ from django.urls import reverse_lazy, reverse
 from django.db.models import Avg, Count
 from django.template import RequestContext
 
+from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pagenotfound_view'
+
 
 from sinkaf import Sinkaf #kufur engelleyici
 
