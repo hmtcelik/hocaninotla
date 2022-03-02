@@ -2,19 +2,210 @@
 {% load static %}
 {% block title %}Anasayfa{% endblock %}
 {% block body %}
-<div class="row">
-    <div class="col-md-9">
-        <p class="drescription">Hosgeldin! Asagidan universitene tiklayarak, hocana <span class="orange">not verip, yorum yapabilirsin</span> :) . Yorum yapabilmek icin uye olmalisin. Universiteni ve hocani alttaki arama motorundan aratabilirsin. </p>
-    </div>
-</div>
-<div class="tiles">
-    <div class="row">
-        <div class="search-button" style="text-align: center;">
-            <form action="{% url 'comment:searchbar' %}" method="get" class="form-inline">
-                <input type="text" name="search" class="form-control mr-sm-2" placeholder="Ara" aria-label="Search">
-                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Ara</button>
-            </form>
+<section class="ud-hero" id="home">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ud-hero-content wow fadeInUp" data-wow-delay=".2s">
+              <h1 class="ud-hero-title">
+              Hocanı Notla
+              </h1>
+              <style> .parent { white-space: nowrap; }
+                      .child { display: inline-block; }
+              </style>
+              <div style="text-align:center;">
+                <form action="{% url 'comment:searchbar' %}" method="get" class="form-inline">
+                    <input type="text" name="search" class="form-control mr-sm-2" placeholder="Ara" aria-label="Search">
+                </form>
+            </div>
+              <p class="ud-hero-desc" style="margin-top: 20px; margin-bottom:50px;">
+                hocanı veya universiteni arayıp hemen not ver
+              </p>
+            </div>
+            <div class="ud-hero-image wow fadeInUp" data-wow-delay=".25s">            
+            </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+    </section>
+    <!-- ====== Hero End ====== -->
+
+    <!-- ====== Features Start ====== -->
+    <section id="features" class="ud-features">
+      <div class="container">
+
+        <div class="row" style="margin-top: -20px;">
+          <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="ud-single-feature wow fadeInUp" data-wow-delay=".25s">
+              <div class="ud-feature-icon">
+                <i class="lni lni-leaf"></i>
+              </div>
+              <div class="ud-feature-content">
+                <h3 class="ud-feature-title">Not Ver ve Yorum Yaz</h3>
+                <p class="ud-feature-desc">
+                  Not verirken duygu ve düşüncelerini de paylaşmayı unutma.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="ud-single-feature wow fadeInUp" data-wow-delay=".1s">
+              <div class="ud-feature-icon">
+                <i class="lni lni-hand"></i>
+              </div>
+              <div class="ud-feature-content">
+                <h3 class="ud-feature-title">Kullanıcı Adını Gizle</h3>
+                <p class="ud-feature-desc">
+                  Not verirken isminin gozukmesini istemiyorsan "ismimi gizle" seçenegini seçmeyi unutma.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="ud-single-feature wow fadeInUp" data-wow-delay=".15s">
+              <div class="ud-feature-icon">
+                <i class="lni lni-highlight-alt"></i>
+              </div>
+              <div class="ud-feature-content">
+                <h3 class="ud-feature-title">Verilen Notları Degerlendir</h3>
+                <p class="ud-feature-desc">
+                  Başka kullaniciların vermis olduğu notları beğen ve yanıtla.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="ud-single-feature wow fadeInUp" data-wow-delay=".2s">
+              <div class="ud-feature-icon">
+                <i class="lni lni-indent-decrease"></i>
+              </div>
+              <div class="ud-feature-content">
+                <h3 class="ud-feature-title">Hocanı Ekle</h3>
+                <p class="ud-feature-desc">
+                  Hocani bulamadiysan, o zaman kendin ekle.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    <!-- ====== Features End ====== -->
+
+    
+    <!-- ====== FAQ Start ====== -->
+    <section id="faq" class="ud-faq">
+      <div class="shape">
+        <img src="{% static '/images/faq/shape.svg'%}" alt="shape" />
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ud-section-title text-center mx-auto">
+              <span>SSS</span>
+              <h2>Sık Sorulan Sorular</h2>
+              <p>
+                1-2 kafaya takılan şeyler
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="ud-single-faq wow fadeInUp" data-wow-delay=".1s">
+              <div class="accordion">
+                <button
+                  class="ud-faq-btn collapsed"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                >
+                  <span class="icon flex-shrink-0">
+                    <i class="lni lni-chevron-down"></i>
+                  </span>
+                  <span>Yorumlar Neye Göre Sıralanıyor?</span>
+                </button>
+                <div id="collapseOne" class="accordion-collapse collapse">
+                  <div class="ud-faq-body">
+                    Like ve Dislike oranına göre sıralanıyor
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ud-single-faq wow fadeInUp" data-wow-delay=".15s">
+              <div class="accordion">
+                <button
+                  class="ud-faq-btn collapsed"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                >
+                  <span class="icon flex-shrink-0">
+                    <i class="lni lni-chevron-down"></i>
+                  </span>
+                  <span>Uygunsuz Bir Yorum Gördum Ne Yapmalıyım?</span>
+                </button>
+                <div id="collapseTwo" class="accordion-collapse collapse">
+                  <div class="ud-faq-body">
+                    Yorumun sağ altında bulunan şikayet etme butonu ile
+                    hemen bize bildirebilirsin, ustelik uye girişi yapmana
+                    gerek yok
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="ud-single-faq wow fadeInUp" data-wow-delay=".1s">
+              <div class="accordion">
+                <button
+                  class="ud-faq-btn collapsed"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour"
+                >
+                  <span class="icon flex-shrink-0">
+                    <i class="lni lni-chevron-down"></i>
+                  </span>
+                  <span>soru3</span>
+                </button>
+                <div id="collapseFour" class="accordion-collapse collapse">
+                  <div class="ud-faq-body">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ud-single-faq wow fadeInUp" data-wow-delay=".15s">
+              <div class="accordion">
+                <button
+                  class="ud-faq-btn collapsed"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive"
+                >
+                  <span class="icon flex-shrink-0">
+                    <i class="lni lni-chevron-down"></i>
+                  </span>
+                  <span>soru4</span>
+                </button>
+                <div id="collapseFive" class="accordion-collapse collapse">
+                  <div class="ud-faq-body">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== FAQ End ====== -->
 {% endblock %}

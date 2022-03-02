@@ -1,146 +1,410 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
-	<head>
-		<title>{% block title %}{% endblock %}</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
 
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-		<link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">		
-		<link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700" rel="stylesheet">
-		<link rel="stylesheet" href="{% static '/css/magnific-popup.css' %}">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
-		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet" />
+    <!-- Primary Meta Tags -->
+<meta name="title" content="Hocani Notla">
+<meta name="description" content="Universite hocalarini notlama ve yorumlama uygulamasi">
 
-		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	</head>
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hocaninotla.com/">
+<meta property="og:title" content="Play - Free Open Source HTML Bootstrap Template by UIdeck">
+<meta property="og:description" content="Play - Free Open Source HTML Bootstrap Template by UIdeck Team">
+<meta property="og:image" content="https://uideck.com/wp-content/uploads/2021/09/play-meta-bs.jpg">
 
-	<body>
-		<!-- Wrapper -->
-		{% include 'messages.html' %}
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://uideck.com/play/">
+<meta property="twitter:title" content="Play - Free Open Source HTML Bootstrap Template by UIdeck">
+<meta property="twitter:description" content="Play - Free Open Source HTML Bootstrap Template by UIdeck Team">
+<meta property="twitter:image" content="https://uideck.com/wp-content/uploads/2021/09/play-meta-bs.jpg">
 
-		<section class="head" id="header">
-			<div class="wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<header class="header">
-								<div class="inner">
-									<!-- Logo -->
-									<a href="#menu"class="nav-bars">
-										<img src="{% static 'images/nav_icon.svg' %}" class="img-responsive" alt="Collapsable Navbar">
-									</a>
-									<a href="{% url 'comment:home'%}" class="logo">
-										<span class="symbol"><img src="{% static 'images/logo.png' %}" alt="Title" /></span><span class="title">Hocani Notla</span>
-									</a>
-								</div>
-								
-								<!-- LOGIN REGISTER BUTTONS-->
-									{% if user.is_authenticated %}
-									<a class="nav-link" href="#">Welcome, {{user.username}}</a>
-												<a href="{% url 'comment:logout'%}">Cikis Yap</a>	
-									{% else %}
-									<div style="display:flex;">
-										
-													<a href="{% url 'comment:login'%}">Giris</a>&nbsp;	
-												
-										
-													<a href="{% url 'comment:register'%}">Kayit Ol</a>	
+    <!--====== Favicon Icon ======-->
+    <link
+      rel="shortcut icon"
+      href="{% static '/images/favicon.svg'%}"
+      type="image/svg"
+    />
 
-									</div>
-									{% endif %}
-							</header>
-							<!-- Menu -->
-							<nav id="menu">
-								<h2>Menu</h2>
-								<ul>
-									<li><a href="{% url 'comment:home'%}">Anasayfa</a></li>
-									<li><a href="{% url 'comment:uni'%}">Hocani Ara</a></li>									
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+    <!-- ===== All CSS files ===== -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" href="{% static '/css/animate.css'%}" />
+    <link rel="stylesheet" href="{% static '/css/lineicons.css'%}" />
+    <link rel="stylesheet" href="{% static '/css/ud-styles.css'%}" />
+  </head>
+  <body>
+    {% include 'messages.html' %}
+    <!-- ====== Header Start ====== -->
+    <header class="ud-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
+              <a class="navbar-brand" href="{% url 'comment:home'%}">
+                <img src="{% static 'images/logo/logo.svg'%}" alt="Logo" />
+              </a>
+              <button class="navbar-toggler">
+                <span class="toggler-icon"> </span>
+                <span class="toggler-icon"> </span>
+                <span class="toggler-icon"> </span>
+              </button>
 
-		<!-- Main -->
+              <div class="navbar-collapse">
+                <ul id="nav" class="navbar-nav mx-auto">
+                  <li class="nav-item">
+                    <a href="{% url 'comment:home'%}">Anasayfa</a>
+                  </li>
 
-		<section class="main-body">
-			<div class="container">
-				{% block body %}
-				{% endblock %}
+                  <li class="nav-item">
+                    <a  href="{% url 'comment:home'%}">Hakkimizda</a>
+                  </li>
+                  <li class="nav-item">
+                    <a  href="{% url 'comment:home'%}">Bize Ulas</a>
+                  </li>
+                  
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="navbar-btn d-none d-sm-inline-block">
+                <a href="{% url 'comment:login'%}" class="ud-main-btn ud-login-btn">
+                  Giriş
+                </a>
+                <a class="ud-main-btn ud-white-btn" href="{% url 'comment:register'%}">
+                  Kayıt Ol
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ====== Header End ====== -->
+
+    <!-- ====== Hero Start ====== -->
+    {% block body %}
+    {% endblock %}
+    <!-- ====== Footer Start ====== -->
+    <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
+      <div class="shape shape-1">
+        <img src="{% static '/images/footer/shape-1.svg'%}" alt="shape" />
+      </div>
+      <div class="shape shape-2">
+        <img src="{% static '/images/footer/shape-2.svg'%}" alt="shape" />
+      </div>
+      <div class="shape shape-3">
+        <img src="{% static '/images/footer/shape-3.svg'%}" alt="shape" />
+      </div>
+      <div class="ud-footer-widgets">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6">
+              <div class="ud-widget">
+                <a href="index.html" class="ud-footer-logo">
+                  <img src="{% static '/images/logo/logo.svg' %}" alt="logo" />
+                </a>
+                <p class="ud-widget-desc">
+                  Dersini aldigin hocalari notla ve 
+                  notlanmis yorumlari degerlendir
+                </p>
+                <ul class="ud-widget-socials">
+                  <li>
+                    <a href="https://twitter.com/MusharofChy">
+                      <i class="lni lni-facebook-filled"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/MusharofChy">
+                      <i class="lni lni-twitter-filled"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/MusharofChy">
+                      <i class="lni lni-instagram-filled"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/MusharofChy">
+                      <i class="lni lni-linkedin-original"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-		</section>
 
-		
-		<section class="social-contact-icon">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 col-xs-12">
-						<ul class="text-center social-contact">
-							<li class="social-icons">
-							<a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a>
-							</li>
-							<li class="social-icons">
-								<a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a>
-							</li>
-							<li class="social-icons">
-								<a href="#" class="icon style2 fa-google-plus"><span class="label">GooglePlus</span></a>
-							</li>
-							<li class="social-icons">
-								<a href="#" class="icon style2 fa-pinterest"><span class="label">pinterest</span></a>
-							</li>
-							<li class="social-icons">
-								<a href="#" class="icon style2 fa-stumbleupon"><span class="label">Stumbleupon</span></a>
-							</li>
-							<li class="social-icons">
-								<a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a>
-							</li>
-						</ul>							
-					</div>
-				</div>
-			</div>
-		</section>
+            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+              <div class="ud-widget">
+                <h5 class="ud-widget-title">Sayfalar</h5>
+                <ul class="ud-widget-links">
+                  <li>
+                    <a href="javascript:void(0)">Anasayfa</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">Hakkımızda</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">Bize Ulas</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+              <div class="ud-widget">
+                <h5 class="ud-widget-title">Kısayollar</h5>
+                <ul class="ud-widget-links">
+                  <li>
+                    <a href="javascript:void(0)">Hoca Arama</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">Üniversiteler</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">İstek ve Öneriler</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+              <div class="ud-widget">
+                <h5 class="ud-widget-title">Sosyal Medya</h5>
+                <ul class="ud-widget-links">
+                  <li>
+                    <a
+                      href="https://lineicons.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Instagram
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://ecommercehtml.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Facebook</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://ayroui.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Twitter</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://graygrids.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Mail Adresi</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
+              <div class="ud-widget">
+                <h5 class="ud-widget-title">İş Ortakları</h5>
+                <ul class="ud-widget-brands">
+                  <li>
+                    <a
+                      href="https://ayroui.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="{% static '/images/footer/brands/ayroui.svg'%}"
+                        alt="ayroui"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://ecommercehtml.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="{% static '/images/footer/brands/ecommerce-html.svg'%}"
+                        alt="ecommerce-html"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://graygrids.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="{% static '/images/footer/brands/graygrids.svg'%}"
+                        alt="graygrids"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://lineicons.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="{% static '/images/footer/brands/lineicons.svg'%}"
+                        alt="lineicons"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://uideck.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="{% static '/images/footer/brands/uideck.svg'%}"
+                        alt="uideck"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://tailwindtemplates.co/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="{% static '/images/footer/brands/tailwindtemplates.svg'%}"
+                        alt="tailwindtemplates"
+                      />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ud-footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <ul class="ud-footer-bottom-left">
+                <li>
+                  <a href="javascript:void(0)">Privacy policy</a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)">Support policy</a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)">Terms of service</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <p class="ud-footer-bottom-right">
+                © 2022 
+                <a href="https://hocaninotla.com" rel="nofollow">Hocanı Notla</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ====== Footer End ====== -->
 
-		<section class="footer">		
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-8 col-xs-9">
-							<p class="right-color">&copy; Copyright 2022. All rights reserved by <a href="#" target="_blank">HocaniNotla</a></p>
-						</div>
-						<div class="col-sm-4 col-xs-3" align="right">
-							<a href="#" id="back-to-top" class="top text-right" >Yukari Cik <i class="fa fa-angle-up" aria-hidden="true"></i> </a>
-						</div>
-					</div>
-				</div>											
-			</footer>
-		</section>
+    <!-- ====== Back To Top Start ====== -->
+    <a href="javascript:void(0)" class="back-to-top">
+      <i class="lni lni-chevron-up"> </i>
+    </a>
+    <!-- ====== Back To Top End ====== -->
 
-	<!-- Scripts -->
+    <!-- ====== All Javascript Files ====== -->
+    <script src="{% static '/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static '/js/wow.min.js' %}"></script>
+    <script src="{% static '/js/main.js'%}"></script>
+    <script>
+      // ==== for menu scroll
+      const pageLink = document.querySelectorAll(".ud-menu-scroll");
 
-		<script src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
-		<script src="{% static 'js/bootstrap.min.js' %}"></script>
-		<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-		
+      pageLink.forEach((elem) => {
+        elem.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelector(elem.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+            offsetTop: 1 - 60,
+          });
+        });
+      });
 
-		<script src="{% static 'js/script.js' %}"></script>
+      // section menu active
+      function onScroll(event) {
+        const sections = document.querySelectorAll(".ud-menu-scroll");
+        const scrollPos =
+          window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop;
 
-		<!--  ===== Scroll to Top ====  -->
-	    <script>
-			if ($('#back-to-top').length) {
-			    $('#back-to-top').on('click', function (e) {
-			        e.preventDefault();
-			        $('html,body').animate({
-			            scrollTop: 0
-			        }, 700);
-			    });
-			}
-		</script>
-		
-	</body>
+        for (let i = 0; i < sections.length; i++) {
+          const currLink = sections[i];
+          const val = currLink.getAttribute("href");
+          const refElement = document.querySelector(val);
+          const scrollTopMinus = scrollPos + 73;
+          if (
+            refElement.offsetTop <= scrollTopMinus &&
+            refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
+          ) {
+            document
+              .querySelector(".ud-menu-scroll")
+              .classList.remove("active");
+            currLink.classList.add("active");
+          } else {
+            currLink.classList.remove("active");
+          }
+        }
+      }
+
+      window.document.addEventListener("scroll", onScroll);
+    </script>
+
+    <script>
+       // ======= Sticky
+  window.onscroll = function () {
+    const ud_header = document.querySelector(".ud-header");
+    const sticky = ud_header.offsetTop;
+    const logo = document.querySelector(".navbar-brand img");
+
+    if (window.pageYOffset > sticky) {
+      ud_header.classList.add("sticky");
+    } else {
+      ud_header.classList.remove("sticky");
+    }
+
+    // === logo change
+    if (ud_header.classList.contains("sticky")) {
+      logo.src = "{% static 'images/logo/logo-2.svg'%}";
+    } else {
+      logo.src = "{% static 'images/logo/logo.svg'%}";
+    }
+
+    // show or hide the back-top-top button
+    const backToTop = document.querySelector(".back-to-top");
+    if (
+      document.body.scrollTop > 50 ||
+      document.documentElement.scrollTop > 50
+    ) {
+      backToTop.style.display = "flex";
+    } else {
+      backToTop.style.display = "none";
+    }
+  };
+    </script>
+  </body>
 </html>

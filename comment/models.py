@@ -28,11 +28,10 @@ class Depart(models.Model):
 class Doctor(models.Model):
     depart = models.ForeignKey(Depart, on_delete=models.CASCADE)
     doctor_name = models.CharField(max_length=150)
+    doctor_lecture = models.CharField(max_length=150) 
     doctor_bio = models.TextField(max_length=1000)
     doctor_pp = models.ImageField(upload_to ='uploads/', blank=True, null=True)
-    doctor_link = models.URLField(max_length=200, blank=True, default="#")
-    scholar_link = models.URLField(max_length=200, blank=True, default="#")
-    
+    doctor_link = models.URLField(max_length=200, blank=True, default="#")    
     
     def __str__(self):
         return self.depart.faculty.uni.uni_name + '-' + self.doctor_name
