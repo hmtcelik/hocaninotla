@@ -2,15 +2,6 @@
 {% load static %}
 {% block title %}{{ doctor.doctor_name }}{% endblock %}
 {% block body %}
-<style>
-        /* USER RATINGS BAR --->>>>> !!!! BUNLARI VIEW DEN EN YUKSEK EN ASSAGI SIRALIYIP ONA GORE WIDTHLERINI AYARLAT*/
-        .bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
-        .bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
-        .bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
-        .bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
-        .bar-1 {width: 15%; height: 18px; background-color: #f44336;}
-</style>
-
 <section id="about" class="ud-about">
         <div class="container">
           <div class="ud-about-wrapper wow fadeInUp" data-wow-delay=".2s">
@@ -38,7 +29,7 @@
                           </div>
                           <div class="middle">
                             <div class="bar-container">
-                              <div class="bar-5"></div>
+                              <div style="width: {{colorwidth_rate5}}%; height: 18px; background-color: #3056d3;"></div>
                             </div>
                           </div>
                           <div class="side right">
@@ -49,7 +40,7 @@
                           </div>
                           <div class="middle">
                             <div class="bar-container">
-                              <div class="bar-4"></div>
+                              <div style="width: {{colorwidth_rate4}}%; height: 18px; background-color: #3056d3;"></div>
                             </div>
                           </div>
                           <div class="side right">
@@ -60,7 +51,7 @@
                           </div>
                           <div class="middle">
                             <div class="bar-container">
-                              <div class="bar-3"></div>
+                              <div style="width: {{colorwidth_rate3}}%; height: 18px; background-color: #3056d3;"></div>
                             </div>
                           </div>
                           <div class="side right">
@@ -71,7 +62,7 @@
                           </div>
                           <div class="middle">
                             <div class="bar-container">
-                              <div class="bar-2"></div>
+                              <div style="width: {{colorwidth_rate2}}%; height: 18px; background-color: #3056d3;"></div>
                             </div>
                           </div>
                           <div class="side right">
@@ -82,7 +73,7 @@
                           </div>
                           <div class="middle">
                             <div class="bar-container">
-                              <div class="bar-1"></div>
+                              <div style="width: {{colorwidth_rate1}}%; height: 18px; background-color: #3056d3;"></div>
                             </div>
                           </div>
                           <div class="side right">

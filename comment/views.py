@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.db.models import Avg, Count
 from django.template import RequestContext
+import re
+
 
 from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pagenotfound_view'
 
@@ -80,10 +82,53 @@ class CommentView(generic.DetailView):
             av_rates = 'No Rate'
         #-----------------------------------------------
 
+
         all_comments = Comment.objects.filter(doctor=doctor).count #number of all comments
         
-        #------ is like/dislike is liked/disliked? for canceling like/dislike  --------
         
+
+        # START FOR DOCTOR RATE SCORECARDS EACH VOTE -------------------------------------------
+        colorwidth_rate1 = 0 
+        colorwidth_rate2 = 0
+        colorwidth_rate3 = 0
+        colorwidth_rate4 = 0
+        colorwidth_rate5 = 0
+
+        rate_list = [noRate1,noRate2,noRate3,noRate4,noRate5]
+        
+        max_rate = max(rate_list)
+
+        
+        if max_rate != 0:
+            each_vote = 100/max_rate # this is for each vote equal how much power
+            colorwidth_rate1 = noRate1 * each_vote
+            colorwidth_rate2 = noRate2 * each_vote
+            colorwidth_rate3 = noRate3 * each_vote
+            colorwidth_rate4 = noRate4 * each_vote
+            colorwidth_rate5 = noRate5 * each_vote                
+
+        if noRate1 == noRate2:
+            if noRate1 == noRate3:
+                if noRate1 == noRate4:                     
+                    if noRate1 == noRate5:
+                        colorwidth_rate1 = 50
+                        colorwidth_rate2 = 50
+                        colorwidth_rate3 = 50
+                        colorwidth_rate4 = 50
+                        colorwidth_rate5 = 50
+        
+        if noRate1 == 0:
+            colorwidth_rate1 = 0
+        if noRate2 == 0:
+            colorwidth_rate2 = 0
+        if noRate3 == 0:
+            colorwidth_rate3 = 0
+        if noRate4 == 0:
+            colorwidth_rate4 = 0
+        if noRate5 == 0:
+            colorwidth_rate5 = 0
+        #-------------------------------------------------------------------------------
+
         arg = {'av_rates': av_rates,
                'rates1': noRate1,
                'rates2': noRate2,
@@ -91,6 +136,11 @@ class CommentView(generic.DetailView):
                'rates4': noRate4,
                'rates5': noRate5,
                'all_comments': all_comments,
+               'colorwidth_rate1': colorwidth_rate1,
+               'colorwidth_rate2': colorwidth_rate2,
+               'colorwidth_rate3': colorwidth_rate3,
+               'colorwidth_rate4': colorwidth_rate4,
+               'colorwidth_rate5': colorwidth_rate5,
                }
         
         context.update(arg)
