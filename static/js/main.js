@@ -61,25 +61,3 @@
   };
 })();
 
-//tum yanitlari gorme scripti
-$(function() {
-	$(".comment-box").each(function(index) {
-	  $(this).children(".user-comment-box").slice(-1).show();
-	});
-  
-	$(".see-more").click(function(e) {
-	  e.preventDefault();
-	  var $link = $(this);
-	  var $div = $link.closest('.comment-box');
-  
-	  if ($link.hasClass('visible')) {
-		$link.text(' yanitlari goster');
-		$div.children(".user-comment-box").slice(0, -1).slideUp()
-	  } else {
-		$link.text(' yanitlari gizle');
-		$div.children(".user-comment-box").slideDown();
-	  }
-  
-	  $link.toggleClass('visible');
-	});
-  });

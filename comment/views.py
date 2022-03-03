@@ -77,7 +77,7 @@ class CommentView(generic.DetailView):
         
         if noAllRates != 0:
             av_rates = ((noRate1 * 1) + (noRate2 * 2) + (noRate3 * 3) + (noRate4 * 4) + (noRate5 * 5)) / noAllRates
-            av_rates = round(av_rates, 2)
+            av_rates = round(av_rates, 1)
         else:
             av_rates = 'No Rate'
         #-----------------------------------------------
