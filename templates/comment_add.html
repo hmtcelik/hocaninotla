@@ -2,7 +2,7 @@
 {% block title %}Yorum Ekle{% endblock %}
 {% block body %}
 
-<form method="post">
+<form style="margin-top: 150px;" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <br>

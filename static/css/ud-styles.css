@@ -2496,25 +2496,25 @@ p {
 
 /* ====== Error 404 CSS ======= */
 .ud-404 {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 30px;
+  padding-bottom: 50px;
 }
 
 @media (max-width: 767px) {
   .ud-404 {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 20px;
+    padding-bottom: 30px;
   }
 }
 
 .ud-404-wrapper {
-  text-align: center;
+  text-align: left;
   max-width: 850px;
-  margin: 0px auto;
+  margin: 0 auto;
   background: var(--white);
-  padding: 100px 60px;
-  -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-          box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+  padding: 50px 50px;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -2543,14 +2543,14 @@ p {
 }
 
 .ud-404-title {
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 30px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .ud-404-title {
-    font-size: 35px;
+    font-size: 25px;
   }
 }
 
@@ -2560,23 +2560,6 @@ p {
   }
 }
 
-.ud-404-subtitle {
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 30px;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .ud-404-subtitle {
-    font-size: 22px;
-  }
-}
-
-@media (max-width: 767px) {
-  .ud-404-subtitle {
-    font-size: 18px;
-  }
-}
 
 .ud-404-links {
   display: -webkit-box;
@@ -2669,6 +2652,7 @@ p {
 /* Place text to the right */
 .right {
   text-align: right;
+  margin-left: -10px;
 }
 
 /* Clear floats after the columns */
@@ -2686,14 +2670,46 @@ p {
   color: white;
 }
 
-
-
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 400px) {
   .side, .middle {
     width: 100%;
+    margin-top: 5px;
   }
-  .right {
-    display: none;
+}
+
+
+.yorumlar{
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 30px;
+  font-size: 18px
+}
+
+.quests{
+  display: flex;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .quests {
+    display: block;
   }
+}
+
+@media (max-width: 767px) {
+  .quests {
+    display: block;
+  }
+}
+
+.inline{
+  display: flex;
+  margin-top: 15px;
+}
+
+.star-on-board{
+  position: relative;
+  top: 0px;
+  margin-left: 6px;
+  size: 1px;
 }
