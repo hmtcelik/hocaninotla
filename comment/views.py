@@ -224,6 +224,7 @@ class CommentCreate(generic.FormView):
         messages.success(self.request, "Yorumunuz Basariyla Kaydedildi." )
         
         return super().form_valid(form)
+
     
 
 class CommentAnswerView(generic.FormView):

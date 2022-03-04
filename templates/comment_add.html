@@ -1,15 +1,33 @@
 {% extends 'includes/base.html' %}
 {% block title %}Yorum Ekle{% endblock %}
 {% block body %}
-
-<form style="margin-top: 150px;" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <br>
-    <p>* ile gosterilen alanlar zorunludur</p> 
-
-    <input type="submit" value="Yorum Ekle">
-</form>
+{% load static %}
 
 
+<section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>Yorum Ekle</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="ud-login">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-login-wrapper">
+            <form class="ud-login-form" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" value="Yorum Ekle" class="ud-main-btn w-60">Yorum Ekle</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

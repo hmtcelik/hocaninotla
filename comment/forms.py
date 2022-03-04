@@ -41,6 +41,15 @@ class RateForm(forms.ModelForm): #comment create
             "grade": "Harf Notum",
             "anonymous":"Ismim Gozukmesin"
         }
+        widgets = {
+            'rate': forms.Select(attrs={'class':'ud-form-group'}),
+            'comment_body': forms.Textarea(attrs={'class':'ud-form-group comment-box'}),
+            'take_again': forms.Select(attrs={'class':'ud-form-group'}),
+            'attandance': forms.Select(attrs={'class':'ud-form-group'}),
+            'online_class': forms.Select(attrs={'class':'ud-form-group'}),
+            'grade': forms.Select(attrs={'class':'ud-form-group'}),
+            'anonymous': forms.CheckboxInput(attrs={'class':'ud-form-group'}),            
+        }
         
     def save(self, commit=True):
         obj = super(RateForm, self)
