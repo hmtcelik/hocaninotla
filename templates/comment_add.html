@@ -23,8 +23,10 @@
           <div class="ud-login-wrapper">
             <form class="ud-login-form" method="post">
                 {% csrf_token %}
+                <div  style="font-weight:bold">
                 {{ form.as_p }}
-                <button type="submit" value="Yorum Ekle" class="ud-main-btn w-60">Yorum Ekle</button>
+                </div>
+                <button type="submit" value="Yorum Ekle" style="margin-top:20px;" class="ud-main-btn w-20">Yorum Ekle</button>
             </form>
         </div>
       </div>

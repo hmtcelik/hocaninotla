@@ -2,10 +2,33 @@
 {% block title %}Yorum Sikayeti{% endblock %}
 {% block body %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn btn-danger"type="submit" value="Sikayet Et">
-</form>
+<section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>Yorumu Şikayet Et</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="ud-login">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-login-wrapper">
+            <form class="ud-login-form" method="post">
+                {% csrf_token %}
+                <div style="font-weight:bold">
+                {{ form.as_p }}
+                </div>
+                <button type="submit" value="Yanit Ekle" style="margin-top:20px;" class="ud-main-btn w-20">Şikayet Et</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}

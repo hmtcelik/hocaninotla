@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe #for like using <strong> on labels 
 
 from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE_CHOICES, ONLINE_CLASS_CHOICES, ATTANDANCE_CHOICES, TAKE_AGAIN_CHOICES
 
@@ -33,22 +34,22 @@ class RateForm(forms.ModelForm): #comment create
         exclude = ['comment_author', 'likes', 'total_likes', 'total_answers', 'date_time', 'net_like']        
         fields = ('rate','comment_body', 'take_again','attandance','online_class','grade','anonymous')
         labels = {
-            "comment_body": "Yorum",
-            "rate": "Verdigim Not * ",
-            "take_again": "Tekrar Alir miyim",
-            "attandance": "Devamlilik",
-            "online_class": "Egitim Sekli",
-            "grade": "Harf Notum",
-            "anonymous":"Ismim Gozukmesin"
+            "comment_body": mark_safe("<strong>Yorum</strong>"),
+            "rate": mark_safe("<strong>Verdiğim Not</strong>"),
+            "take_again": mark_safe("<strong>Tekrar Alır mısın</strong>"),
+            "attandance": mark_safe("<strong>Devamlılık</strong>"),
+            "online_class": mark_safe("<strong>Eğitim Şekli</strong>"),
+            "grade": mark_safe("<strong>Harf Notum</strong>"),
+            "anonymous":mark_safe("<strong>İsmim Gözükmesin</strong>"),
         }
         widgets = {
             'rate': forms.Select(attrs={'class':'ud-form-group'}),
-            'comment_body': forms.Textarea(attrs={'class':'ud-form-group comment-box'}),
+            'comment_body': forms.Textarea(attrs={'class':'ud-form-group comment-box','placeholder': ("bişeyler yaz")}),
             'take_again': forms.Select(attrs={'class':'ud-form-group'}),
             'attandance': forms.Select(attrs={'class':'ud-form-group'}),
             'online_class': forms.Select(attrs={'class':'ud-form-group'}),
             'grade': forms.Select(attrs={'class':'ud-form-group'}),
-            'anonymous': forms.CheckboxInput(attrs={'class':'ud-form-group'}),            
+            'anonymous': forms.CheckboxInput(attrs={'class':'ud-form-group annon'}),            
         }
         
     def save(self, commit=True):
@@ -64,7 +65,10 @@ class CommentAnswerForm(forms.ModelForm):
         exclude = ['answer_author']
         fields = ('answer_body',)
         labels = {
-            "answer_body": "Yanit",
+            "answer_body": mark_safe("<strong>Yanıt</strong>"),
+        }
+        widgets = {
+            'answer_body': forms.Textarea(attrs={'class':'ud-form-group comment-box','placeholder': ("bişeyler yaz")}),       
         }
         
     def save(self, commit=True):
@@ -79,7 +83,10 @@ class ReportForm(forms.ModelForm):
         exclude = ['report_author',]
         fields = ('report_body',)
         labels = {
-            "report_body":"Aciklama",
+            "report_body": mark_safe("<strong>Şikayetim</strong>"),
+        }
+        widgets = {
+            'report_body': forms.Textarea(attrs={'class':'ud-form-group comment-box','placeholder': ("bişeyler yaz")}),       
         }
         
     def save(self, commit=True):

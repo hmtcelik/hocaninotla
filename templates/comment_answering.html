@@ -2,10 +2,33 @@
 {% block title %}Yorum Yanitla{% endblock %}
 {% block body %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Yorum Ekle">
-</form>
+<section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>Yorumu Yanıtla</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="ud-login">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-login-wrapper">
+            <form class="ud-login-form" method="post">
+                {% csrf_token %}
+                <div  style="font-weight:bold">
+                {{ form.as_p }}
+                </div>
+                <button type="submit" value="Yanit Ekle" style="margin-top:20px;" class="ud-main-btn w-20">Yaniti Ekle</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}
