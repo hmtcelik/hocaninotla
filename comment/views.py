@@ -26,9 +26,8 @@ from django.contrib.auth.models import User
 def searchbar(request):
     if request.method == "GET":
         search = request.GET.get('search')
-        post = Uni.objects.all().filter(uni_name__contains=search)
         post2 = Doctor.objects.all().filter(doctor_name__contains=search)
-        context = {'post': post, 'post2' : post2,}
+        context = {'post2' : post2,}
         return render(request, 'searchbar.html', context)
 
 

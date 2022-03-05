@@ -8,6 +8,8 @@ from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE
 
 # Create your forms here.
 
+
+
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
     class Meta:
@@ -94,3 +96,4 @@ class ReportForm(forms.ModelForm):
         if commit:
             report.save()
         return report
+    
