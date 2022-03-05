@@ -101,7 +101,7 @@ class CommentView(generic.DetailView):
         
         max_rate = max(rate_list)
 
-        
+
         if max_rate != 0:
             each_vote = 100/max_rate # this is for each vote equal how much power
             colorwidth_rate1 = noRate1 * each_vote
@@ -109,6 +109,14 @@ class CommentView(generic.DetailView):
             colorwidth_rate3 = noRate3 * each_vote
             colorwidth_rate4 = noRate4 * each_vote
             colorwidth_rate5 = noRate5 * each_vote                
+
+        if max_rate == 1:
+            each_vote = 50
+            colorwidth_rate1 = noRate1 * each_vote
+            colorwidth_rate2 = noRate2 * each_vote
+            colorwidth_rate3 = noRate3 * each_vote
+            colorwidth_rate4 = noRate4 * each_vote
+            colorwidth_rate5 = noRate5 * each_vote                  
 
         if noRate1 == noRate2:
             if noRate1 == noRate3:

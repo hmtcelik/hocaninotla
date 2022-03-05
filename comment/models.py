@@ -40,11 +40,11 @@ class Doctor(models.Model):
 
 
 RATE_CHOICES = [
-    (1.0, '1 - cok kotu'),
-    (2.0, '2 - kotu'),
-    (3.0, '3 - orta'),
-    (4.0, '4 - iyi'),
     (5.0, '5 - cok iyi'),
+    (4.0, '4 - iyi'),
+    (3.0, '3 - orta'),
+    (2.0, '2 - kotu'),
+    (1.0, '1 - cok kotu'),
 ]
 
 GRADE_CHOICES = (
