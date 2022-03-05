@@ -4,17 +4,49 @@
 
 {{ error }}
 
-{% if post2 %} <!-- Doctor search -->
-    <h1>Sonuçlar:</h1>
-    <br>
-    {% for i in post2 %}
-        <h2><a href="{% url 'comment:comment' i.id %}">{{ i.doctor_name }}</a></h2>
-    {% endfor %} 
-{% endif %}
+{% if post2 %} 
+<section class="ud-404" style="margin-bottom: 300px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <!-- Doctor search -->
+                        <h5 class="sonuclar">({{ all_results }}) sonuç bulundu</h5>
+            {% for i in post2 %}
+          <div class="ud-404-wrapper" style="margin-top: 30px; max-width:650px;">
+            <a href="{% url 'comment:comment' i.id %}">
+            <div class="ud-404-content">
+                <div style="display:flex; margin-bottom:5px;">
+                    <h1 class="rate-number" style="font-size: 35px; font-weight:850;">{{ i.doctor_av_rate }}</h1>
+                    <h3 class="divisor-number" style="font-size: 15px;">/ 5</h3>
+                </div>
+              <h2 class="ud-404-title" style="color: #3056d3">{{ i.doctor_name }}</h2>
+              <p style="margin-top: -25px; margin-bottom:25px; color:rgb(131, 131, 131)">({{i.doctor_total_rate}}) değerlendirme</p>
+              <h5 class="ud-404-subtitle">
+                {{i.depart.faculty.uni.uni_name}} - {{i.doctor_lecture}}
+              </h5>
+            </div>
+            </a>
+          </div>
+          {% endfor %} 
+        
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
-{% if not post and not post2 %} <!-- if doesnt any matched -->
-<h2>Bulunamadı</h2>
-<p>(Sakin ol yakinda eklenecektir.)</p>
-{% endif %}
+  {% if not post2 %} <!-- if doesnt any matched -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+            <div class="sonuclar" style="margin-bottom: 350px; margin-top:150px; text-align:center;">
+                <h3>Bulamadık &nbsp;:(</h3>
+                <p style="margin-top: 10px;">(Sanırım yakında eklenecektir.)</p>
+                <a style="margin-top:50px; font-size:20px;" href="{% url  'comment:home'%}"><button class="ud-main-btn w-100">Kendin Ekle</button></a>
+            </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 
 {% endblock %}

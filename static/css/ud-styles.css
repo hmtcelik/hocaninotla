@@ -2609,12 +2609,30 @@ p {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  word-wrap: break-word;
+
+}
+
+
+
+.sonuclar {
+  text-align: left;
+  max-width: 650px;
+  margin: 0 auto;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  padding: 5px 5px;
 }
 
 @media (max-width: 767px) {
   .ud-404-wrapper {
     padding: 50px 30px;
   }
+  
 }
 
 .ud-404-wrapper .shape {

@@ -31,7 +31,9 @@ class Doctor(models.Model):
     doctor_lecture = models.CharField(max_length=150) 
     doctor_bio = models.TextField(max_length=1000)
     doctor_pp = models.ImageField(upload_to ='uploads/', blank=True, null=True)
-    doctor_link = models.URLField(max_length=200, blank=True, default="#")    
+    doctor_link = models.URLField(max_length=200, blank=True, default="#")
+    doctor_av_rate = models.FloatField(default=0.0, blank=True) 
+    doctor_total_rate = models.IntegerField(default=0, blank=True)
     
     def __str__(self):
         return self.depart.faculty.uni.uni_name + '-' + self.doctor_name

@@ -27,7 +27,8 @@ def searchbar(request):
     if request.method == "GET":
         search = request.GET.get('search')
         post2 = Doctor.objects.all().filter(doctor_name__contains=search)
-        context = {'post2' : post2,}
+        all_results = post2.count()
+        context = {'post2' : post2, 'all_results':all_results}
         return render(request, 'searchbar.html', context)
 
 
@@ -78,13 +79,16 @@ class CommentView(generic.DetailView):
             av_rates = ((noRate1 * 1) + (noRate2 * 2) + (noRate3 * 3) + (noRate4 * 4) + (noRate5 * 5)) / noAllRates
             av_rates = round(av_rates, 1)
         else:
-            av_rates = 'No Rate'
+            av_rates = 0.0
+            
+        doctor.doctor_av_rate = av_rates
+        
         #-----------------------------------------------
 
 
-        all_comments = Comment.objects.filter(doctor=doctor).count #number of all comments
+        all_comments = Comment.objects.filter(doctor=doctor).count() #number of all comments
         
-        
+        doctor.doctor_total_rate = noAllRates
 
         # START FOR DOCTOR RATE SCORECARDS EACH VOTE -------------------------------------------
         colorwidth_rate1 = 0 
@@ -141,7 +145,7 @@ class CommentView(generic.DetailView):
                'colorwidth_rate4': colorwidth_rate4,
                'colorwidth_rate5': colorwidth_rate5,
                }
-        
+        doctor.save()
         context.update(arg)
         return context
 
