@@ -60,23 +60,41 @@
                   <li class="nav-item">
                     <a href="{% url 'comment:home'%}">Anasayfa</a>
                   </li>
-
                   <li class="nav-item">
                     <a  href="{% url 'comment:home'%}">Hakkimizda</a>
                   </li>
                   <li class="nav-item">
                     <a  href="{% url 'comment:home'%}">Bize Ulas</a>
                   </li>
+                  {% if user.is_authenticated %}
+                  <div class="nav-logregmar">
+                    <li class="nav-item nav-logreg">
+                      <a  href="{% url 'comment:account'%}">Hesabım</a>
+                    </li>
+                    <li class="nav-item nav-logreg">
+                      <a  href="{% url 'comment:logout'%}">Çıkış Yap</a>
+                    </li>
+                  </div>
+                  {% else %}
+                  <div class="nav-logregmar">
+                    <li class="nav-item nav-logreg">
+                      <a  href="{% url 'comment:login'%}">Giriş Yap</a>
+                    </li>
+                    <li class="nav-item nav-logreg">
+                      <a  href="{% url 'comment:login'%}">Kayıt Ol</a>
+                    </li>
+                  </div>
+                  {% endif %}
                     </ul>
                   </li>
                 </ul>
               </div>
               <div class="navbar-btn d-none d-sm-inline-block">
                 {% if user.is_authenticated %}
-                <a href="{% url 'comment:account' user.pk%}" class="ud-main-btn ud-login-btn">
+                <a href="{% url 'comment:account'%}" class="ud-main-btn ud-login-btn">
                   Hesabım
                 </a>
-                <a class="ud-main-btn ud-white-btn" href="{% url 'comment:register'%}">
+                <a class="ud-main-btn ud-white-btn" href="{% url 'comment:logout'%}">
                   Çıkış Yap
                 </a>
                 {% else %}

@@ -57,6 +57,9 @@ class DoctorView(generic.DetailView):
     model = Depart
     template_name = 'doctor.html'
     
+class AccountView(generic.TemplateView):
+    template_name = 'account.html'
+
 
 class CommentView(generic.DetailView):
     model = Doctor
