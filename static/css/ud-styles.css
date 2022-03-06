@@ -1467,6 +1467,20 @@ p {
   }
 }
 
+.ud-formm-group{ /* for login and register page*/
+  margin-bottom: 28px;
+  display: block;
+  font-weight: normal;
+  font-size: 13px;
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #b8b8b8;
+  resize: none;
+}
+
 .ud-contact-form-wrapper .ud-form-group {
   margin-bottom: 25px;
 }

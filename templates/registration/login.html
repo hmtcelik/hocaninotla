@@ -8,16 +8,13 @@
 
 {% load crispy_forms_tags %}
 
-
-
-<section style="margin-top:30px;" class="ud-loginn">
+<section style="margin-top:30px; margin-bottom:30px;" class="ud-loginn">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <div class="ud-loginn-wrapper">
           <form method="post" class="ud-loginn-form w-100">
             {% csrf_token %}
-            <div style="width: 100%;">
             {{ login_form|crispy }}
             <div class="ud-form-group w-100">
               <button type="submit" value="Giriş Yap" class="ud-main-btn w-100 mt-4">Giriş Yap</button>
@@ -25,10 +22,10 @@
           </form>
 
           <a class="forget-pass" href="javascript:void(0)">
-            Forget Password?
+            Şifremi Unuttum
           </a>
           <p class="signup-option">
-            Not a member yet? <a href="javascript:void(0)"> Sign Up </a>
+            Hesabın Yok mu? <a href="{% url 'comment:register'%}"> Kayıt Ol </a>
           </p>
         </div>
       </div>

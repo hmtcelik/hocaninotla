@@ -16,5 +16,6 @@ urlpatterns = [
     path("answercomment/<int:doctor_id>/<int:comment_id>/", views.CommentAnswerView.as_view(), name = 'commentanswer'),
     path("likecomment/<int:doctor_id>/<int:comment_id>/", views.likeview, name="likecomment"),
     path("dislikecomment/<int:doctor_id>/<int:comment_id>/", views.dislikeview, name="dislikecomment"),
-    path("reportcomment/<int:doctor_id>/<int:comment_id>/", views.ReportCommentView.as_view(), name='reportcomment'),     
+    path("reportcomment/<int:doctor_id>/<int:comment_id>/", views.ReportCommentView.as_view(), name='reportcomment'),
+    path("account/<int:pk>", views.AccountView.as_view(), name="account"),    
 ]

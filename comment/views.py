@@ -17,7 +17,7 @@ from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pa
 from sinkaf import Sinkaf #kufur engelleyici
 
 
-from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm
+from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm, LoginForm
 from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment
 from django.contrib.auth.models import User
 
@@ -57,7 +57,7 @@ class DoctorView(generic.DetailView):
     model = Depart
     template_name = 'doctor.html'
     
-     
+
 class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
@@ -306,7 +306,7 @@ def register_request(request):
 #Login----->
 def login_request(request):
 	if request.method == "POST":
-		form = AuthenticationForm(request, data=request.POST)
+		form = LoginForm(request, data=request.POST)
 		if form.is_valid():
 			username = form.cleaned_data.get('username')
 			password = form.cleaned_data.get('password')
@@ -319,7 +319,7 @@ def login_request(request):
 				messages.error(request,"Invalid username or password.")
 		else:
 			messages.error(request,"Invalid username or password.")
-	form = AuthenticationForm()
+	form = LoginForm()
 	return render(request=request, template_name="registration/login.html", context={"login_form":form})
 
 

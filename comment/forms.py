@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe #for like using <strong> on labels 
 
@@ -7,27 +7,53 @@ from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE
 
 
 # Create your forms here.
+class LoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
 
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'class':'ud-formm-group',}),label= mark_safe('<strong>Kullanıcı Adı</strong>'))
+    password = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class':'ud-formm-group'}),label=mark_safe('<strong>Şifre</strong>'))
 
 
 class NewUserForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(
+        required=True,
+        label=mark_safe('<strong>Email</strong>'),
+        widget=forms.TextInput(attrs={'class':'ud-formm-group'}),
+        )
+    password1 = forms.CharField(
+        label= mark_safe('<strong>Şifre</strong>'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password','class':'ud-formm-group'}),
+        help_text= mark_safe("<div style='padding:5px 5px; margin-top:-5px;'>En az 8 karakter içermelidir<br>Sadece sayılardan oluşmamalıdır</div><br>"),
+    )
+    password2 = forms.CharField(
+        label= mark_safe('<strong>Şifre Tekrar</strong>'),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password','class':'ud-formm-group'}),
+        strip=False,
+    )
+    
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username",)
         labels = {
-            "username": "Kullanici Adi",
-            "email": "Mail",
-            "password1": "Parola",
-            "password2": "Tekrar Parola",
+            "username": mark_safe('<strong>Kullanıcı Adı</strong>'),
+        }
+        widgets={
+            'username': forms.TextInput(attrs={'class':'ud-formm-group',}),
+            }
+        help_texts={
+            'username': ''
         }
     def save(self, commit=True):
             user = super(NewUserForm, self).save(commit=False)
             user.email = self.cleaned_data['email']
+            print(user)
             if commit:
                 user.save()
             return user    
 
+    field_order = ['username', 'email', 'password1', 'password2',]
 
 class RateForm(forms.ModelForm): #comment create
 

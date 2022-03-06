@@ -5,17 +5,27 @@
 
 {% block body %} 
 
-{% load crispy_forms_tags %}         
+{% load crispy_forms_tags %}
 
-<!--Register--> 
-<div class="container py-5">
-	<h1>Kayit Ol</h1>
-	<form method="POST">
-		{% csrf_token %}
-		{{ register_form|crispy }}                    
-		<button class="btn btn-primary" type="submit">Kayit Ol</button>
-	</form><br>
-	<p>Zaten hesabiniz varsa, <a href="{% url 'comment:login' %}">Giris</a> yapiniz.</p>
-</div>
+<section style="margin-top:30px;" class="ud-loginn">
+	<div class="container">
+	  <div class="row">
+		<div class="col-lg-12">
+		  <div class="ud-loginn-wrapper" style="text-align: left;">
+			<form method="post" class="ud-loginn-form w-100">
+			  {% csrf_token %}
+			  {{ register_form|crispy }}  
+			  <div class="ud-form-group w-100">
+				<button type="submit" value="Kayit Ol" class="ud-main-btn w-100 mt-4">Kayıt Ol</button>
+			  </div>
+			</form>
 
+			<p class="signup-option">
+			  Zaten Hesabın Var mı? <a href="{% url 'comment:login' %}"> Giriş Yap </a>
+			</p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
 {% endblock %}
