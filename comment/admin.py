@@ -4,8 +4,8 @@ from .models import Uni, Faculty, Depart, Doctor, Comment, CommentAnswer, Report
 
 class CommentAdmin(admin.ModelAdmin):
     list_filter = ('date_time',) #bu yana filter ekliyor
-    list_display = ('comment_author','doctor','net_like','date_time',) # bu da kolon ve satir olarak orda cok guzel gosteriyor
-    search_fields = ("comment_author__startswith",)    
+    list_display = ('comment_author','doctor','net_like','date_time') # bu da kolon ve satir olarak orda cok guzel gosteriyor
+    search_fields = ("comment_author__startswith","id")    
     
 class CommentAnswerAdmin(admin.ModelAdmin):
     list_filter = ('date_time',)
