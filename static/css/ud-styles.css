@@ -2878,6 +2878,10 @@ div.b {
   margin-top: 30px;
 }
 
+.like-dislike-button-counter{
+  margin-top: 3px;
+}
+
 .star-on-board{
   position: relative;
   top: 0px;
