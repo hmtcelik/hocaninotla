@@ -79,6 +79,7 @@ ONLINE_CLASS_CHOICES = (
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     comment_author = models.CharField(max_length=150)
+    comment_author_id = models.IntegerField()
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
     comment_body = models.TextField(max_length=1000, blank=True)
     take_again = models.CharField(max_length=20, choices=TAKE_AGAIN_CHOICES, null=True, blank=True)

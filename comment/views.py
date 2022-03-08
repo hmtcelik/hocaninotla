@@ -37,7 +37,6 @@ def searchbar(request):
             context = {'post2' : post2, 'all_results':all_results}
             return render(request, 'searchbar.html', context)
 
-
 class HomeView(generic.TemplateView):
     template_name = 'index.html'
 
@@ -64,9 +63,30 @@ class DoctorView(generic.DetailView):
     template_name = 'doctor.html'
     
 class AccountView(generic.TemplateView):
-    template_name = 'account.html'
+    template_name = 'account/account_index.html'
+    
 
+class MyCommentsView(generic.TemplateView):
+    template_name = 'account/mycomments.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(MyCommentsView, self).get_context_data(**kwargs)
+        
+        user_id = self.request.user.id
+        
+        comments = Comment.objects.all().filter(comment_author_id=user_id)
+        all_results = comments.count()
+        
+        arg = {
+            'comments':comments,
+            'all_results':all_results,    
+        }
+          
+        context.update(arg)
+        return context
+    
 
+    
 class CommentView(generic.DetailView):
     model = Doctor
     template_name = 'comment.html'
@@ -149,6 +169,26 @@ class CommentView(generic.DetailView):
             colorwidth_rate5 = 0
         #-------------------------------------------------------------------------------
 
+        # ---------- if user did comment this doctor, not allowed second comment -------------------------
+        user_id = self.request.user.id
+        user_comment_id = 0
+        already_rated = 0
+        
+        if user_id != None:
+            comments_of_this_user = Comment.objects.filter(doctor=doctor, comment_author_id=user_id) #also this doctor
+            if comments_of_this_user:
+                already_rated = 1
+            else:
+                already_rated = 0
+            
+
+            check_comment = Comment.objects.filter(doctor=doctor, comment_author_id=user_id)
+            if check_comment:
+                comment = get_object_or_404(Comment, doctor=doctor, comment_author_id=user_id)
+                user_comment_id = comment.id
+        
+        #----------------------------------------------------------------------------
+
         arg = {'av_rates': av_rates,
                'rates1': noRate1,
                'rates2': noRate2,
@@ -161,6 +201,8 @@ class CommentView(generic.DetailView):
                'colorwidth_rate3': colorwidth_rate3,
                'colorwidth_rate4': colorwidth_rate4,
                'colorwidth_rate5': colorwidth_rate5,
+               'already_rated' : already_rated,
+               'user_comment_id':user_comment_id
                }
         doctor.save()
         context.update(arg)
@@ -249,17 +291,53 @@ class CommentCreate(generic.FormView):
         form.save(commit=False)        
         form.instance.doctor_id = self.kwargs.get('doctor_id')
         form.instance.comment_author = self.request.user
+        form.instance.comment_author_id = self.request.user.id
         doctor_id = self.kwargs.get('doctor_id')
-        if self.snf.tahmin([form.cleaned_data['comment_body']]):
-            messages.error(self.request,"Yorumunuzda uygunsuz ifadeler bulunuyor.")
+    
+        user_id = self.request.user.id
+        
+        doctor = get_object_or_404(Doctor, id=self.kwargs['doctor_id'])
+        comments_of_this_user = Comment.objects.filter(doctor=doctor, comment_author_id=user_id) #also this doctor
+        if comments_of_this_user:
+            messages.error(self.request,"Zaten Not Vermissin, Tekrar Veremezsin!.")
             return HttpResponseRedirect(reverse('comment:createcomment', args=[str(doctor_id)]))
-
+        
+        if self.snf.tahmin([form.cleaned_data['comment_body']]):
+            messages.error(self.request,"Yorumunda uygunsuz ifadeler bulunuyor.")
+            return HttpResponseRedirect(reverse('comment:createcomment', args=[str(doctor_id)]))
+            
         form.save()
-        messages.success(self.request, "Yorumunuz Basariyla Kaydedildi." )
+        messages.success(self.request, "Yorumun Basariyla Kaydedildi." )
         
         return super().form_valid(form)
 
+def commenteditview(request, doctor_id, comment_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    user_id = request.user.id
+    the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)
+    update_form = RateForm(instance=the_comment)
+
+    snf = Sinkaf() #kufur hakaret engelliyor
     
+    if request.method == 'POST':
+        update_form = RateForm(request.POST, instance=the_comment)
+        if update_form.is_valid():
+            if snf.tahmin([update_form.cleaned_data['comment_body']]):
+                messages.error(request,"Yorumunda uygunsuz ifadeler bulunuyor.")
+                return HttpResponseRedirect(reverse('comment:editcomment', args=[str(doctor_id),str(comment_id)]))
+            
+            update_form.save(commit=False)
+            update_form.doctor_id = doctor_id
+            update_form.comment_author = request.user
+            update_form.comment_author_id = request.user.id
+
+            update_form.save()
+            messages.success(request, "Yorumun Basariyla Kaydedildi.")
+        return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
+        
+       
+    return render(request=request, template_name="comment_edit.html", context={"edit_form":update_form})
+        
 
 class CommentAnswerView(generic.FormView):
     template_name = 'comment_answering.html'

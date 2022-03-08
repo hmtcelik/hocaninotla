@@ -1,0 +1,68 @@
+{% extends 'includes/base.html' %}
+{% block title %}Yorumlarim{% endblock %}
+{% block body %}
+
+<section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>Yorumlarım</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% if comments %} 
+<section class="ud-404" style="margin-bottom: 300px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <!-- Doctor search -->
+                        <h5 class="sonuclar">({{ all_results }}) sonuç bulundu</h5>
+            {% for i in comments %}
+          <div class="ud-404-wrapper" style="margin-top: 30px; max-width:650px;">
+            <a href="{% url 'comment:comment' i.doctor.id %}">
+            <div class="ud-404-content">
+                <div style="display:flex; margin-bottom:5px;">
+                    <h1 class="rate-number" style="font-size: 35px; font-weight:850;">{{ i.doctor.doctor_av_rate }}</h1>
+                    <h3 class="divisor-number" style="font-size: 15px;">/ 5 &nbsp; (Verdiğin not= {{i.rate}}) </h3>
+                </div>
+          
+              <h2 class="ud-404-title" style="color: #3056d3">{{ i.doctor.doctor_name }}</h2>
+              <p style="margin-top: -25px; margin-bottom:25px; color:rgb(131, 131, 131)">({{i.doctor.doctor_total_rate}}) değerlendirme</p>
+      
+              <h5 class="ud-404-subtitle">
+                {{i.doctor.depart.faculty.uni.uni_name}} - {{i.doctor.doctor_lecture}}
+              </h5>
+              
+              <h6 style="margin-top: 60px;">Yorumun:</h6>
+              <p> {{ i.comment_body }}</p>
+            </div>
+            </a>
+            <a href="#"><button class="btn btn-white"><i class="lni lni-pencil"></i></button></a>
+
+          </div>
+          {% endfor %} 
+        
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if not comments %} <!-- if doesnt any matched -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+            <div class="sonuclar" style="margin-bottom: 350px; margin-top:150px; text-align:center;">
+                <h3>Bulamadık &nbsp;:(</h3>
+                <p style="margin-top: 10px;">(Sanırım hiç yorum yapmamışsın.)</p>
+            </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+{% endblock %}

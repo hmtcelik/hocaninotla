@@ -112,9 +112,27 @@
                   </a>
                 </li>
               </ul>  
-                <div class="give-rate">
-                        <a href="{% url 'comment:createcomment' doctor.id%}"><button class="ud-main-btn w-20 m-lg-0">Not Ver</button></a>
-                </div>
+                {% if user.is_authenticated %}
+                        {% if already_rated %}
+                                {% if user_comment_id %}
+                                <div class="give-rate">
+                                        <a href="{% url 'comment:editcomment' doctor_id=doctor.id comment_id=user_comment_id%}"><button class="ud-main-btn w-20 m-lg-0">Notumu Duzenle</button></a>
+                                </div>
+                                {% else %}
+                                <div class="give-rate">
+                                        <a href="{% url 'comment:createcomment' doctor.id%}"><button class="ud-main-btn w-20 m-lg-0">Not Ver</button></a>
+                                </div>
+                                {% endif %}
+                        {% else%}
+                                <div class="give-rate">
+                                        <a href="{% url 'comment:createcomment' doctor.id%}"><button class="ud-main-btn w-20 m-lg-0">Not Ver</button></a>
+                                </div>
+                        {% endif %}
+                {% else %}
+                        <div class="give-rate">
+                                <a href="{% url 'comment:login'%}"><button class="ud-main-btn w-20 m-lg-0">Not Ver</button></a>
+                        </div>
+                {% endif %}
         </div>
           </div>
                 <div class="see-comments wow fadeInUp" style="margin-bottom: -55px;" data-wow-delay=".2s">

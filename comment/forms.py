@@ -90,7 +90,7 @@ class RateForm(forms.ModelForm): #comment create
 
     class Meta:
         model = Comment
-        exclude = ['comment_author', 'likes', 'total_likes', 'total_answers', 'date_time', 'net_like']        
+        exclude = ['comment_author', 'likes', 'total_likes', 'total_answers', 'date_time', 'net_like','comment_author_id']        
         fields = ('rate','comment_body', 'take_again','attandance','online_class','grade','anonymous')
         labels = {
             "comment_body": mark_safe("<strong>Yorum</strong>"),
