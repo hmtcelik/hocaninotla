@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe #for like using <strong> on labels 
 
@@ -14,6 +14,35 @@ class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'class':'ud-formm-group',}),label= mark_safe('<strong>Kullanıcı Adı</strong>'))
     password = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class':'ud-formm-group'}),label=mark_safe('<strong>Şifre</strong>'))
 
+class PasswordChangingForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        max_length=100,
+        label=mark_safe('<strong>Eski Şifre</strong>'),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'off', 'class':'ud-formm-group'}),
+        )
+    new_password1 = forms.CharField(
+        max_length=100,        
+        label= mark_safe('<strong>Yeni Şifre</strong>'),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'off','class':'ud-formm-group'}),
+    )
+    new_password2 = forms.CharField(
+        max_length=100,
+        label= mark_safe('<strong>Tekrar Yeni Şifre</strong>'),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'off','class':'ud-formm-group'}),
+    )
+    
+    class Meta:
+        model = User
+        fields = ("username",)
+        labels = {
+            "username": mark_safe('<strong>Kullanıcı Adı</strong>'),
+        }
+        widgets={
+            'username': forms.TextInput(attrs={'class':'ud-formm-group',}),
+            }
+        help_texts={
+            'username': ''
+        }
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(
@@ -23,11 +52,13 @@ class NewUserForm(UserCreationForm):
         )
     password1 = forms.CharField(
         label= mark_safe('<strong>Şifre</strong>'),
+        max_length=100,        
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password','class':'ud-formm-group'}),
         help_text= mark_safe("<div style='padding:5px 5px; margin-top:-5px;'>En az 8 karakter içermelidir<br>Sadece sayılardan oluşmamalıdır</div><br>"),
     )
     password2 = forms.CharField(
+        max_length=100,        
         label= mark_safe('<strong>Şifre Tekrar</strong>'),
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password','class':'ud-formm-group'}),
         strip=False,

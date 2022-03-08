@@ -23,15 +23,15 @@
           <div class="ud-login-wrapper">
                <h4>Merhaba {{user.username}}</h4>
                <BR>
-               <ul>
+               <ul class="ud-404-links">
                  <li>
                    <a href="#">Yorumlarim</a>
                  </li>
                  <li>
-                  <a href="#">SIFRE DEGSITIR</a>
+                  <a href="{% url 'comment:changepassword'%}">Şifre Değiştir</a>
                  </li>
                  <li>
-                  <a href="#">CIKIS YAP</a>
+                  <a href="{% url 'comment:logout'%}">Çıkış Yap</a>
                  </li>
                </ul>
            </ul>

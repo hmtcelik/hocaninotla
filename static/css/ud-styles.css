@@ -1493,6 +1493,7 @@ p {
   outline: none;
   border-bottom: 2px solid #b8b8b8;
   resize: none;
+  margin-top: 5px;
 }
 
 .ud-contact-form-wrapper .ud-form-group {
@@ -2700,7 +2701,7 @@ p {
 .ud-404-links {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: block;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2718,7 +2719,8 @@ p {
   color: var(--heading-color);
   background: rgba(48, 86, 211, 0.06);
   border-radius: 5px;
-  margin: 5px 10px;
+  margin-top: 10px;
+  width: 35%;
 }
 
 .ud-404-links a:hover {
@@ -2728,9 +2730,10 @@ p {
 
 @media (max-width: 767px) {
   .ud-404-links a {
-    margin: 5px 10px;
+    margin-top: 5px;
     font-size: 14px;
     padding: 10px 20px;
+    width: 100%;
   }
 }
 /*# sourceMappingURL=ud-styles.css.map */

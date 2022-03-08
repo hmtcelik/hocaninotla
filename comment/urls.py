@@ -2,8 +2,11 @@ from django.urls import path
 from . import views
 from . import models
 
-app_name = 'comment'
+#django auth views for password things
+from django.contrib.auth import views as auth_views
 
+
+app_name = 'comment'
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name = 'home'),
@@ -17,5 +20,9 @@ urlpatterns = [
     path("likecomment/<int:doctor_id>/<int:comment_id>/", views.likeview, name="likecomment"),
     path("dislikecomment/<int:doctor_id>/<int:comment_id>/", views.dislikeview, name="dislikecomment"),
     path("reportcomment/<int:doctor_id>/<int:comment_id>/", views.ReportCommentView.as_view(), name='reportcomment'),
-    path("account/", views.AccountView.as_view(), name="account"),    
+    path("myaccount/", views.AccountView.as_view(), name="account"),
+    
+    path("changepassword", views.PasswordsChangeView.as_view(), name='changepassword'),
+    path("password_succes",views.passwordsuccesview, name='changedpassword'),
+
 ]

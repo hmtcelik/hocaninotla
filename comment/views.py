@@ -1,8 +1,11 @@
 from django.views import generic
 from django.shortcuts import render, redirect
+
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.views import PasswordChangeView
+
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -13,11 +16,11 @@ import re
 
 from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pagenotfound_view'
 
-
 from sinkaf import Sinkaf #kufur engelleyici
 
 
-from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm, LoginForm
+
+from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm, LoginForm, PasswordChangingForm
 from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment
 from django.contrib.auth.models import User
 
@@ -348,3 +351,12 @@ def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("comment:home")
+
+
+class PasswordsChangeView(PasswordChangeView):
+    form_class= PasswordChangingForm
+    template_name='registration/changepassword.html'
+    success_url= reverse_lazy('comment:changedpassword')
+
+def passwordsuccesview(request):
+    return render(request, template_name="registration/succes_changedpassword.html",context={})
