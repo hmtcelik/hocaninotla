@@ -41,7 +41,7 @@
               <p> {{ i.comment_body }}</p>
             </div>
             </a>
-            <a href="#"><button class="btn btn-white"><i class="lni lni-pencil"></i></button></a>
+            <a href="{% url 'comment:editcomment' i.doctor.id i.id%}"><button class="btn btn-white"><i class="lni lni-pencil"></i></button></a>
 
           </div>
           {% endfor %} 

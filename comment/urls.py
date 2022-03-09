@@ -23,6 +23,7 @@ urlpatterns = [
     path("reportcomment/<int:doctor_id>/<int:comment_id>/", views.ReportCommentView.as_view(), name='reportcomment'),
     path("myaccount/", views.AccountView.as_view(), name="account"),
     path("myaccount/mycomments", views.MyCommentsView.as_view(), name="mycomments"),
+    path("adddoctor", views.AddDoctorView.as_view(), name="adddoctor"),
 
     path("changepassword", views.PasswordsChangeView.as_view(), name='changepassword'),
     path("password_succes",views.passwordsuccesview, name='changedpassword'),

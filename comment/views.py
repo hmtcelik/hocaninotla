@@ -14,6 +14,7 @@ from django.template import RequestContext
 import re
 
 
+
 from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pagenotfound_view'
 
 from sinkaf import Sinkaf #kufur engelleyici
@@ -62,6 +63,9 @@ class DoctorView(generic.DetailView):
     model = Depart
     template_name = 'doctor.html'
     
+class AddDoctorView(generic.TemplateView):
+    template_name = 'adddoctor.html'
+    
 class AccountView(generic.TemplateView):
     template_name = 'account/account_index.html'
     
@@ -75,6 +79,7 @@ class MyCommentsView(generic.TemplateView):
         user_id = self.request.user.id
         
         comments = Comment.objects.all().filter(comment_author_id=user_id)
+        
         all_results = comments.count()
         
         arg = {
