@@ -69,6 +69,8 @@ class AddDoctorView(generic.TemplateView):
 class AccountView(generic.TemplateView):
     template_name = 'account/account_index.html'
     
+class ContactView(generic.TemplateView):
+    template_name = 'contact.html'
 
 class MyCommentsView(generic.TemplateView):
     template_name = 'account/mycomments.html'
@@ -316,6 +318,21 @@ class CommentCreate(generic.FormView):
         
         return super().form_valid(form)
 
+def commentdeleteview(request, doctor_id, comment_id):
+    if request.method == 'POST':
+
+        doctor = get_object_or_404(Doctor, id=doctor_id)
+        user_id = request.user.id
+        the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)
+        
+        the_comment.delete()
+        
+        messages.success(request, "Yorumun Basariyla Silindi.")
+        
+        
+    return HttpResponseRedirect(reverse('comment:mycomments'))
+
+    
 def commenteditview(request, doctor_id, comment_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     user_id = request.user.id
@@ -419,20 +436,19 @@ def login_request(request):
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				login(request, user)
-				messages.info(request, f"You are now logged in as {username}.")
+				messages.info(request, f" Hoşgeldin {username}.")
 				return redirect("comment:home")
 			else:
-				messages.error(request,"Invalid username or password.")
+				messages.error(request,"Kullanıcı adı veya şifre yanlış")
 		else:
-			messages.error(request,"Invalid username or password.")
+			messages.error(request,"Kullanıcı adı veya şifre yanlış")
 	form = LoginForm()
 	return render(request=request, template_name="registration/login.html", context={"login_form":form})
 
 
 #Logout----->
 def logout_request(request):
-	logout(request)
-	messages.info(request, "You have successfully logged out.") 
+	logout(request) 
 	return redirect("comment:home")
 
 

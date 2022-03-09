@@ -41,14 +41,19 @@
               <p> {{ i.comment_body }}</p>
             </div>
             </a>
-            <a href="{% url 'comment:editcomment' i.doctor.id i.id%}"><button class="btn btn-white"><i class="lni lni-pencil"></i></button></a>
+            <div style="display: flex; margin-top:30px;">
+              <a href="{% url 'comment:editcomment' i.doctor.id i.id%}"><button class="btn btn-secondary"><i class="lni lni-pencil"></i></button></a>
+            <form style="margin-left: 10px;" action="{% url 'comment:deletecomment' i.doctor.id i.id%}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-danger"><i class="lni lni-trash-can"></i></button>
+          </form>
+          </div> 
 
-          </div>
           {% endfor %} 
         
         </div>
       </div>
-    </div>
+    </div></div>
   </section>
   {% endif %}
 

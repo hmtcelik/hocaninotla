@@ -16,7 +16,8 @@ urlpatterns = [
     path("login/", views.login_request, name="login"),
     path("logout", views.logout_request, name= "logout"),
     path("createcomment/<int:doctor_id>/", views.CommentCreate.as_view(), name = 'createcomment'),
-    path("editcomment/<int:doctor_id>/<int:comment_id>/", views.commenteditview, name = 'editcomment'),    
+    path("editcomment/<int:doctor_id>/<int:comment_id>/", views.commenteditview, name = 'editcomment'),
+    path("deletecomment/<int:doctor_id>/<int:comment_id>/", views.commentdeleteview, name = 'deletecomment'),
     path("answercomment/<int:doctor_id>/<int:comment_id>/", views.CommentAnswerView.as_view(), name = 'commentanswer'),
     path("likecomment/<int:doctor_id>/<int:comment_id>/", views.likeview, name="likecomment"),
     path("dislikecomment/<int:doctor_id>/<int:comment_id>/", views.dislikeview, name="dislikecomment"),
@@ -24,6 +25,7 @@ urlpatterns = [
     path("myaccount/", views.AccountView.as_view(), name="account"),
     path("myaccount/mycomments", views.MyCommentsView.as_view(), name="mycomments"),
     path("adddoctor", views.AddDoctorView.as_view(), name="adddoctor"),
+    path("contact/", views.ContactView.as_view(), name='contact'),
 
     path("changepassword", views.PasswordsChangeView.as_view(), name='changepassword'),
     path("password_succes",views.passwordsuccesview, name='changedpassword'),
