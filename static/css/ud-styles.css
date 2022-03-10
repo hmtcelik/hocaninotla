@@ -1,15 +1,3 @@
-/* =======
-
-	Template Name: Play Bootstrap
-	Author: UIdeck
-	Author URI: https://uideck.com/
-	Support: https://github.com/uideck/
-	Version: 1.0
-
-======== */
-/*===========================
-  COMMON css 
-===========================*/
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap");
 :root {
   --font: "Inter", sans-serif;
@@ -2138,62 +2126,52 @@ p {
 .ud-blog-overlay-content .ud-blog-meta p:last-child {
   margin-right: 0px;
 }
-
 .ud-blog-overlay-content .ud-blog-meta p i {
   font-size: 16px;
   margin-right: 10px;
 }
-
 .ud-blog-details-content {
   padding-top: 60px;
 }
-
 @media only screen and (min-width: 1400px) and (max-width: 1920px), only screen and (min-width: 1200px) and (max-width: 1399px) {
   .ud-blog-details-content {
     padding-right: 50px;
   }
 }
-
 .ud-blog-details-title {
   font-weight: 700;
   font-size: 35px;
   line-height: 50px;
   margin-bottom: 35px;
 }
-
 @media (max-width: 767px) {
   .ud-blog-details-title {
     font-size: 26px;
     line-height: 35px;
   }
 }
-
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .ud-blog-details-title {
     font-size: 30px;
     line-height: 40px;
   }
 }
-
 .ud-blog-details-para {
   font-size: 16px;
   line-height: 28px;
   margin-bottom: 30px;
 }
-
 .ud-blog-details-subtitle {
   font-weight: 700;
   font-size: 26px;
   margin-bottom: 30px;
 }
-
 @media (max-width: 767px) {
   .ud-blog-details-subtitle {
     font-size: 22px;
     margin-bottom: 25px;
   }
 }
-
 .ud-blog-quote {
   background-image: url("../images/blog/quote-bg.svg");
   background-repeat: no-repeat;
@@ -2202,13 +2180,11 @@ p {
   text-align: center;
   margin-bottom: 40px;
 }
-
 @media (max-width: 767px) {
   .ud-blog-quote {
     padding: 30px;
   }
 }
-
 .ud-blog-quote i {
   font-size: 40px;
   font-weight: 700;
@@ -2216,13 +2192,11 @@ p {
   line-height: 1;
   margin-bottom: 20px;
 }
-
 @media (max-width: 767px) {
   .ud-blog-quote i {
     margin-bottom: 15px;
   }
 }
-
 .ud-blog-quote p {
   font-style: italic;
   font-weight: 600;
@@ -2232,14 +2206,12 @@ p {
   color: var(--heading-color);
   margin-bottom: 15px;
 }
-
 @media (max-width: 767px) {
   .ud-blog-quote p {
     font-size: 14px;
     line-height: 24px;
   }
 }
-
 .ud-blog-quote h6 {
   color: var(--body-color);
   font-style: italic;
@@ -2248,7 +2220,6 @@ p {
   line-height: 20px;
   text-align: center;
 }
-
 .ud-blog-details-action {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2260,7 +2231,6 @@ p {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-
 @media (max-width: 767px) {
   .ud-blog-details-action {
     -webkit-box-orient: vertical;
@@ -2272,7 +2242,6 @@ p {
             align-items: flex-start;
   }
 }
-
 .ud-blog-tags {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2281,21 +2250,17 @@ p {
       -ms-flex-align: center;
           align-items: center;
 }
-
 @media (max-width: 767px) {
   .ud-blog-tags {
     margin-bottom: 20px;
   }
 }
-
 .ud-blog-tags li {
   margin-right: 14px;
 }
-
 .ud-blog-tags li:last-child {
   margin-right: 0px;
 }
-
 .ud-blog-tags a {
   padding: 8px 16px;
   font-size: 12px;
@@ -2304,12 +2269,10 @@ p {
   background: rgba(48, 86, 211, 0.06);
   border-radius: 3px;
 }
-
 .ud-blog-tags a:hover {
   background: var(--primary-color);
   color: var(--white);
 }
-
 .ud-blog-share {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2318,14 +2281,12 @@ p {
       -ms-flex-align: center;
           align-items: center;
 }
-
 .ud-blog-share h6 {
   font-weight: 500;
   font-size: 12px;
   color: var(--body-color);
   margin-right: 20px;
 }
-
 .ud-blog-share-links {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2334,15 +2295,12 @@ p {
       -ms-flex-align: center;
           align-items: center;
 }
-
 .ud-blog-share-links li {
   margin-right: 14px;
 }
-
 .ud-blog-share-links li:last-child {
   margin-right: 0px;
 }
-
 .ud-blog-share-links a {
   font-size: 18px;
   width: 35px;
@@ -2359,27 +2317,21 @@ p {
   border-radius: 50%;
   color: var(--white);
 }
-
 .ud-blog-share-links a.facebook {
   background: #4064ac;
 }
-
 .ud-blog-share-links a.facebook:hover {
   background: #315294;
 }
-
 .ud-blog-share-links a.twitter {
   background: #1c9cea;
 }
-
 .ud-blog-share-links a.twitter:hover {
   background: #0f8bd8;
 }
-
 .ud-blog-share-links a.linkedin {
   background: #007ab9;
 }
-
 .ud-blog-share-links a.linkedin:hover {
   background: #03689b;
 }
@@ -2387,7 +2339,6 @@ p {
 .ud-blog-sidebar {
   padding-top: 60px;
 }
-
 .ud-newsletter-box {
   background: var(--primary-color);
   padding: 60px 45px;
@@ -2397,57 +2348,47 @@ p {
   border-radius: 5px;
   margin-bottom: 50px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 767px) {
   .ud-newsletter-box {
     padding: 50px 30px;
   }
 }
-
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .ud-newsletter-box {
     padding: 60px 45px;
   }
 }
-
 .ud-newsletter-box .shape {
   position: absolute;
   z-index: -1;
 }
-
 .ud-newsletter-box .shape.shape-1 {
   top: 0;
   right: 0;
 }
-
 .ud-newsletter-box .shape.shape-2 {
   left: 0;
   bottom: 0;
 }
-
 .ud-newsletter-box .ud-newsletter-title {
   font-weight: 600;
   font-size: 25px;
   color: var(--white);
   margin-bottom: 5px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .ud-newsletter-box .ud-newsletter-title {
     font-size: 23px;
   }
 }
-
 .ud-newsletter-box p {
   font-size: 16px;
   line-height: 24px;
   color: var(--white);
 }
-
 .ud-newsletter-box .ud-newsletter-form {
   margin-top: 30px;
 }
-
 .ud-newsletter-box .ud-newsletter-form input {
   width: 100%;
   -webkit-box-shadow: 0px 4px 42px rgba(0, 0, 0, 0.01);
@@ -2460,31 +2401,25 @@ p {
   border: 2px solid transparent;
   padding: 12px 20px;
 }
-
 .ud-newsletter-box .ud-newsletter-form input::-webkit-input-placeholder {
   color: var(--white);
   opacity: 1;
 }
-
 .ud-newsletter-box .ud-newsletter-form input:-ms-input-placeholder {
   color: var(--white);
   opacity: 1;
 }
-
 .ud-newsletter-box .ud-newsletter-form input::-ms-input-placeholder {
   color: var(--white);
   opacity: 1;
 }
-
 .ud-newsletter-box .ud-newsletter-form input::placeholder {
   color: var(--white);
   opacity: 1;
 }
-
 .ud-newsletter-box .ud-newsletter-form input:focus {
   border-color: var(--white);
 }
-
 .ud-newsletter-box .ud-newsletter-form .ud-main-btn {
   background: #13c296;
   -webkit-box-shadow: 0px 4px 42px rgba(0, 0, 0, 0.01);
@@ -2493,21 +2428,17 @@ p {
   width: 100%;
   margin-bottom: 24px;
 }
-
 .ud-newsletter-box .ud-newsletter-form .ud-main-btn:hover {
   background: var(--heading-color);
 }
-
 .ud-newsletter-box .ud-newsletter-form .ud-newsletter-note {
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
 }
-
 .ud-articles-box {
   margin-bottom: 50px;
 }
-
 .ud-articles-box .ud-articles-box-title {
   font-weight: 600;
   font-size: 28px;
@@ -2515,7 +2446,6 @@ p {
   position: relative;
   margin-bottom: 20px;
 }
-
 .ud-articles-box .ud-articles-box-title::after {
   content: "";
   position: absolute;
@@ -2525,7 +2455,6 @@ p {
   left: 0;
   bottom: 0;
 }
-
 .ud-articles-box .ud-articles-list li {
   padding: 20px 0;
   border-bottom: 1px solid #f2f3f8;
@@ -2536,12 +2465,10 @@ p {
       -ms-flex-align: center;
           align-items: center;
 }
-
 .ud-articles-box .ud-articles-list li:last-child {
   padding-bottom: 0px;
   border-bottom: 0px;
 }
-
 .ud-articles-box .ud-articles-list .ud-article-image {
   max-width: 80px;
   width: 100%;
@@ -2550,82 +2477,66 @@ p {
   overflow: hidden;
   margin-right: 20px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 767px) {
   .ud-articles-box .ud-articles-list .ud-article-image {
     max-width: 65px;
     height: 65px;
   }
 }
-
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .ud-articles-box .ud-articles-list .ud-article-image {
     max-width: 80px;
     height: 80px;
   }
 }
-
 .ud-articles-box .ud-articles-list .ud-article-image img {
   width: 100%;
 }
-
 .ud-articles-box .ud-articles-list .ud-article-title {
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
   margin-bottom: 5px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .ud-articles-box .ud-articles-list .ud-article-title {
     font-size: 16px;
   }
 }
-
 .ud-articles-box .ud-articles-list .ud-article-title a {
   color: inherit;
 }
-
 .ud-articles-box .ud-articles-list .ud-article-title a:hover {
   color: var(--primary-color);
 }
-
 .ud-articles-box .ud-articles-list .ud-article-author {
   font-size: 14px;
 }
-
 .ud-banner-ad {
   border-radius: 5px;
   overflow: hidden;
 }
-
 .ud-banner-ad a {
   display: block;
 }
-
 .ud-banner-ad img {
   width: 100%;
 }
-
-
 .comment-add-btn{
   margin: 0px auto;
   position: relative;
 }
-
 /* ====== Error 404 CSS ======= */
 .ud-404 {
   padding-top: 10px;
   padding-bottom: 30px;
 }
-
 @media (max-width: 767px) {
   .ud-404 {
     padding-top: 10px;
     padding-bottom: 20px;
   }
 }
-
 .ud-404-wrapper {
   text-align: left;
   max-width: 720px;
@@ -2641,9 +2552,6 @@ p {
   word-wrap: break-word;
 
 }
-
-
-
 .sonuclar {
   text-align: left;
   max-width: 650px;
@@ -2656,48 +2564,39 @@ p {
   margin-bottom: 30px;
   padding: 5px 5px;
 }
-
 @media (max-width: 767px) {
   .ud-404-wrapper {
     padding: 50px 30px;
   }
   
 }
-
 .ud-404-wrapper .shape {
   position: absolute;
   z-index: -1;
 }
-
 .ud-404-wrapper .shape.shape-1 {
   top: 0;
   left: 0;
 }
-
 .ud-404-wrapper .shape.shape-2 {
   right: 0;
   bottom: 0;
 }
-
 .ud-404-title {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 30px;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .ud-404-title {
     font-size: 25px;
   }
 }
-
 @media (max-width: 767px) {
   .ud-404-title {
     font-size: 30px;
   }
 }
-
-
 .ud-404-links {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2711,7 +2610,6 @@ p {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-
 .ud-404-links a {
   font-size: 16px;
   font-weight: 500;
@@ -2722,12 +2620,10 @@ p {
   margin-top: 10px;
   width: 35%;
 }
-
 .ud-404-links a:hover {
   background: var(--heading-color);
   color: var(--white);
 }
-
 @media (max-width: 767px) {
   .ud-404-links a {
     margin-top: 5px;
@@ -2737,17 +2633,14 @@ p {
   }
 }
 /*# sourceMappingURL=ud-styles.css.map */
-
 .doctor-links{
   margin-left: 5px;
   color: black;
 }
-
 .rate-number{
   font-weight: 1000;
   font-size: 52px
 }
-
 .divisor-number{
   color: rgb(173, 173, 173); 
   position:relative; 
@@ -2755,7 +2648,6 @@ p {
   margin-left:5px; 
   font-size:20px
 }
-
 .divisor-numberr-on-comment{
   color: rgb(173, 173, 173); 
   position:relative; 
@@ -2763,7 +2655,6 @@ p {
   margin-left:3px; 
   font-size: 16px
 }
-
 div.b {
   word-wrap: break-word;
 }
@@ -2773,46 +2664,38 @@ div.b {
 ------------------
 ------------------
 */
-
 .heading {
   font-size: 25px;
   margin-right: 25px;
 }
-
 .fa {
   font-size: 25px;
 }
-
 .checked {
   color: orange;
 }
-
 /* Three column layout */
 .side {
   float: left;
   width: 15%;
   margin-top:10px;
 }
-
 .middle {
   margin-top:10px;
   float: left;
   width: 70%;
 }
-
 /* Place text to the right */
 .right {
   text-align: right;
   margin-left: -10px;
 }
-
 /* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
-
 /* The bar container */
 .bar-container {
   width: 100%;
@@ -2820,7 +2703,6 @@ div.b {
   text-align: center;
   color: white;
 }
-
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 400px) {
   .side, .middle {
@@ -2828,11 +2710,9 @@ div.b {
     margin-top: 5px;
   }
 }
-
 .comment-adding{
   text-align: center;
 }
-
 .comment-add-wrapper{
   background: var(--white);
   display: -webkit-box;
@@ -2845,57 +2725,47 @@ div.b {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-
 .yorumlar{
   text-align: center;
   margin-top: 90px;
   margin-bottom: 30px;
   font-size: 18px
 }
-
 .quests{
   display: block;
   margin-top: 15px;
   margin-bottom: 10px;
 }
-
 .quest{
   margin-top: 5px;
   font-size: 16px;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .quests {
     display: block;
   }
 }
-
 @media (max-width: 767px) {
   .quests {
     display: block;
   }
 }
-
 .inline{
   display: flex;
   margin-top: 30px;
 }
-
 .like-dislike-button-counter{
   margin-top: 3px;
 }
-
 .star-on-board{
   position: relative;
   top: 0px;
   margin-left: 6px;
   size: 1px;
 }
-
 .report-comment{
   float: right;
 }
-
 /* ===== FAQ CSS ===== */
 .ud-faqq {
   padding-top: 120px;
@@ -2904,28 +2774,24 @@ div.b {
   position: relative;
   z-index: 1;
 }
-
 @media (max-width: 767px) {
   .ud-faqq {
     padding-top: 80px;
     padding-bottom: 50px;
   }
 }
-
 .ud-faqq .shape {
   position: absolute;
   z-index: -1;
   left: 0;
   bottom: 0;
 }
-
 .ud-single-faqq {
   background: var(--white);
   border: 1px solid var(--white);
   border-radius: 10px;
   margin-bottom: 30px;
 }
-
 .ud-single-faqq .ud-faqq-btn {
   text-align: left;
   display: -webkit-box;
@@ -2943,20 +2809,15 @@ div.b {
   opacity: 0.88;
   padding: 30px;
 }
-
-
-
 @media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 767px) {
   .ud-single-faqq .ud-faq-btn {
     padding: 15px;
   }
 }
-
 .ud-single-faqq .ud-faqq-btn.collapsed span.icon i {
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
 }
-
 .ud-single-faqq .ud-faqq-btn span.icon {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2974,7 +2835,6 @@ div.b {
   color: var(--primary-color);
   margin-right: 24px;
 }
-
 .ud-single-faqq .ud-faqq-btn span.icon i {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
@@ -2983,17 +2843,14 @@ div.b {
   font-size: 14px;
   font-weight: 700;
 }
-
 .ud-single-faqq .ud-faqq-body {
   padding: 0px 30px 40px 95px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 767px) {
   .ud-single-faqq .ud-faqq-body {
     padding: 0px 16px 20px 82px;
   }
 }
-
 .commentanswer{
   margin-left:20px;
   margin-top:3px;

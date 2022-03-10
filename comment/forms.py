@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm
 from django.contrib.auth.models import User
-from django.utils.safestring import mark_safe #for like using <strong> on labels 
+from django.utils.safestring import mark_safe #for example; using <strong> on labels 
+from django.utils.translation import gettext as _
 
 from django.contrib.auth import forms as auth_forms #django password forgetting things forms
 
@@ -24,6 +25,20 @@ class PasswordsResetForm(auth_forms.PasswordResetForm):
         widget=forms.TextInput(attrs={'class':'ud-formm-group'}),
         )
 
+class PasswordsConfirmForm(auth_forms.SetPasswordForm):
+    new_password1 = forms.CharField(
+        label= mark_safe('<strong>Yeni Şifre</strong>'),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password','class':'ud-formm-group'}),
+        strip=False,
+        help_text= mark_safe("<div style='padding:5px 5px; margin-top:-5px;'>En az 8 karakter içermelidir<br>Sadece sayılardan oluşmamalıdır</div><br>"),
+    )
+    new_password2 = forms.CharField(
+        label= mark_safe('<strong>Tekrar Yeni Şifre</strong>'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password','class':'ud-formm-group'}),
+    )
+    
+
 class PasswordChangingForm(PasswordChangeForm):
     old_password = forms.CharField(
         max_length=100,
@@ -34,6 +49,7 @@ class PasswordChangingForm(PasswordChangeForm):
         max_length=100,        
         label= mark_safe('<strong>Yeni Şifre</strong>'),
         widget=forms.PasswordInput(attrs={'autocomplete': 'off','class':'ud-formm-group'}),
+        help_text= mark_safe("<div style='padding:5px 5px; margin-top:-5px;'>En az 8 karakter içermelidir<br>Sadece sayılardan oluşmamalıdır</div><br>"),        
     )
     new_password2 = forms.CharField(
         max_length=100,
@@ -73,6 +89,7 @@ class NewUserForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password','class':'ud-formm-group'}),
         strip=False,
     )
+
     
     class Meta:
         model = User
@@ -86,10 +103,12 @@ class NewUserForm(UserCreationForm):
         help_texts={
             'username': ''
         }
+
+    
+    
     def save(self, commit=True):
             user = super(NewUserForm, self).save(commit=False)
             user.email = self.cleaned_data['email']
-            print(user)
             if commit:
                 user.save()
             return user    

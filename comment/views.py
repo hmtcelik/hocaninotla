@@ -77,6 +77,7 @@ class AddDoctorView(generic.TemplateView):
     
 class AccountView(generic.TemplateView):
     template_name = 'account/account_index.html'
+
     
 class ContactView(generic.TemplateView):
     template_name = 'contact.html'
@@ -374,7 +375,7 @@ class CommentAnswerView(generic.FormView):
     template_name = 'comment_answering.html'
     form_class = CommentAnswerForm
     snf = Sinkaf() #kufur hakaret engelliyor
-    
+
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
 
@@ -420,20 +421,6 @@ class ReportCommentView(generic.FormView):
         messages.success(self.request, "Sikayetiniz Bize Ulasmistir." )
         return super().form_valid(form)
     
-    
-#Register----->
-def register_request(request):
-	if request.method == "POST":
-		form = NewUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			messages.success(request, "Basariyla Kayit Olundu." )
-			return redirect("comment:login")
-		else:
-				messages.error(request,"Bir Seyler Ters Gitti, Lutfen Tekrar Deneyiniz.")
-	form = NewUserForm()
-	return render (request=request, template_name="registration/register.html", context={"register_form":form})
-
 
 #Login----->
 def login_request(request):
@@ -460,6 +447,23 @@ def logout_request(request):
 	logout(request) 
 	return redirect("comment:home")
 
+#Register----->
+def register_request(request):
+    if request.method == "POST":
+        snf = Sinkaf() #kufur hakaret engelliyor      
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            if snf.tahmin([form.cleaned_data['username']]):
+                messages.error(request,"Isminizde uygunsuz ifadeler var")
+                return redirect("comment:register")
+            user = form.save()
+            messages.success(request, "Basariyla Kayit Olundu." )
+            return redirect("comment:login")
+        else:
+            messages.error(request,"hata")
+    form = NewUserForm()
+    return render (request=request, template_name="registration/register.html", context={"register_form":form})
+
 
 class PasswordsChangeView(PasswordChangeView):
     form_class= PasswordChangingForm
@@ -471,32 +475,35 @@ def passwordsuccesview(request):
 
 
 def password_reset_request(request):
-	if request.method == "POST":
-		password_reset_form = PasswordsResetForm(request.POST)
-		if password_reset_form.is_valid():
-			data = password_reset_form.cleaned_data['email']
-			associated_users = User.objects.filter(Q(email=data))
-			if associated_users.exists():
-				for user in associated_users:
-					subject = "Password Reset Requested"
-					email_template_name = "registration/password_reset_email.txt"
-					c = {
-					"email":user.email,
-					'domain':'127.0.0.1:8000',
-					'site_name': 'Website',
-					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
-					"user": user,
-					'token': default_token_generator.make_token(user),
-					'protocol': 'http',
-					}
-					email = render_to_string(email_template_name, c)
-					try:
-						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
-					except BadHeaderError:
-						return HttpResponse('Invalid header found.')
-					return redirect ("comment:password_reset_done")
-	password_reset_form = PasswordsResetForm()
-	return render(request=request, template_name="registration/password_reset.html", context={"password_reset_form":password_reset_form})
+    if request.method == "POST":
+        password_reset_form = PasswordsResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data['email']
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:    
+                    subject = "Parola Sifirlama Istegi"
+                    email_template_name = "registration/password_reset_email.txt"
+                    c = {
+                        "email": user.email,
+                        'domain':'127.0.0.1:8000',
+                        'site_name': 'Hocani Notla',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+                    }   
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+                    except BadHeaderError:
+                        return HttpResponse('Invalid header found.')
+                    return redirect ("comment:password_reset_done")     
+            else:
+                messages.error(request,"Bu E-posta ile ilişkin kullanıcı bulunamadı")
+
+    password_reset_form = PasswordsResetForm()
+    return render(request=request, template_name="registration/password_reset.html", context={"password_reset_form":password_reset_form})
 
 
 class My_PasswordResetDoneView(auth_views.PasswordResetDoneView):
@@ -504,6 +511,7 @@ class My_PasswordResetDoneView(auth_views.PasswordResetDoneView):
     success_url = reverse_lazy('comment:password_reset_confirm')
     
 class My_PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    form_class = my_forms.PasswordsConfirmForm
     template_name='registration/password_reset_confirm.html'
     success_url = reverse_lazy('comment:password_reset_complete')
 
