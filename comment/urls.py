@@ -27,7 +27,13 @@ urlpatterns = [
     path("adddoctor", views.AddDoctorView.as_view(), name="adddoctor"),
     path("contact/", views.ContactView.as_view(), name='contact'),
 
-    path("changepassword", views.PasswordsChangeView.as_view(), name='changepassword'),
-    path("password_succes",views.passwordsuccesview, name='changedpassword'),
-
+    #password change (in account page)
+    path("changepassword/", views.PasswordsChangeView.as_view(), name='changepassword'),
+    path("password_succes/",views.passwordsuccesview, name='changedpassword'),
+    
+    #password reset (in login page)
+    path("resetpassword/", views.password_reset_request, name="password_reset"),
+    path("resetpassword/done",views.My_PasswordResetDoneView.as_view(), name="password_reset_done"),
+    path("resetpassword/<uidb64>/<token>/", views.My_PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path("resetpassword/complete",views.My_PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 ]

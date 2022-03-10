@@ -29,7 +29,7 @@ class Doctor(models.Model):
     depart = models.ForeignKey(Depart, on_delete=models.CASCADE)
     doctor_name = models.CharField(max_length=150)
     doctor_lecture = models.CharField(max_length=150) 
-    doctor_bio = models.TextField(max_length=1000)
+    doctor_bio = models.TextField(max_length=1000, blank=True)
     doctor_pp = models.ImageField(upload_to ='uploads/', blank=True, null=True)
     doctor_link = models.URLField(max_length=200, blank=True, default="#")
     doctor_av_rate = models.FloatField(default=0.0, blank=True) 

@@ -2,7 +2,7 @@ from django.views import generic
 from django.shortcuts import render, redirect
 
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.views import PasswordChangeView
 
@@ -13,15 +13,24 @@ from django.db.models import Avg, Count
 from django.template import RequestContext
 import re
 
+from django.contrib.auth import views as auth_views #django password forgetting things views
+from django.contrib.auth import forms as auth_forms #django password forgetting things forms
 
+# password resetting (forget password
+from django.core.mail import send_mail, BadHeaderError
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
 
 from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pagenotfound_view'
 
 from sinkaf import Sinkaf #kufur engelleyici
 
+from . import forms as my_forms # all my forms using with; my_forms.ExampleForm
 
-
-from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm, LoginForm, PasswordChangingForm
+from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm, LoginForm, PasswordChangingForm, PasswordsResetForm
 from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment
 from django.contrib.auth.models import User
 
@@ -459,3 +468,45 @@ class PasswordsChangeView(PasswordChangeView):
 
 def passwordsuccesview(request):
     return render(request, template_name="registration/succes_changedpassword.html",context={})
+
+
+def password_reset_request(request):
+	if request.method == "POST":
+		password_reset_form = PasswordsResetForm(request.POST)
+		if password_reset_form.is_valid():
+			data = password_reset_form.cleaned_data['email']
+			associated_users = User.objects.filter(Q(email=data))
+			if associated_users.exists():
+				for user in associated_users:
+					subject = "Password Reset Requested"
+					email_template_name = "registration/password_reset_email.txt"
+					c = {
+					"email":user.email,
+					'domain':'127.0.0.1:8000',
+					'site_name': 'Website',
+					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
+					"user": user,
+					'token': default_token_generator.make_token(user),
+					'protocol': 'http',
+					}
+					email = render_to_string(email_template_name, c)
+					try:
+						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+					except BadHeaderError:
+						return HttpResponse('Invalid header found.')
+					return redirect ("comment:password_reset_done")
+	password_reset_form = PasswordsResetForm()
+	return render(request=request, template_name="registration/password_reset.html", context={"password_reset_form":password_reset_form})
+
+
+class My_PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name='registration/password_reset_done.html'
+    success_url = reverse_lazy('comment:password_reset_confirm')
+    
+class My_PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name='registration/password_reset_confirm.html'
+    success_url = reverse_lazy('comment:password_reset_complete')
+
+class My_PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name='registration/password_reset_complete.html'
+    success_url = reverse_lazy('comment:login')

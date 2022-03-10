@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe #for like using <strong> on labels 
 
+from django.contrib.auth import forms as auth_forms #django password forgetting things forms
+
 from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE_CHOICES, ONLINE_CLASS_CHOICES, ATTANDANCE_CHOICES, TAKE_AGAIN_CHOICES
 
 
@@ -13,6 +15,14 @@ class LoginForm(AuthenticationForm):
 
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'class':'ud-formm-group',}),label= mark_safe('<strong>Kullanıcı Adı</strong>'))
     password = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class':'ud-formm-group'}),label=mark_safe('<strong>Şifre</strong>'))
+
+        
+class PasswordsResetForm(auth_forms.PasswordResetForm):
+    email = forms.EmailField(
+        required=True,
+        label=mark_safe('<strong>Email</strong>'),
+        widget=forms.TextInput(attrs={'class':'ud-formm-group'}),
+        )
 
 class PasswordChangingForm(PasswordChangeForm):
     old_password = forms.CharField(
