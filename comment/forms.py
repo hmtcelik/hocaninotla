@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import forms as auth_forms #django password forgetting things forms
 
 from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE_CHOICES, ONLINE_CLASS_CHOICES, ATTANDANCE_CHOICES, TAKE_AGAIN_CHOICES, BannedEmails
+from .models import Requests
 
 
 # Create your forms here.
@@ -110,9 +111,6 @@ class NewUserForm(UserCreationForm):
         username = self.cleaned_data['username']
         if User.objects.exclude().filter(username=username).exists():
         	raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu kullanici adi zaten kullaniliyor</span>"))
-        not_allowed = " "
-        if username in not_allowed:
-            print("yes")
 
         return username
 
@@ -211,3 +209,20 @@ class ReportForm(forms.ModelForm):
             report.save()
         return report
     
+class RequestsForm(forms.ModelForm):
+    class Meta:
+        model = Requests
+        exclude = ['request_author',]
+        fields = ('request_body',)
+        labels = {
+            "request_body": mark_safe("<strong>İstek ve Önerim</strong>"),
+        }
+        widgets = {
+            'request_body': forms.Textarea(attrs={'class':'ud-form-group comment-box','placeholder': ("bişeyler yaz")}),       
+        }
+        
+    def save(self, commit=True):
+        request = super(RequestsForm, self)
+        if commit:
+            request.save()
+        return request

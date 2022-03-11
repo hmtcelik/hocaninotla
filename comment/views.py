@@ -535,3 +535,24 @@ class My_PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 class My_PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name='registration/password_reset_complete.html'
     success_url = reverse_lazy('comment:login')
+    
+class RequestFormView(generic.FormView):    
+    template_name = 'requestform.html'
+    form_class = my_forms.RequestsForm
+    snf = Sinkaf()
+    
+    def get_success_url(self):
+        return reverse_lazy('comment:home')
+        
+    def form_valid(self, form):
+        form.save(commit=False)
+
+        form.instance.request_author = self.request.user
+   
+        if self.snf.tahmin([form.cleaned_data['request_body']]):
+            messages.error(self.request,"Sikayetinizde uygunsuz ifadeler bulunuyor.")
+            return HttpResponseRedirect(reverse('comment:requestform',))
+        
+        form.save()
+        messages.success(self.request, "Form Bize Ulasmistir." )
+        return super().form_valid(form)

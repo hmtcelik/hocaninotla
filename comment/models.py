@@ -124,3 +124,11 @@ class BannedEmails(models.Model):
     
     def __str__(self):
         return self.email
+
+class Requests(models.Model):
+    request_author = models.CharField(max_length=150)
+    request_body = models.TextField(max_length=1000)
+    date_time = models.DateTimeField(auto_now_add = True, blank=True)
+    
+    def __str__(self):
+        return self.request_author

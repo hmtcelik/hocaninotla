@@ -130,7 +130,6 @@ p {
   margin-top:20px;
   margin-bottom:-20px;
 }
-
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .give-rate{
   position: relative;
@@ -138,7 +137,6 @@ p {
   margin-top: 0 auto;
   }
 }
-
 .see-comments{
   text-align: center;
   max-width: 300px;
@@ -151,7 +149,6 @@ p {
   z-index: 1;
   margin-top: 30px;
 }
-
 /*===== All Button Style =====*/
 .ud-main-btn {
   display: inline-block;
@@ -170,26 +167,22 @@ p {
   transition: all 0.4s ease-out 0s;
   background: var(--primary-color);
 }
-
 .ud-main-btn:hover {
   color: var(--white);
   background: var(--heading-color);
 }
-
 @media (max-width: 767px) {
   .container {
     padding-left: 30px;
     padding-right: 30px;
   }
 }
-
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .container {
     padding-left: 20px;
     padding-right: 20px;
   }
 }
-
 .back-to-top {
   width: 40px;
   height: 40px;
@@ -211,12 +204,10 @@ p {
   z-index: 99;
   color: var(--white);
 }
-
 .back-to-top:hover {
   color: var(--white);
   background: var(--heading-color);
 }
-
 /* ===== Header CSS ===== */
 .ud-header {
   position: absolute;
@@ -227,7 +218,6 @@ p {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
-
 .sticky {
   position: fixed;
   z-index: 99;
@@ -239,11 +229,9 @@ p {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
-
 .sticky .navbar {
   padding: 0;
 }
-
 .navbar {
   padding: 0px 0;
   border-radius: 5px;
@@ -251,25 +239,20 @@ p {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
-
 .navbar-brand {
   padding: 0;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-brand {
     padding: 5px 0px;
   }
 }
-
 .navbar-brand img {
   max-width: 160px;
 }
-
 .navbar-toggler {
   padding: 0;
 }
-
 .navbar-toggler .toggler-icon {
   width: 30px;
   height: 2px;
@@ -280,23 +263,19 @@ p {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
-
 .navbar-toggler.active .toggler-icon:nth-of-type(1) {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   top: 7px;
 }
-
 .navbar-toggler.active .toggler-icon:nth-of-type(2) {
   opacity: 0;
 }
-
 .navbar-toggler.active .toggler-icon:nth-of-type(3) {
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
   top: -7px;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-collapse {
     position: absolute;
@@ -316,32 +295,26 @@ p {
     display: block;
   }
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-nav {
     padding: 20px 30px;
   }
 }
-
 .navbar-nav .nav-item {
   position: relative;
   padding: 0px 20px;
 }
-
 .nav-logreg{
   display: none;
 }
-
 .nav-logregmar{
   margin-top: 0px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .navbar-nav .nav-item {
     padding: 0px 12px;
   }
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-nav .nav-item {
     padding: 0px;
@@ -353,7 +326,6 @@ p {
     margin-top: 15px;
   }
 }
-
 .navbar-nav .nav-item > a {
   font-size: 16px;
   font-weight: 400;
@@ -363,7 +335,6 @@ p {
   padding: 25px 8px;
   position: relative;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-nav .nav-item > a {
     display: block;
@@ -371,7 +342,6 @@ p {
     color: var(--heading-color);
   }
 }
-
 .navbar-nav .nav-item > a:hover, .navbar-nav .nav-item > a.active {
   color: var(--white);
   opacity: 0.5;
@@ -437,17 +407,14 @@ p {
     opacity: 1;
   }
 }
-
 .navbar-nav .nav-item:hover > .ud-submenu {
   opacity: 1;
   visibility: visible;
   top: 100%;
 }
-
 .navbar-nav .nav-item.nav-item-has-children > a {
   position: relative;
 }
-
 .navbar-nav .nav-item.nav-item-has-children > a::after {
   content: "";
   -webkit-box-sizing: border-box;
@@ -463,13 +430,11 @@ p {
   top: 50%;
   margin-top: -2px;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-nav .nav-item.nav-item-has-children > a::after {
     right: 5px;
   }
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-btn {
     position: absolute;
@@ -479,85 +444,68 @@ p {
     transform: translateY(-50%);
   }
 }
-
 .navbar-btn .ud-main-btn {
   padding: 8px 16px;
   background: transparent;
 }
-
 .navbar-btn .ud-login-btn:hover {
   opacity: 0.5;
 }
-
 .navbar-btn .ud-white-btn {
   background: rgba(255, 255, 255, 0.2);
 }
-
 .navbar-btn .ud-white-btn:hover {
   background: white;
   color: var(--heading-color);
 }
-
 .sticky .navbar-toggler .toggler-icon {
   background-color: var(--heading-color);
 }
-
 .sticky .navbar-nav .nav-item:hover > a {
   color: var(--primary-color);
   opacity: 1;
 }
-
 .sticky .navbar-nav .nav-item a {
   color: var(--heading-color);
 }
-
 .sticky .navbar-nav .nav-item a.active, .sticky .navbar-nav .nav-item a:hover {
   color: var(--primary-color);
   opacity: 1;
 }
-
 .sticky .navbar-btn .ud-main-btn.ud-login-btn {
   color: var(--heading-color);
 }
-
 .sticky .navbar-btn .ud-main-btn.ud-login-btn:hover {
   color: var(--primary-color);
   opacity: 1;
 }
-
 .sticky .navbar-btn .ud-white-btn {
   background: var(--primary-color);
   color: var(--white);
 }
-
 .sticky .navbar-btn .ud-white-btn:hover {
   background: var(--heading-color);
 }
-
 /* ===== Hero CSS ===== */
 .ud-hero {
   background: var(--primary-color);
   padding-top: 180px;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .ud-hero {
     padding-top: 160px;
   }
 }
-
 @media (max-width: 767px) {
   .ud-hero {
     padding-top: 130px;
   }
 }
-
 .ud-hero-content {
   max-width: 780px;
   margin: auto;
   margin-bottom: 30px;
 }
-
 .ud-hero-content .ud-hero-title {
   color: var(--white);
   font-weight: 700;
@@ -566,21 +514,18 @@ p {
   text-align: center;
   margin-bottom: 30px;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .ud-hero-content .ud-hero-title {
     font-size: 38px;
     line-height: 50px;
   }
 }
-
 @media (max-width: 767px) {
   .ud-hero-content .ud-hero-title {
     font-size: 26px;
     line-height: 38px;
   }
 }
-
 .ud-hero-content .ud-hero-desc {
   font-weight: normal;
   font-size: 20px;
@@ -592,14 +537,12 @@ p {
   margin: auto;
   margin-bottom: 30px;
 }
-
 @media (max-width: 767px) {
   .ud-hero-content .ud-hero-desc {
     font-size: 16px;
     line-height: 30px;
   }
 }
-
 .ud-hero-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -611,57 +554,47 @@ p {
       -ms-flex-pack: center;
           justify-content: center;
 }
-
 .ud-hero-buttons .ud-main-btn {
   margin: 8px;
 }
-
 @media (max-width: 767px) {
   .ud-hero-buttons .ud-main-btn {
     margin: 5px;
   }
 }
-
 @media (max-width: 767px) {
   .ud-hero-buttons .ud-main-btn {
     padding: 12px 16px;
   }
 }
-
 .ud-hero-buttons .ud-white-btn {
   background: var(--white);
   color: var(--heading-color);
 }
-
 .ud-hero-buttons .ud-white-btn:hover {
   -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
   background: #fefefe;
   color: var(--primary-color);
 }
-
 .ud-hero-buttons .ud-link-btn:hover {
   color: var(--white);
   background: transparent;
   opacity: 0.5;
 }
-
 .ud-hero-brands-wrapper {
   text-align: center;
   margin-bottom: 40px;
 }
-
 .ud-hero-brands-wrapper img {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   opacity: 0.5;
   max-width: 250px;
 }
-
 .ud-hero-brands-wrapper img:hover {
   opacity: 1;
 }
-
 .ud-hero-image {
   max-width: 845px;
   margin: auto;
@@ -669,52 +602,43 @@ p {
   position: relative;
   z-index: 1;
 }
-
 .ud-hero-image img {
   max-width: 100%;
   text-align: center;
 }
-
 .ud-hero-image .shape {
   position: absolute;
   z-index: -1;
 }
-
 .ud-hero-image .shape.shape-1 {
   bottom: 0;
   left: -30px;
 }
-
 .ud-hero-image .shape.shape-2 {
   top: -20px;
   right: -20px;
 }
-
 /* ===== Features CSS ===== */
 .ud-features {
   padding-top: 120px;
   padding-bottom: 90px;
 }
-
 @media (max-width: 767px) {
   .ud-features {
     padding-top: 80px;
     padding-bottom: 40px;
   }
 }
-
 .ud-section-title {
   max-width: 620px;
   margin-bottom: 70px;
 }
-
 .ud-section-title span {
   font-weight: 600;
   font-size: 18px;
   color: var(--primary-color);
   margin-bottom: 10px;
 }
-
 .ud-section-title h2 {
   font-weight: 700;
   font-size: 42px;
@@ -723,28 +647,23 @@ p {
   color: var(--heading-color);
   margin-bottom: 20px;
 }
-
 .ud-section-title p {
   font-size: 20px;
   line-height: 30px;
 }
-
 @media (max-width: 767px) {
   .ud-section-title p {
     font-size: 16px;
     line-height: 26px;
   }
 }
-
 .ud-single-feature {
   margin-bottom: 40px;
 }
-
 .ud-single-feature:hover .ud-feature-icon::before {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-
 .ud-single-feature .ud-feature-icon {
   width: 70px;
   height: 70px;
@@ -766,7 +685,6 @@ p {
   text-align: center;
   margin-bottom: 40px;
 }
-
 .ud-single-feature .ud-feature-icon::before {
   content: "";
   position: absolute;
@@ -783,48 +701,40 @@ p {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
-
 .ud-single-feature .ud-feature-title {
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
   margin-bottom: 12px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .ud-single-feature .ud-feature-title {
     font-size: 18px;
     line-height: 26px;
   }
 }
-
 .ud-single-feature .ud-feature-desc {
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 40px;
 }
-
 .ud-single-feature .ud-feature-link {
   font-weight: 500;
   color: var(--body-color);
 }
-
 .ud-single-feature .ud-feature-link:hover {
   color: var(--primary-color);
 }
-
 /* ===== About CSS ===== */
 .ud-about {
   background: #f3f4fe;
   padding: 120px 0;
 }
-
 @media (max-width: 767px) {
   .ud-about {
     padding: 80px 0;
   }
 }
-
 .ud-about-wrapper {
   background: var(--white);
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -838,23 +748,19 @@ p {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .ud-about-wrapper {
     display: block;
   }
 }
-
 .ud-about-content-wrapper {
   padding: 70px;
 }
-
 @media (max-width: 767px) {
   .ud-about-content-wrapper {
     padding: 50px 30px;
   }
 }
-
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .ud-about-content-wrapper {
     padding: 50px;
@@ -864,7 +770,6 @@ p {
 .ud-about-content {
   max-width: 500px;
 }
-
 .ud-about-content .tag {
   font-weight: 500;
   font-size: 14px;
@@ -874,33 +779,28 @@ p {
   display: inline-block;
   margin-bottom: 20px;
 }
-
 .ud-about-content h2 {
   font-weight: bold;
   font-size: 36px;
   line-height: 45px;
   margin-bottom: 30px;
 }
-
 @media (max-width: 767px) {
   .ud-about-content h2 {
     font-size: 26px;
     line-height: 38px;
   }
 }
-
 .ud-about-content p {
   font-size: 16px;
   line-height: 28px;
   margin-bottom: 40px;
 }
-
 .ud-about-content .ud-main-btn:hover {
   background: #2748b4;
   -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .ud-about-image {
     display: none;
@@ -915,21 +815,18 @@ p {
   position: relative;
   z-index: 1;
 }
-
 @media (max-width: 767px) {
   .ud-faq {
     padding-top: 80px;
     padding-bottom: 50px;
   }
 }
-
 .ud-faq .shape {
   position: absolute;
   z-index: -1;
   left: 0;
   bottom: 0;
 }
-
 .ud-single-faq {
   background: var(--white);
   border: 1px solid #f3f4fe;
@@ -938,7 +835,6 @@ p {
   border-radius: 10px;
   margin-bottom: 30px;
 }
-
 .ud-single-faq .ud-faq-btn {
   text-align: left;
   display: -webkit-box;
@@ -956,18 +852,15 @@ p {
   opacity: 0.88;
   padding: 30px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 767px) {
   .ud-single-faq .ud-faq-btn {
     padding: 15px;
   }
 }
-
 .ud-single-faq .ud-faq-btn.collapsed span.icon i {
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
 }
-
 .ud-single-faq .ud-faq-btn span.icon {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1000,187 +893,6 @@ p {
   .ud-single-faq .ud-faq-body {
     padding: 0px 16px 20px 82px;
   }
-}
-/* ===== Testimonials CSS ===== */
-.ud-testimonials {
-  padding-top: 120px;
-}
-@media (max-width: 767px) {
-  .ud-testimonials {
-    padding-top: 80px;
-  }
-}
-.ud-single-testimonial {
-  padding: 30px;
-  -webkit-box-shadow: 0px 60px 120px -20px #ebeffd;
-          box-shadow: 0px 60px 120px -20px #ebeffd;
-  background: var(--white);
-  margin-bottom: 50px;
-}
-.ud-single-testimonial .ud-testimonial-ratings {
-  margin-bottom: 10px;
-}
-.ud-single-testimonial .ud-testimonial-ratings i {
-  color: #fbb040;
-}
-.ud-single-testimonial .ud-testimonial-content {
-  margin-bottom: 25px;
-}
-.ud-single-testimonial .ud-testimonial-content p {
-  font-size: 16px;
-  line-height: 30px;
-  color: #637381;
-}
-.ud-single-testimonial .ud-testimonial-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.ud-single-testimonial .ud-testimonial-info .ud-testimonial-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 20px;
-}
-.ud-single-testimonial .ud-testimonial-info .ud-testimonial-meta h4 {
-  font-weight: 600;
-  font-size: 14px;
-}
-.ud-single-testimonial .ud-testimonial-info .ud-testimonial-meta p {
-  font-size: 12px;
-  color: #969696;
-}
-.ud-brands .ud-title {
-  margin-bottom: 30px;
-}
-.ud-brands .ud-title h6 {
-  font-weight: normal;
-  font-size: 12px;
-  color: var(--body-color);
-  display: inline-block;
-  position: relative;
-}
-.ud-brands .ud-title h6::after {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 1px;
-  background: #afb2b5;
-  right: -40px;
-  top: 50%;
-}
-.ud-brands .ud-brands-logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  margin-right: -40px;
-}
-.ud-brands .ud-brands-logo .ud-single-logo {
-  margin-right: 40px;
-  margin-bottom: 20px;
-  max-width: 140px;
-}
-.ud-brands .ud-brands-logo .ud-single-logo:hover img {
-  -webkit-filter: none;
-          filter: none;
-}
-.ud-brands .ud-brands-logo .ud-single-logo img {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
-  -webkit-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
-}
-/* ===== Team CSS ===== */
-.ud-team {
-  padding-top: 120px;
-  padding-bottom: 80px;
-}
-@media (max-width: 767px) {
-  .ud-team {
-    padding-top: 80px;
-    padding-bottom: 40px;
-  }
-}
-.ud-single-team {
-  margin-bottom: 40px;
-}
-.ud-single-team .ud-team-image-wrapper {
-  width: 170px;
-  height: 170px;
-  position: relative;
-  margin: 0px auto 25px;
-}
-.ud-single-team .ud-team-image {
-  border-radius: 50%;
-}
-.ud-single-team .ud-team-image img {
-  width: 100%;
-  border-radius: 50%;
-}
-.ud-single-team .shape {
-  position: absolute;
-  z-index: -1;
-}
-.ud-single-team .shape.shape-1 {
-  top: 0;
-  left: 0;
-}
-.ud-single-team .shape.shape-2 {
-  bottom: 0;
-  right: 0;
-}
-.ud-single-team .ud-team-info {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.ud-single-team .ud-team-info h5 {
-  font-weight: 500;
-  font-size: 18px;
-  text-transform: capitalize;
-  margin-bottom: 10px;
-}
-.ud-single-team .ud-team-info h6 {
-  font-weight: 500;
-  font-size: 12px;
-  color: var(--body-color);
-}
-.ud-single-team .ud-team-socials {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-.ud-single-team .ud-team-socials a {
-  width: 32px;
-  height: 32px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 0px 10px;
-  color: #cdced6;
-}
-.ud-single-team .ud-team-socials a:hover {
-  color: var(--primary-color);
 }
 /* ===== Contact CSS ===== */
 .ud-contact {
@@ -1249,7 +961,6 @@ p {
   width: 330px;
   margin-bottom: 30px;
 }
-
 .ud-contact-info-wrapper .ud-info-icon {
   font-size: 32px;
   color: var(--primary-color);

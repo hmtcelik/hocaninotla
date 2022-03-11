@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Uni, Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment, BannedEmails
+from .models import Uni, Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment, BannedEmails, Requests
 
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -15,6 +15,12 @@ class MyUserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, MyUserAdmin)
 
+class RequestFormAdmin(admin.ModelAdmin):
+    list_filter = ('date_time',) #bu yana filter ekliyor
+    list_display = ('request_author','date_time') # bu da kolon ve satir olarak orda cok guzel gosteriyor
+    search_fields = ("request_author__startswith",)   
+
+admin.site.register(Requests, RequestFormAdmin)
 
 class CommentAdmin(admin.ModelAdmin):
     list_filter = ('date_time',) #bu yana filter ekliyor
