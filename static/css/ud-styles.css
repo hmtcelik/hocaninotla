@@ -2493,10 +2493,12 @@ div.b {
     display: block;
   }
 }
+
 .inline{
   display: flex;
   margin-top: 30px;
 }
+
 .like-dislike-button-counter{
   margin-top: 3px;
 }

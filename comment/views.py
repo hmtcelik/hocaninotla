@@ -336,14 +336,18 @@ def commentdeleteview(request, doctor_id, comment_id):
         doctor = get_object_or_404(Doctor, id=doctor_id)
         user_id = request.user.id
 
-        the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)            
+        try:
+            the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)            
+        except Comment.DoesNotExist:
+            the_comment = None
+            
+        if the_comment != None:
+            the_comment.delete()
+                            
+            messages.success(request, "Yorumun Basariyla Silindi.")
 
-        the_comment.delete()
-        
-        next = request.POST.get('next', '/')
-        
-        messages.success(request, "Yorumun Basariyla Silindi.")
-        
+    next = request.POST.get('next', '/')
+
         
     return HttpResponseRedirect(next)
 
@@ -352,28 +356,36 @@ def commentdeleteview(request, doctor_id, comment_id):
 def commenteditview(request, doctor_id, comment_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     user_id = request.user.id
-    the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)
-    update_form = RateForm(instance=the_comment)
-
-    snf = Sinkaf() #kufur hakaret engelliyor
+    try:
+        the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)
+    except Comment.DoesNotExist:
+        the_comment = None
     
-    if request.method == 'POST':
-        update_form = RateForm(request.POST, instance=the_comment)
-        if update_form.is_valid():
-            if snf.tahmin([update_form.cleaned_data['comment_body']]):
-                messages.error(request,"Yorumunda uygunsuz ifadeler bulunuyor.")
-                return HttpResponseRedirect(reverse('comment:editcomment', args=[str(doctor_id),str(comment_id)]))
-            
-            update_form.save(commit=False)
-            update_form.doctor_id = doctor_id
-            update_form.comment_author = request.user
-            update_form.comment_author_id = request.user.id
+    if the_comment != None:        
+        update_form = RateForm(instance=the_comment)
+  
+        snf = Sinkaf() #kufur hakaret engelliyor
+        
+        if request.method == 'POST':
+            update_form = RateForm(request.POST, instance=the_comment)
+            if update_form.is_valid():
+                if snf.tahmin([update_form.cleaned_data['comment_body']]):
+                    messages.error(request,"Yorumunda uygunsuz ifadeler bulunuyor.")
+                    return HttpResponseRedirect(reverse('comment:editcomment', args=[str(doctor_id),str(comment_id)]))
+                
+                update_form.save(commit=False)
+                update_form.doctor_id = doctor_id
+                update_form.comment_author = request.user
+                update_form.comment_author_id = request.user.id
 
-            update_form.save()
-            messages.success(request, "Yorumun Basariyla Kaydedildi.")
+                update_form.save()
+                messages.success(request, "Yorumun Basariyla Kaydedildi.")
+            return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
+    
+    else:
         return HttpResponseRedirect(reverse('comment:comment', args=[str(doctor_id)]))
         
-       
+            
     return render(request=request, template_name="comment_edit.html", context={"edit_form":update_form})
         
 
