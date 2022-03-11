@@ -907,128 +907,6 @@ p {
     text-align: center;
   }
 }
-
-/* ===== Pricing CSS ===== */
-.ud-pricing {
-  padding-top: 120px;
-  padding-bottom: 90px;
-}
-
-@media (max-width: 767px) {
-  .ud-pricing {
-    padding-top: 80px;
-    padding-bottom: 40px;
-  }
-}
-
-.ud-single-pricing {
-  margin-bottom: 40px;
-  background: var(--white);
-  border: 2px solid #d4deff;
-  border-radius: 8px;
-  text-align: center;
-  padding: 45px 30px;
-  position: relative;
-}
-
-.ud-single-pricing.active {
-  background: -webkit-gradient(linear, left top, left bottom, from(#3056d3), to(#179bee));
-  background: linear-gradient(180deg, #3056d3 0%, #179bee 100%);
-  border: none;
-  padding: 55px 30px;
-}
-
-.ud-single-pricing.active .ud-pricing-header h3,
-.ud-single-pricing.active .ud-pricing-header h4 {
-  color: var(--white);
-}
-
-.ud-single-pricing.active .ud-pricing-body li {
-  color: var(--white);
-}
-
-.ud-single-pricing.first-item::after, .ud-single-pricing.last-item::after {
-  content: "";
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  z-index: 1;
-}
-
-.ud-single-pricing.first-item::after {
-  background: var(--primary-color);
-  left: -2px;
-  bottom: -2px;
-  border-radius: 0px 55px 0px 8px;
-}
-
-.ud-single-pricing.last-item::after {
-  background: #13c296;
-  top: -2px;
-  right: -2px;
-  border-radius: 0px 8px 0px 55px;
-}
-
-.ud-single-pricing .ud-popular-tag {
-  display: inline-block;
-  padding: 10px 25px;
-  background: var(--white);
-  border-radius: 30px;
-  color: var(--primary-color);
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.ud-single-pricing .ud-pricing-header h3 {
-  font-weight: 500;
-  font-size: 15px;
-  margin-bottom: 8px;
-}
-
-.ud-single-pricing .ud-pricing-header h4 {
-  font-weight: 600;
-  font-size: 26px;
-  color: var(--primary-color);
-  margin-bottom: 40px;
-}
-
-.ud-single-pricing .ud-pricing-body {
-  margin-bottom: 40px;
-}
-
-.ud-single-pricing .ud-pricing-body li {
-  font-weight: 500;
-  font-size: 15px;
-  margin-bottom: 18px;
-}
-
-.ud-single-pricing .ud-main-btn {
-  border-radius: 30px;
-  padding: 15px 40px;
-}
-
-.ud-single-pricing .ud-border-btn {
-  border: 1px solid #d4deff;
-  color: var(--primary-color);
-  background: var(--white);
-}
-
-.ud-single-pricing .ud-border-btn:hover {
-  color: var(--white);
-  border-color: var(--primary-color);
-  background: var(--primary-color);
-}
-
-.ud-single-pricing .ud-white-btn {
-  background: var(--white);
-  color: var(--heading-color);
-}
-
-.ud-single-pricing .ud-white-btn:hover {
-  color: var(--white);
-  background: var(--heading-color);
-}
-
 /* ===== FAQ CSS ===== */
 .ud-faq {
   padding-top: 120px;
@@ -1107,7 +985,6 @@ p {
   color: var(--primary-color);
   margin-right: 24px;
 }
-
 .ud-single-faq .ud-faq-btn span.icon i {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
@@ -1116,28 +993,23 @@ p {
   font-size: 14px;
   font-weight: 700;
 }
-
 .ud-single-faq .ud-faq-body {
   padding: 0px 30px 40px 95px;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px), (max-width: 767px) {
   .ud-single-faq .ud-faq-body {
     padding: 0px 16px 20px 82px;
   }
 }
-
 /* ===== Testimonials CSS ===== */
 .ud-testimonials {
   padding-top: 120px;
 }
-
 @media (max-width: 767px) {
   .ud-testimonials {
     padding-top: 80px;
   }
 }
-
 .ud-single-testimonial {
   padding: 30px;
   -webkit-box-shadow: 0px 60px 120px -20px #ebeffd;
@@ -1145,25 +1017,20 @@ p {
   background: var(--white);
   margin-bottom: 50px;
 }
-
 .ud-single-testimonial .ud-testimonial-ratings {
   margin-bottom: 10px;
 }
-
 .ud-single-testimonial .ud-testimonial-ratings i {
   color: #fbb040;
 }
-
 .ud-single-testimonial .ud-testimonial-content {
   margin-bottom: 25px;
 }
-
 .ud-single-testimonial .ud-testimonial-content p {
   font-size: 16px;
   line-height: 30px;
   color: #637381;
 }
-
 .ud-single-testimonial .ud-testimonial-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1172,7 +1039,6 @@ p {
       -ms-flex-align: center;
           align-items: center;
 }
-
 .ud-single-testimonial .ud-testimonial-info .ud-testimonial-image {
   width: 50px;
   height: 50px;
@@ -1180,21 +1046,17 @@ p {
   overflow: hidden;
   margin-right: 20px;
 }
-
 .ud-single-testimonial .ud-testimonial-info .ud-testimonial-meta h4 {
   font-weight: 600;
   font-size: 14px;
 }
-
 .ud-single-testimonial .ud-testimonial-info .ud-testimonial-meta p {
   font-size: 12px;
   color: #969696;
 }
-
 .ud-brands .ud-title {
   margin-bottom: 30px;
 }
-
 .ud-brands .ud-title h6 {
   font-weight: normal;
   font-size: 12px;
@@ -1202,7 +1064,6 @@ p {
   display: inline-block;
   position: relative;
 }
-
 .ud-brands .ud-title h6::after {
   content: "";
   position: absolute;
@@ -1212,7 +1073,6 @@ p {
   right: -40px;
   top: 50%;
 }
-
 .ud-brands .ud-brands-logo {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1224,91 +1084,75 @@ p {
       flex-wrap: wrap;
   margin-right: -40px;
 }
-
 .ud-brands .ud-brands-logo .ud-single-logo {
   margin-right: 40px;
   margin-bottom: 20px;
   max-width: 140px;
 }
-
 .ud-brands .ud-brands-logo .ud-single-logo:hover img {
   -webkit-filter: none;
           filter: none;
 }
-
 .ud-brands .ud-brands-logo .ud-single-logo img {
   -webkit-filter: grayscale(1);
           filter: grayscale(1);
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
-
 /* ===== Team CSS ===== */
 .ud-team {
   padding-top: 120px;
   padding-bottom: 80px;
 }
-
 @media (max-width: 767px) {
   .ud-team {
     padding-top: 80px;
     padding-bottom: 40px;
   }
 }
-
 .ud-single-team {
   margin-bottom: 40px;
 }
-
 .ud-single-team .ud-team-image-wrapper {
   width: 170px;
   height: 170px;
   position: relative;
   margin: 0px auto 25px;
 }
-
 .ud-single-team .ud-team-image {
   border-radius: 50%;
 }
-
 .ud-single-team .ud-team-image img {
   width: 100%;
   border-radius: 50%;
 }
-
 .ud-single-team .shape {
   position: absolute;
   z-index: -1;
 }
-
 .ud-single-team .shape.shape-1 {
   top: 0;
   left: 0;
 }
-
 .ud-single-team .shape.shape-2 {
   bottom: 0;
   right: 0;
 }
-
 .ud-single-team .ud-team-info {
   text-align: center;
   margin-bottom: 20px;
 }
-
 .ud-single-team .ud-team-info h5 {
   font-weight: 500;
   font-size: 18px;
   text-transform: capitalize;
   margin-bottom: 10px;
 }
-
 .ud-single-team .ud-team-info h6 {
   font-weight: 500;
   font-size: 12px;
   color: var(--body-color);
 }
-
 .ud-single-team .ud-team-socials {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1320,7 +1164,6 @@ p {
       -ms-flex-pack: center;
           justify-content: center;
 }
-
 .ud-single-team .ud-team-socials a {
   width: 32px;
   height: 32px;
@@ -1336,23 +1179,19 @@ p {
   margin: 0px 10px;
   color: #cdced6;
 }
-
 .ud-single-team .ud-team-socials a:hover {
   color: var(--primary-color);
 }
-
 /* ===== Contact CSS ===== */
 .ud-contact {
   padding: 120px 0px;
   position: relative;
 }
-
 @media (max-width: 767px) {
   .ud-contact {
     padding: 80px 0;
   }
 }
-
 .ud-contact::after {
   content: "";
   position: absolute;
@@ -1363,36 +1202,30 @@ p {
   height: 50%;
   background: #f3f4fe;
 }
-
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .ud-contact::after {
     height: 45%;
   }
 }
-
 .ud-contact-title {
   margin-bottom: 150px;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .ud-contact-title {
     margin-bottom: 50px;
   }
 }
-
 .ud-contact-title span {
   color: var(--heading-color);
   font-weight: 600;
   font-size: 15px;
   margin-bottom: 20px;
 }
-
 .ud-contact-title h2 {
   font-weight: 600;
   font-size: 35px;
   line-height: 41px;
 }
-
 .ud-contact-info-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1403,13 +1236,11 @@ p {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .ud-contact-info-wrapper {
     margin-bottom: 50px;
   }
 }
-
 .ud-contact-info-wrapper .ud-single-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1424,13 +1255,11 @@ p {
   color: var(--primary-color);
   margin-right: 24px;
 }
-
 .ud-contact-info-wrapper .ud-info-meta h5 {
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 15px;
 }
-
 .ud-contact-info-wrapper .ud-info-meta p {
   font-size: 15px;
   line-height: 24px;

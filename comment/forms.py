@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 
 from django.contrib.auth import forms as auth_forms #django password forgetting things forms
 
-from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE_CHOICES, ONLINE_CLASS_CHOICES, ATTANDANCE_CHOICES, TAKE_AGAIN_CHOICES
+from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE_CHOICES, ONLINE_CLASS_CHOICES, ATTANDANCE_CHOICES, TAKE_AGAIN_CHOICES, BannedEmails
 
 
 # Create your forms here.
@@ -129,6 +129,9 @@ class NewUserForm(UserCreationForm):
         new = User.objects.filter(email=email)  
         if new.count():  
             raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta zaten kullaniliyor</span>"))  
+        banned = BannedEmails.objects.filter(email=email)
+        if banned.count():
+            raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta adresi zaten kullaniliyor</span>"))  
         return email
     
     def save(self, commit=True):

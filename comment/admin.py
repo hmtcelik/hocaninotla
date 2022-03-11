@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Uni, Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment
+from .models import Uni, Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment, BannedEmails
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -22,6 +22,11 @@ class ReportCommentAdmin(admin.ModelAdmin):
     list_display = ('report_author','comment','date_time',)
     search_fields = ("report_author__startswith",)
 
+class BannedEmailsAdmin(admin.ModelAdmin):
+    list_filter = ('date_time',)
+    list_display = ('email','date_time',)
+    search_fields = ("email__startswith",)
+
 
 admin.site.register(Uni)
 admin.site.register(Faculty)
@@ -30,4 +35,5 @@ admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(CommentAnswer, CommentAnswerAdmin)
 admin.site.register(ReportComment, ReportCommentAdmin)
+admin.site.register(BannedEmails,BannedEmailsAdmin)
 

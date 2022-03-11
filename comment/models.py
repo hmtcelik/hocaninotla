@@ -116,3 +116,11 @@ class ReportComment(models.Model):
     
     def __str__(self):
         return 'Report:' + self.report_author + ' ---> ' + self.comment.comment_author + ' // ' + self.comment.doctor.doctor_name + '-' + self.comment.doctor.depart.faculty.uni.uni_name
+    
+    
+class BannedEmails(models.Model):
+    email = models.CharField(max_length=150)
+    date_time = models.DateTimeField(auto_now_add=True, blank=True)
+    
+    def __str__(self):
+        return self.email
