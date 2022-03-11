@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe #for example; using <strong> on labels 
 from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError  
 
 from django.contrib.auth import forms as auth_forms #django password forgetting things forms
 
@@ -101,10 +102,34 @@ class NewUserForm(UserCreationForm):
             'username': forms.TextInput(attrs={'class':'ud-formm-group',}),
             }
         help_texts={
-            'username': ''
+            'username': ""
         }
 
+    def clean_username(self):
+        super(NewUserForm, self).clean()
+        username = self.cleaned_data['username']
+        if User.objects.exclude().filter(username=username).exists():
+        	raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu kullanici adi zaten kullaniliyor</span>"))
+        not_allowed = " "
+        if username in not_allowed:
+            print("yes")
+
+        return username
+
+    def clean_password2(self): 
+        password1 = self.cleaned_data['password1']  
+        password2 = self.cleaned_data['password2']  
+  
+        if password1 and password2 and password1 != password2:  
+            raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Şifreler birbirleriyle uyuşmuyor</span>"))  
+        return password2
     
+    def clean_email(self):  
+        email = self.cleaned_data['email']
+        new = User.objects.filter(email=email)  
+        if new.count():  
+            raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta zaten kullaniliyor</span>"))  
+        return email
     
     def save(self, commit=True):
             user = super(NewUserForm, self).save(commit=False)

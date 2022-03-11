@@ -245,7 +245,19 @@
                                 {% else %}
                                         &nbsp;&nbsp;<a href="{% url 'comment:login'%}"><button class="btn btn-light">Yanitla</button></a>
                                 {% endif %}
+
+                                {% if comment.comment_author_id == user_id %}
+                                <div style="display: flex; margin-left:50px;">
+                                        <a href="{% url 'comment:editcomment' doctor.id comment.id%}"><button class="btn btn-secondary"><i class="lni lni-pencil"></i></button></a>
+                                      <form style="margin-left: 10px;" action="{% url 'comment:deletecomment' doctor.id comment.id%}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ request.path }}">
+                                        <button class="btn btn-danger"><i class="lni lni-trash-can"></i></button>
+                                    </form>
+                                    </div>
+                                {% else %}
                                         <a style="margin-left:30px;"href="{% url 'comment:reportcomment' doctor.id comment.id%}"><button class="btn btn-danger btn-sm"><i class="lni lni-flag-alt"></i></i></button></a>
+                                {% endif %}
                         </div>
                         <div class="comment-box-container">
                                 <div class="comment-box">

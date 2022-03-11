@@ -203,6 +203,7 @@ class CommentView(generic.DetailView):
             if check_comment:
                 comment = get_object_or_404(Comment, doctor=doctor, comment_author_id=user_id)
                 user_comment_id = comment.id
+
         
         #----------------------------------------------------------------------------
 
@@ -219,7 +220,8 @@ class CommentView(generic.DetailView):
                'colorwidth_rate4': colorwidth_rate4,
                'colorwidth_rate5': colorwidth_rate5,
                'already_rated' : already_rated,
-               'user_comment_id':user_comment_id
+               'user_comment_id':user_comment_id,
+               'user_id': user_id,
                }
         doctor.save()
         context.update(arg)
@@ -333,14 +335,18 @@ def commentdeleteview(request, doctor_id, comment_id):
 
         doctor = get_object_or_404(Doctor, id=doctor_id)
         user_id = request.user.id
-        the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)
-        
+
+        the_comment = Comment.objects.get(doctor=doctor_id, comment_author_id=user_id)            
+
         the_comment.delete()
+        
+        next = request.POST.get('next', '/')
         
         messages.success(request, "Yorumun Basariyla Silindi.")
         
         
-    return HttpResponseRedirect(reverse('comment:mycomments'))
+    return HttpResponseRedirect(next)
+
 
     
 def commenteditview(request, doctor_id, comment_id):
@@ -459,9 +465,8 @@ def register_request(request):
             user = form.save()
             messages.success(request, "Basariyla Kayit Olundu." )
             return redirect("comment:login")
-        else:
-            messages.error(request,"hata")
-    form = NewUserForm()
+    else:
+        form = NewUserForm()
     return render (request=request, template_name="registration/register.html", context={"register_form":form})
 
 
