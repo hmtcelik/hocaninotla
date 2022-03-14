@@ -49,7 +49,7 @@
           <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg">
               <a class="navbar-brand" href="{% url 'comment:home'%}">
-                <img src="{% static 'images/logo/logo.svg'%}" alt="Logo" />
+                <img src="{% static 'images/logo/logo.png'%}" alt="Logo" />
               </a>
               <button class="navbar-toggler">
                 <span class="toggler-icon"> </span>
@@ -135,7 +135,7 @@
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="ud-widget">
                 <a href="index.html" class="ud-footer-logo">
-                  <img src="{% static '/images/logo/logo.svg' %}" alt="logo" />
+                  <img src="{% static '/images/logo/logo.png' %}" alt="logo" />
                 </a>
                 <p class="ud-widget-desc">
                   Dersini aldigin hocalari notla ve 
@@ -339,9 +339,9 @@
 
     // === logo change
     if (ud_header.classList.contains("sticky")) {
-      logo.src = "{% static 'images/logo/logo-2.svg'%}";
+      logo.src = "{% static 'images/logo/logo-2.png'%}";
     } else {
-      logo.src = "{% static 'images/logo/logo.svg'%}";
+      logo.src = "{% static 'images/logo/logo.png'%}";
     }
 
     // show or hide the back-top-top button

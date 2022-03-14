@@ -54,6 +54,7 @@ def searchbar(request):
 class HomeView(generic.TemplateView):
     template_name = 'index.html'
 
+
 class UniView(generic.ListView):
     template_name = 'uni.html'
     context_object_name = 'all_unis'
