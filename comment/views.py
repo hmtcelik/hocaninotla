@@ -13,6 +13,7 @@ from django.db.models import Avg, Count
 from django.template import RequestContext
 import re
 
+
 from django.contrib.auth import views as auth_views #django password forgetting things views
 from django.contrib.auth import forms as auth_forms #django password forgetting things forms
 
@@ -26,13 +27,16 @@ from django.utils.encoding import force_bytes
 
 from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pagenotfound_view'
 
-from sinkaf import Sinkaf #kufur engelleyici
 
 from . import forms as my_forms # all my forms using with; my_forms.ExampleForm
 
 from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm, LoginForm, PasswordChangingForm, PasswordsResetForm
-from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment
+from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment, BannedEmails
 from django.contrib.auth.models import User
+
+from sinkaf import Sinkaf  #kufur engelleyici
+
+sinkaf_model = Sinkaf() #kufur engelliyici
 
 
 # Searchbar func.
@@ -301,7 +305,8 @@ def dislikeview(request, doctor_id, comment_id):
 class CommentCreate(generic.FormView):
     template_name = 'comment_add.html'
     form_class = RateForm
-    snf = Sinkaf() #kufur engelliyici
+    
+    
     
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
@@ -311,6 +316,7 @@ class CommentCreate(generic.FormView):
         form.instance.doctor_id = self.kwargs.get('doctor_id')
         form.instance.comment_author = self.request.user
         form.instance.comment_author_id = self.request.user.id
+        form.instance.comment_author_email = self.request.user.email
         doctor_id = self.kwargs.get('doctor_id')
     
         user_id = self.request.user.id
@@ -321,7 +327,7 @@ class CommentCreate(generic.FormView):
             messages.error(self.request,"Zaten Not Vermissin, Tekrar Veremezsin!.")
             return HttpResponseRedirect(reverse('comment:createcomment', args=[str(doctor_id)]))
         
-        if self.snf.tahmin([form.cleaned_data['comment_body']]):
+        if sinkaf_model.tahmin([form.cleaned_data['comment_body']]):
             messages.error(self.request,"Yorumunda uygunsuz ifadeler bulunuyor.")
             return HttpResponseRedirect(reverse('comment:createcomment', args=[str(doctor_id)]))
             
@@ -363,13 +369,12 @@ def commenteditview(request, doctor_id, comment_id):
     
     if the_comment != None:        
         update_form = RateForm(instance=the_comment)
-  
-        snf = Sinkaf() #kufur hakaret engelliyor
+
         
         if request.method == 'POST':
             update_form = RateForm(request.POST, instance=the_comment)
             if update_form.is_valid():
-                if snf.tahmin([update_form.cleaned_data['comment_body']]):
+                if sinkaf_model.tahmin([update_form.cleaned_data['comment_body']]):
                     messages.error(request,"Yorumunda uygunsuz ifadeler bulunuyor.")
                     return HttpResponseRedirect(reverse('comment:editcomment', args=[str(doctor_id),str(comment_id)]))
                 
@@ -392,7 +397,6 @@ def commenteditview(request, doctor_id, comment_id):
 class CommentAnswerView(generic.FormView):
     template_name = 'comment_answering.html'
     form_class = CommentAnswerForm
-    snf = Sinkaf() #kufur hakaret engelliyor
 
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
@@ -403,7 +407,7 @@ class CommentAnswerView(generic.FormView):
         form.instance.answer_author = self.request.user       
         doctor_id = self.kwargs.get('doctor_id')
         comment_id = self.kwargs.get('comment_id')         
-        if self.snf.tahmin([form.cleaned_data['answer_body']]):
+        if sinkaf_model.tahmin([form.cleaned_data['answer_body']]):
             messages.error(self.request,"Yanitinizda uygunsuz ifadeler bulunuyor.")
             return HttpResponseRedirect(reverse('comment:commentanswer', args=[str(doctor_id),str(comment_id)]))
 
@@ -420,7 +424,6 @@ class CommentAnswerView(generic.FormView):
 class ReportCommentView(generic.FormView):    
     template_name = 'comment_reporting.html'
     form_class = ReportForm
-    snf = Sinkaf()
     
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
@@ -431,7 +434,7 @@ class ReportCommentView(generic.FormView):
         form.instance.report_author = self.request.user
         doctor_id = self.kwargs.get('doctor_id')
         comment_id = self.kwargs.get('comment_id')   
-        if self.snf.tahmin([form.cleaned_data['report_body']]):
+        if sinkaf_model.tahmin([form.cleaned_data['report_body']]):
             messages.error(self.request,"Sikayetinizde uygunsuz ifadeler bulunuyor.")
             return HttpResponseRedirect(reverse('comment:reportcomment', args=[str(doctor_id),str(comment_id)]))
         
@@ -468,10 +471,10 @@ def logout_request(request):
 #Register----->
 def register_request(request):
     if request.method == "POST":
-        snf = Sinkaf() #kufur hakaret engelliyor      
+        
         form = NewUserForm(request.POST)
         if form.is_valid():
-            if snf.tahmin([form.cleaned_data['username']]):
+            if sinkaf_model.tahmin([form.cleaned_data['username']]):
                 messages.error(request,"Isminizde uygunsuz ifadeler var")
                 return redirect("comment:register")
             user = form.save()
@@ -539,7 +542,6 @@ class My_PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
 class RequestFormView(generic.FormView):    
     template_name = 'requestform.html'
     form_class = my_forms.RequestsForm
-    snf = Sinkaf()
     
     def get_success_url(self):
         return reverse_lazy('comment:home')
@@ -549,7 +551,7 @@ class RequestFormView(generic.FormView):
 
         form.instance.request_author = self.request.user
    
-        if self.snf.tahmin([form.cleaned_data['request_body']]):
+        if sinkaf_model.tahmin([form.cleaned_data['request_body']]):
             messages.error(self.request,"Sikayetinizde uygunsuz ifadeler bulunuyor.")
             return HttpResponseRedirect(reverse('comment:requestform',))
         

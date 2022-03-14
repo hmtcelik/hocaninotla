@@ -77,6 +77,7 @@ class NewUserForm(UserCreationForm):
         required=True,
         label=mark_safe('<strong>Email</strong>'),
         widget=forms.TextInput(attrs={'class':'ud-formm-group'}),
+        help_text= mark_safe("<div style='padding:5px 5px; margin-top:-5px;'>Yalnızca üniversite e-postanız ile kayıt olabilirsiniz</div><br>"),
         )
     password1 = forms.CharField(
         label= mark_safe('<strong>Şifre</strong>'),
@@ -111,7 +112,9 @@ class NewUserForm(UserCreationForm):
         username = self.cleaned_data['username']
         if User.objects.exclude().filter(username=username).exists():
         	raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu kullanici adi zaten kullaniliyor</span>"))
-
+        if ' ' in username:
+        	raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Boşluk içermemelidir.( _ kullanabilirsiniz)</span>"))
+        
         return username
 
     def clean_password2(self): 
@@ -120,16 +123,20 @@ class NewUserForm(UserCreationForm):
   
         if password1 and password2 and password1 != password2:  
             raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Şifreler birbirleriyle uyuşmuyor</span>"))  
+        
         return password2
     
     def clean_email(self):  
         email = self.cleaned_data['email']
         new = User.objects.filter(email=email)  
+        if 'edu.tr' not in email:
+            raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Lütfen geçerli bir e-posta giriniz</span>"))  
         if new.count():  
             raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta zaten kullaniliyor</span>"))  
         banned = BannedEmails.objects.filter(email=email)
         if banned.count():
             raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta adresi zaten kullaniliyor</span>"))  
+    
         return email
     
     def save(self, commit=True):

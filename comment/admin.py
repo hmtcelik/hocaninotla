@@ -47,7 +47,7 @@ class BannedEmailsAdmin(admin.ModelAdmin):
     list_display = ('email','date_time',)
     search_fields = ("email__startswith",)
 
-
+    
 admin.site.register(Uni)
 admin.site.register(Faculty)
 admin.site.register(Depart)

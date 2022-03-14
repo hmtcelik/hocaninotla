@@ -1,0 +1,6 @@
+django
+django-crispy-forms
+joblib
+numpy
+scikit_learn==0.24.1
+Pillow

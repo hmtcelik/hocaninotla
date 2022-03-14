@@ -75,11 +75,12 @@ ONLINE_CLASS_CHOICES = (
     ('Online Egitim','Online Egitim'),
     ('Hibrit Egitim','Hibrit Egitim'),
 )
-    
+
 class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     comment_author = models.CharField(max_length=150)
     comment_author_id = models.IntegerField()
+    comment_author_email = models.CharField(max_length=150)
     rate = models.FloatField(choices=RATE_CHOICES, null=True)
     comment_body = models.TextField(max_length=1000, blank=True)
     take_again = models.CharField(max_length=20, choices=TAKE_AGAIN_CHOICES, null=True, blank=True)
@@ -98,6 +99,7 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment_author+' ---> '+ self.doctor.doctor_name  + '//' + self.doctor.depart.faculty.uni.uni_name
+
 
 class CommentAnswer(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)

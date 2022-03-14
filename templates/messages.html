@@ -3,7 +3,7 @@
     {% for message in messages %}
     <div class="product-options">
 
-    <div id="success-alert" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+    <div style="padding: 10px; font-size:18px;" id="success-alert" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
       &nbsp; <strong>{{ message }}</strong>
     </div>
 
