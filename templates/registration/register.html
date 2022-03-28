@@ -15,6 +15,7 @@
 			<form method="post" class="ud-loginn-form w-100">
 			  {% csrf_token %}
 			  {{ register_form|crispy }}  
+			  <i style="color:#637381d5">Üye olarak <a href="#">kullanıcı sözleşmesini</a> kabul etmiş olursunuz</i>
 			  <div class="ud-form-group w-100">
 				<button type="submit" value="Kayit Ol" class="ud-main-btn w-100 mt-4">Kayıt Ol</button>
 			  </div>
