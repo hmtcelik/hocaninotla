@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-))u!yx7iiq5^4f3hp^!qtwv6j+0ak_#=i=9*6l0q-du^_k9n$ay'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['178.62.228.126']
     
@@ -89,8 +89,8 @@ else:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hocaninotlaDB',
-        'USER': 'hocaninotla_admin',
+        'NAME': 'myprojectdb',
+        'USER': 'myproject_admin',
         'PASSWORD': 'AqG_3$F_wmC3MG@g',
         'HOST': 'localhost',
         'PORT': '',
