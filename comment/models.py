@@ -1,3 +1,5 @@
+from urllib import request
+from wsgiref.util import request_uri
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg #for avarage of rates
@@ -29,8 +31,6 @@ class Doctor(models.Model):
     depart = models.ForeignKey(Depart, on_delete=models.CASCADE)
     doctor_name = models.CharField(max_length=150)
     doctor_lecture = models.CharField(max_length=150) 
-    doctor_bio = models.TextField(max_length=1000, blank=True)
-    doctor_pp = models.ImageField(upload_to ='uploads/', blank=True, null=True)
     doctor_link = models.URLField(max_length=200, blank=True, default="#")
     doctor_av_rate = models.FloatField(default=0.0, blank=True) 
     doctor_total_rate = models.IntegerField(default=0, blank=True)
@@ -40,15 +40,15 @@ class Doctor(models.Model):
 
 
 RATE_CHOICES = [
-    (5.0, '5 - cok iyi'),
+    (5.0, '5 - çok iyi'),
     (4.0, '4 - iyi'),
     (3.0, '3 - orta'),
-    (2.0, '2 - kotu'),
-    (1.0, '1 - cok kotu'),
+    (2.0, '2 - kötü'),
+    (1.0, '1 - çok kötü'),
 ]
 
 GRADE_CHOICES = (
-    ('Henuz Bilmiyorum','Henuz Bilmiyorum'),
+    ('Henüz Bilmiyorum','Henüz Bilmiyorum'),
     ('AA','AA'),
     ('BA','BA'),
     ('BB','BB'),
@@ -61,19 +61,19 @@ GRADE_CHOICES = (
 
 TAKE_AGAIN_CHOICES = (
     ('Evet','Evet'),
-    ('Hayir','Hayir'),
-    ('Emin Degilim','Emin Degilim'),
+    ('Hayır','Hayır'),
+    ('Emin Değilim','Emin Değilim'),
 )
 
 ATTANDANCE_CHOICES = (
     ('Zorunlu','Zorunlu'),
-    ('Zorunlu Degil','Zorunlu Degil'),
+    ('Zorunlu Değil','Zorunlu Değil'),
 )
 
 ONLINE_CLASS_CHOICES = (
-    ('Yuzyuze Egitim','Yuzyuze Egitim'),
-    ('Online Egitim','Online Egitim'),
-    ('Hibrit Egitim','Hibrit Egitim'),
+    ('Yüzyüze Eğitim','Yüzyüze Eğitim'),
+    ('Online Eğitim','Online Eğitim'),
+    ('Hibrit Eğitim','Hibrit Eğitim'),
 )
 
 class Comment(models.Model):
@@ -132,5 +132,16 @@ class Requests(models.Model):
     request_body = models.TextField(max_length=1000)
     date_time = models.DateTimeField(auto_now_add = True, blank=True)
     
+    def __str__(self):
+        return self.request_author
+    
+class DoctorRequests(models.Model):
+    request_author = models.CharField(max_length=150)
+    doctor_name = models.CharField(max_length=150)
+    uni_name = models.CharField(max_length=150)
+    faculty_name = models.CharField(max_length=150)
+    depart_name = models.CharField(max_length=150)
+    doctor_lecture = models.CharField(max_length=150) 
+
     def __str__(self):
         return self.request_author

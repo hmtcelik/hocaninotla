@@ -45,8 +45,8 @@ def searchbar(request):
         search = request.GET.get('search')
         if not search or search == "":
             return HttpResponseRedirect(reverse('comment:home'))
-        else:                
-            post2 = Doctor.objects.all().filter(doctor_name__contains=search)
+        else:
+            post2 = Doctor.objects.all().filter(doctor_name__icontains=search)
             all_results = post2.count()
             context = {'post2' : post2, 'all_results':all_results}
             return render(request, 'searchbar.html', context)
@@ -76,9 +76,6 @@ class DepartView(generic.DetailView):
 class DoctorView(generic.DetailView):
     model = Depart
     template_name = 'doctor.html'
-    
-class AddDoctorView(generic.TemplateView):
-    template_name = 'adddoctor.html'
     
 class AccountView(generic.TemplateView):
     template_name = 'account/account_index.html'
@@ -558,4 +555,20 @@ class RequestFormView(generic.FormView):
         
         form.save()
         messages.success(self.request, "Form Bize Ulasmistir." )
+        return super().form_valid(form)
+    
+    
+class AddDoctorView(generic.FormView):
+    template_name = 'adddoctor.html'
+    form_class = my_forms.DoctorRequestForm
+    
+    def get_success_url(self):
+        return reverse_lazy('comment:home')
+    
+    def form_valid(self, form):
+        form.save(commit=False)
+        form.instance.request_author = self.request.user
+        
+        form.save()
+        messages.success(self.request, "Başarıyla Oluşturuldu! Onaylandıktan Sonra Eklenecektir")
         return super().form_valid(form)

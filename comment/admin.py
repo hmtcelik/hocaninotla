@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Uni, Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment, BannedEmails, Requests
+from .models import DoctorRequests, Uni, Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment, BannedEmails, Requests, DoctorRequests
 
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -47,7 +47,7 @@ class BannedEmailsAdmin(admin.ModelAdmin):
     list_display = ('email','date_time',)
     search_fields = ("email__startswith",)
 
-    
+
 admin.site.register(Uni)
 admin.site.register(Faculty)
 admin.site.register(Depart)
@@ -56,4 +56,4 @@ admin.site.register(Comment, CommentAdmin)
 admin.site.register(CommentAnswer, CommentAnswerAdmin)
 admin.site.register(ReportComment, ReportCommentAdmin)
 admin.site.register(BannedEmails,BannedEmailsAdmin)
-
+admin.site.register(DoctorRequests)

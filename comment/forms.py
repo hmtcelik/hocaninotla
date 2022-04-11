@@ -8,8 +8,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import forms as auth_forms #django password forgetting things forms
 
 from .models import  Comment , RATE_CHOICES, CommentAnswer, ReportComment, GRADE_CHOICES, ONLINE_CLASS_CHOICES, ATTANDANCE_CHOICES, TAKE_AGAIN_CHOICES, BannedEmails
-from .models import Requests
-
+from .models import Requests, DoctorRequests
 
 # Create your forms here.
 class LoginForm(AuthenticationForm):
@@ -111,9 +110,9 @@ class NewUserForm(UserCreationForm):
         super(NewUserForm, self).clean()
         username = self.cleaned_data['username']
         if User.objects.exclude().filter(username=username).exists():
-        	raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu kullanici adi zaten kullaniliyor</span>"))
+            raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu kullanici adi zaten kullaniliyor</span>"))
         if ' ' in username:
-        	raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Boşluk içermemelidir.( _ kullanabilirsiniz)</span>"))
+            raise forms.ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Boşluk içermemelidir.( _ kullanabilirsiniz)</span>"))
         
         return username
 
@@ -157,7 +156,7 @@ class RateForm(forms.ModelForm): #comment create
         labels = {
             "comment_body": mark_safe("<strong>Yorum</strong>"),
             "rate": mark_safe("<strong>Verdiğim Not</strong>"),
-            "take_again": mark_safe("<strong>Tekrar Alır mısın</strong>"),
+            "take_again": mark_safe("<strong>Tekrar Alır mıydın</strong>"),
             "attandance": mark_safe("<strong>Devamlılık</strong>"),
             "online_class": mark_safe("<strong>Eğitim Şekli</strong>"),
             "grade": mark_safe("<strong>Harf Notum</strong>"),
@@ -233,3 +232,29 @@ class RequestsForm(forms.ModelForm):
         if commit:
             request.save()
         return request
+
+class DoctorRequestForm(forms.ModelForm):
+    class Meta:
+        model = DoctorRequests
+        exclude = ['request_author',]
+        fields = ('doctor_name','uni_name','faculty_name','depart_name','doctor_lecture')
+        labels = {
+            "doctor_name": mark_safe("<strong>Adı ve Soyadı</strong>"),
+            "uni_name": mark_safe("<strong>Üniversitesi</strong>"),
+            "faculty_name": mark_safe("<strong>Fakültesi</strong>"),
+            "depart_name": mark_safe("<strong>Departmanı</strong>"),
+            "doctor_lecture": mark_safe("<strong>Alanı(Ders)</strong>"),
+        }
+        widgets = {
+            'uni_name': forms.TextInput(attrs={'class':'ud-form-group comment-box',}),
+            'faculty_name': forms.TextInput(attrs={'class':'ud-form-group comment-box',}),    
+            'depart_name': forms.TextInput(attrs={'class':'ud-form-group comment-box',}),    
+            'doctor_name': forms.TextInput(attrs={'class':'ud-form-group comment-box',}),    
+            'doctor_lecture': forms.TextInput(attrs={'class':'ud-form-group comment-box',}),
+        }
+        
+    def save(self, commit=True):
+        doc_request = super(DoctorRequestForm, self)
+        if commit:
+            doc_request.save()
+        return doc_request
