@@ -26,10 +26,15 @@
                 <div  style="font-weight:bold">
                 {{ form.as_p}}
                 </div>
-                <button type="submit" value="Yorum Ekle" style="margin-top:20px;" class="ud-main-btn w-20">Yorum Ekle</button>
-            </form>
+                {% if user.is_authenticated %}
+                  <button type="submit" value="Yorum Ekle" style="margin-top:20px;" class="ud-main-btn w-20">Yorum Ekle</button>
+                {% else %}
+                  <a href="{% url  'comment:login' %}"><button style="margin-top:20px;" class="ud-main-btn w-20">Yorum Ekle</button></a>
+                {% endif %}
+              </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 {% endblock %}

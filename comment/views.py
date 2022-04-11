@@ -304,13 +304,17 @@ class CommentCreate(generic.FormView):
     template_name = 'comment_add.html'
     form_class = RateForm
     
-    
-    
     def get_success_url(self):
         return reverse('comment:comment', kwargs={'pk': self.kwargs.get('doctor_id') })
 
     def form_valid(self, form):
         form.save(commit=False)        
+    
+        users = User.objects.all()
+        if self.request.user not in users:
+            messages.error(self.request,"Lütfen Giriş Yapınız")
+            return HttpResponseRedirect(reverse('comment:login',))
+    
         form.instance.doctor_id = self.kwargs.get('doctor_id')
         form.instance.comment_author = self.request.user
         form.instance.comment_author_id = self.request.user.id
@@ -405,6 +409,12 @@ class CommentAnswerView(generic.FormView):
         form.instance.answer_author = self.request.user       
         doctor_id = self.kwargs.get('doctor_id')
         comment_id = self.kwargs.get('comment_id')         
+
+        users = User.objects.all()
+        if self.request.user not in users:
+            messages.error(self.request,"Lütfen Giriş Yapınız")
+            return HttpResponseRedirect(reverse('comment:login',))
+            
         if sinkaf_model.tahmin([form.cleaned_data['answer_body']]):
             messages.error(self.request,"Yanitinizda uygunsuz ifadeler bulunuyor.")
             return HttpResponseRedirect(reverse('comment:commentanswer', args=[str(doctor_id),str(comment_id)]))
@@ -537,7 +547,7 @@ class My_PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name='registration/password_reset_complete.html'
     success_url = reverse_lazy('comment:login')
     
-class RequestFormView(generic.FormView):    
+class RequestFormView(generic.FormView):
     template_name = 'requestform.html'
     form_class = my_forms.RequestsForm
     
@@ -567,8 +577,13 @@ class AddDoctorView(generic.FormView):
     
     def form_valid(self, form):
         form.save(commit=False)
+
+        users = User.objects.all()
+        if self.request.user not in users:
+            messages.error(self.request,"Lütfen Giriş Yapınız")
+            return HttpResponseRedirect(reverse('comment:login',))
+            
         form.instance.request_author = self.request.user
-        
         form.save()
         messages.success(self.request, "Başarıyla Oluşturuldu! Onaylandıktan Sonra Eklenecektir")
         return super().form_valid(form)
