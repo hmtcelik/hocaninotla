@@ -9,7 +9,7 @@ class MyUserAdmin(UserAdmin):
     ordering = ('-date_joined', )
     # if you want the date they joined or other columns displayed in the list,
     # override list_display too
-    list_display = ('username', 'email', 'date_joined', 'first_name', 'last_name', 'is_staff')
+    list_display = ('username', 'email', 'date_joined', 'first_name', 'last_name','is_email_verified' ,'is_staff')
 
 # finally replace the default UserAdmin with yours
 admin.site.unregister(User)

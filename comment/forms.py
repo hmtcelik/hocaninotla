@@ -1,3 +1,4 @@
+from tkinter.tix import Form
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm
 from django.contrib.auth.models import User
@@ -18,7 +19,23 @@ class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'class':'ud-formm-group',}),label= mark_safe('<strong>Kullanıcı Adı</strong>'))
     password = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class':'ud-formm-group'}),label=mark_safe('<strong>Şifre</strong>'))
 
+
+class ResendEmailVerifForm(forms.Form):
+    email = forms.EmailField(
+        required=True,
+        label=mark_safe('<strong>E-Posta Adresi</strong>'),
+        widget=forms.TextInput(attrs={'class':'ud-formm-group'}),
+        )
+    
+    def clean_email(self):  
+        email = self.cleaned_data['email']
+        new = User.objects.filter(email=email)
+
+        if not new.count():
+            raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta ile ilişkin hesap bulunamadı</span>"))
         
+        return email
+
 class PasswordsResetForm(auth_forms.PasswordResetForm):
     email = forms.EmailField(
         required=True,
@@ -131,7 +148,7 @@ class NewUserForm(UserCreationForm):
         if 'edu.tr' not in email:
             raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Lütfen geçerli bir e-posta giriniz</span>"))  
         if new.count():  
-            raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta zaten kullaniliyor</span>"))  
+            raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta adresi zaten kullaniliyor</span>"))  
         banned = BannedEmails.objects.filter(email=email)
         if banned.count():
             raise ValidationError(mark_safe("<span style='color:red;margin-bottom:15px;'>Bu e-posta adresi zaten kullaniliyor</span>"))  

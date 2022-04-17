@@ -1,23 +1,42 @@
+<style>
+  .close{font-size: 18px;font-weight: bold;}
+</style>
 
 {% if messages %}
     {% for message in messages %}
     <div class="product-options">
 
-    <div style="padding: 10px; font-size:18px;" id="success-alert" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-      &nbsp; <strong>{{ message }}</strong>
-    </div>
+      <div style="padding: 10px; font-size:18px;" id="success-alert" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        <div style="float: left;">
+          &nbsp; <strong>{{ message }}</strong>
+        </div>
+        <div style="float: right;">
+          <a type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeClick()">
+            <span aria-hidden="true">&times; &nbsp;</span>
+          </a>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
 
     </div>
     {% endfor %}
 {% endif %}
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
+  var myAlert = document.getElementById('success-alert')
+  function closeClick(){
+    myAlert.remove()
+  }
+</script>
+
+<script>
 $(document).ready(function() {
   $("#success-alert").hide();
-    $("#success-alert").fadeTo(2300, 500).slideUp(500, function() {
+    $("#success-alert").fadeTo(10000, 500).slideUp(500, function() {
       $("#success-alert").slideUp(500);
   });
 });

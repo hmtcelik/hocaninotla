@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.db.models import Avg #for avarage of rates
 
 
-
 class Uni(models.Model):
     uni_name = models.CharField(max_length=150)
     uni_img = models.ImageField(upload_to ='uploads/', blank=True, null=True)

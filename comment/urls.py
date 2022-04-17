@@ -42,5 +42,10 @@ urlpatterns = [
     #other pages
     path("adddoctor", views.AddDoctorView.as_view(), name="adddoctor"),
     path("contact/", views.ContactView.as_view(), name='contact'),
-    path("requestform/", views.RequestFormView.as_view(), name='requestform')
+    path("requestform/", views.RequestFormView.as_view(), name='requestform'),
+
+    #email verification
+    path("activate-user/<uidb64>/<token>/", views.activate_user, name='activate'),
+    path("resend_verif_email/", views.resend_email, name="resend_email")
+    
 ]

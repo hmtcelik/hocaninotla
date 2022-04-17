@@ -1,0 +1,14 @@
+{% extends "includes/base.html" %}
+{% block title %}Hata{% endblock %}
+
+{% block body %} 
+  
+  <!--Password Reset Complete-->
+  <div class="container p-5 mt-5" style="margin-bottom: 300px;">
+	    <h2 class="font-weight-bold mt-3">Bir şeyler ters gitti</h2>
+		<hr>
+        <p>Anasayafaya gidelim</p>                 
+        <a style="margin-top:5px" href="{% url 'comment:home'%}" class="btn btn-primary">Anasayfa</a>
+    </div>
+
+{% endblock %}

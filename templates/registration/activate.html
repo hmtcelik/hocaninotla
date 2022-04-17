@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+
+Merhaba {{user.username}}
+
+Aşağıdaki linke tıklayarak e-postanızı doğrulayıp hesabınızı aktive edebilirsiniz
+
+http://{{domain}}{% url 'comment:activate' uidb64=uid token=token %}
+
+
+
+{% endautoescape %}

@@ -1,3 +1,6 @@
+from concurrent.futures import thread
+from lib2to3.pgen2.tokenize import generate_tokens
+from pickle import TRUE
 from django.views import generic
 from django.shortcuts import render, redirect
 
@@ -11,8 +14,8 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.db.models import Avg, Count
 from django.template import RequestContext
-import re
-
+from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 
 from django.contrib.auth import views as auth_views #django password forgetting things views
 from django.contrib.auth import forms as auth_forms #django password forgetting things forms
@@ -21,9 +24,9 @@ from django.contrib.auth import forms as auth_forms #django password forgetting 
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 
 from django.core.exceptions import PermissionDenied #for raise 404 errror on 'pagenotfound_view'
 
@@ -33,6 +36,14 @@ from . import forms as my_forms # all my forms using with; my_forms.ExampleForm
 from .forms import NewUserForm, RateForm, CommentAnswerForm, ReportForm, LoginForm, PasswordChangingForm, PasswordsResetForm
 from .models import Uni , Faculty, Depart, Doctor, Comment, CommentAnswer, ReportComment, BannedEmails
 from django.contrib.auth.models import User
+
+#about sending email
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from .utils import TokenGenerator
+from django.core.mail import EmailMessage
+from django.conf import settings
+import threading
 
 from sinkaf import Sinkaf  #kufur engelleyici
 
@@ -453,23 +464,90 @@ class ReportCommentView(generic.FormView):
 
 #Login----->
 def login_request(request):
-	if request.method == "POST":
-		form = LoginForm(request, data=request.POST)
-		if form.is_valid():
-			username = form.cleaned_data.get('username')
-			password = form.cleaned_data.get('password')
-			user = authenticate(username=username, password=password)
-			if user is not None:
-				login(request, user)
-				messages.info(request, f" Hoşgeldin {username}.")
-				return redirect("comment:home")
-			else:
-				messages.error(request,"Kullanıcı adı veya şifre yanlış")
-		else:
-			messages.error(request,"Kullanıcı adı veya şifre yanlış")
-	form = LoginForm()
-	return render(request=request, template_name="registration/login.html", context={"login_form":form})
+    if request.method == "POST":
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            
+            if not user.is_email_verified:
+                message = format_html("E-posta doğrulaması gerekmektedir, Lütfen E-postanızı kontrol ediniz. <a href=\"{}\">Tekrar Gonder</a>", reverse('comment:resend_email'))
+                messages.error(request, message)
+                return redirect("comment:login",)             
+            
+            if user is not None:
+                login(request, user)
+                messages.info(request, f" Hoşgeldin {username}.")
+                return redirect("comment:home")
+            else:
+                messages.error(request,"Kullanıcı adı veya şifre yanlış")
+        else:
+            messages.error(request,"Kullanıcı adı veya şifre yanlış")
+            
+    form = LoginForm()
+    return render(request=request, template_name="registration/login.html", context={"login_form":form,})
 
+#email verification function
+generate_token = TokenGenerator() #from .utils
+
+def send_action_email(user,request):
+    current_site = get_current_site(request)
+    email_subject = "Hesabını Doğrula"
+    email_body = render_to_string('registration/activate.html',{
+        'user': user,
+        'domain': current_site,
+        'uid':  urlsafe_base64_encode(force_bytes(user.id)),
+        'token': generate_token.make_token(user) 
+    })
+    
+    email= EmailMessage(subject=email_subject, body=email_body, from_email=settings.EMAIL_FROM_USER, to=[user.email])
+    EmailThread(email).start()
+    
+class EmailThread(threading.Thread):
+    
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+        
+    def run(self):
+        self.email.send()
+
+def activate_user(request, uidb64, token):
+    try:
+       uid=force_str(urlsafe_base64_decode(uidb64))
+       user=User.objects.get(pk=uid) 
+    except Exception as e:
+        user=None
+        
+    if user and generate_token.check_token(user, token):
+        user.is_email_verified = True
+        user.save()
+        
+        messages.success(request, "E-posta doğrulama işlemi başarılı. Şimdi giriş yapabilirsiniz")
+        return redirect("comment:login")
+
+    return render(request, 'registration/activate_failed.html', {"user": user})
+
+def resend_email(request):
+    if request.method == "POST":
+        form = my_forms.ResendEmailVerifForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.filter(email=email)
+            
+            if not user.count():
+                messages.error(request,"Bu e-posta ile ilişkin hesap bulunamadı")
+                return HttpResponseRedirect(reverse('comment:resend_email',))
+            else:
+                user = get_object_or_404(User, email=email)
+                send_action_email(user,request)
+                messages.success(request, "E-posta gönderildi, Lütfen E-postanızı kontrol ediniz.")
+                return HttpResponseRedirect(reverse('comment:login',))
+        
+    else:
+        form = my_forms.ResendEmailVerifForm()
+    return render(request=request, template_name="registration/resend_verif.html", context={"form":form})
 
 #Logout----->
 def logout_request(request):
@@ -486,7 +564,10 @@ def register_request(request):
                 messages.error(request,"Isminizde uygunsuz ifadeler var")
                 return redirect("comment:register")
             user = form.save()
-            messages.success(request, "Basariyla Kayit Olundu." )
+            
+            send_action_email(user,request)
+            
+            messages.success(request, "Basariyla Kayit Olundu. Hesabınızı aktive etmeniz gerekmektedir. (E-posta gonderildi)")
             return redirect("comment:login")
     else:
         form = NewUserForm()
